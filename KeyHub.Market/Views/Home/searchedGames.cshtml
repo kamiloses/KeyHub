@@ -1,5 +1,7 @@
+@model IEnumerable<KeyHub.Market.Models.Game>
+
 @{
-Layout = "_HomeLayout";
+    Layout = "_HomeLayout";
 }
 
 <div class="search-page-container">
@@ -17,29 +19,33 @@ Layout = "_HomeLayout";
             </div>
         </div>
 
-        
-
         <div class="filter-group">
             <label>Platform</label>
             <ul>
-                <li><label><input type="checkbox" class="filter-checkbox"> Xbox Live <span>(299)</span></label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Windows Store <span>(111)</span></label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Minecraft <span>(26)</span></label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Steam <span>(9)</span></label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> PSN <span>(8)</span></label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Nintendo <span>(6)</span></label></li>
+                @foreach (var platform in Enum.GetValues(typeof(KeyHub.Market.Models.Platform)))
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox"> @platform
+                            <span>(0)</span> <!-- Możesz dynamicznie policzyć -->
+                        </label>
+                    </li>
+                }
             </ul>
         </div>
 
         <div class="filter-group">
             <label>Genre</label>
             <ul>
-                <li><label><input type="checkbox" class="filter-checkbox"> Action</label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Adventure</label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> RPG</label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Simulation</label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Strategy</label></li>
-                <li><label><input type="checkbox" class="filter-checkbox"> Sports</label></li>
+                @* Możesz wypisać unikalne gatunki z bazy *@
+                @foreach (var genre in Model.Select(g => g.Genre).Distinct())
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" class="filter-checkbox"> @genre
+                        </label>
+                    </li>
+                }
             </ul>
         </div>
     </aside>
@@ -58,30 +64,27 @@ Layout = "_HomeLayout";
         </div>
 
         <div class="game-list">
-
-            <div class="game-item">
-                <h3>Grand Theft Auto V Enhanced PC</h3>
-                <p><strong>Platform:</strong> Rockstar</p>
-                <p><strong>Type:</strong> Key</p>
-                <p><strong>Region:</strong> GLOBAL</p>
-                <p><strong>Can be activated in:</strong> Poland</p>
-                <p class="sponsor">SPONSORED</p>
-                <p class="price"><span class="final-price">50.23 PLN</span> <span class="old-price">127.88 PLN</span> <span class="discount">-61%</span></p>
-            </div>
-
-            <div class="game-item">
-                <h3>Grand Theft Auto IV Complete Edition PC</h3>
-                <p><strong>Platform:</strong> Rockstar</p>
-                <p><strong>Type:</strong> Key</p>
-                <p><strong>Region:</strong> GLOBAL</p>
-                <p><strong>Can be activated in:</strong> Poland</p>
-                <p class="sponsor">SPONSORED</p>
-                <p class="price"><span class="final-price">41.16 PLN</span> <span class="old-price">55.39 PLN</span> <span class="discount">-26%</span></p>
-            </div>
-
+            @foreach (var game in Model.Take(20)) // wyświetl tylko 20 gier
+            {
+                <div class="game-item">
+                    <h3>@game.Title</h3>
+                    <p><strong>Platform:</strong> @game.Platform</p>
+                    <p><strong>Genre:</strong> @game.Genre</p>
+                    <p><strong>Region:</strong> GLOBAL</p>
+                    <p><strong>Can be activated in:</strong> Poland</p>
+                    @if (game.Discount > 0)
+                    {
+                        <p class="sponsor">SPONSORED</p>
+                    }
+                    <p class="price">
+                        <span class="final-price">@String.Format("{0:C}", game.Price * (1 - (game.Discount ?? 0)/100m))</span>
+                        <span class="old-price">@String.Format("{0:C}", game.Price)</span>
+                        <span class="discount">-@game.Discount%</span>
+                    </p>
+                </div>
+            }
         </div>
     </main>
-
 </div>
 
 <style>
