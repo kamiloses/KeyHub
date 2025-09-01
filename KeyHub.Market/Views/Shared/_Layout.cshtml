@@ -1,13 +1,18 @@
  @* todo narazie Layout potem zmienic nazwew *@
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>@ViewData["Title"]</title>
-</head>
-<body>
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta charset="utf-8" />
+     <title>@ViewData["Title"] - MojaAplikacja</title>
+ </head>
+ <body>
 
-@RenderBody()
+ @await Html.PartialAsync("_Header")  
 
-</body>
-</html>
+ <main>
+     @RenderBody()  <!-- tutaj wstawiane są widoki -->
+ </main>
+
+ </body>
+ </html>
