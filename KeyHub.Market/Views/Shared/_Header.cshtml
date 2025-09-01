@@ -1,67 +1,41 @@
 <header>
     <nav>
-        <a href="/">Home</a>
-        <a href="/Account/Login">Login</a>
-        <a href="/Account/Register">Register</a>
+        <div class="nav-left">
+            <a href="/">
+                <img src="~/images/keyHub-logo.png" alt="KeyHub Logo" class="logo">
+                <h1>KeyHub</h1>
+            </a>
+        </div>
 
-        <!-- Input do wyszukiwania gry -->
-        <input type="text" placeholder="Search for a game..." />
+        <div class="nav-center">
+            <input type="text" placeholder="Search for a game..." />
+        </div>
 
-        <!-- Dropdown gatunków -->
-        <div class="genre-dropdown">
-            <span>Genres ▼</span>
-            <ul class="genre-list">
-                <li>Action</li>
-                <li>Adventure</li>
-                <li>RPG</li>
-                <li>Strategy</li>
-                <li>Simulation</li>
-                <li>Sports</li>
-            </ul>
+        <div class="nav-right">
+            <div class="genre-dropdown">
+                <span>Genres ▼</span>
+                @* todo dynamiczna z bazy danych *@
+                <ul class="genre-list"> 
+                    <li>Action</li>
+                    <li>Adventure</li>
+                    <li>RPG</li>
+                    <li>Strategy</li>
+                    <li>Simulation</li>
+                    <li>Sports</li>
+                </ul>
+            </div>
+
+            @if (false) {
+                <a href="/Account/Login">Login</a>
+                <a href="/Account/Register">Register</a>
+            }
+            else {
+                <a href="/Cart" class="cart-icon" title="Your Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                
+                <a href="/Account/Logout">Logout</a>
+            }
         </div>
     </nav>
 </header>
-
-<style>
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    input[type="text"] {
-        padding: 0.3rem;
-        font-size: 0.9rem;
-    }
-
-    .genre-dropdown {
-        position: relative;
-        cursor: pointer;
-    }
-
-    .genre-dropdown .genre-list {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: #fff;
-        border: 1px solid #ccc;
-        list-style: none;
-        padding: 0.5rem 0;
-        margin: 0;
-        width: 150px;
-        z-index: 10;
-    }
-
-    .genre-dropdown .genre-list li {
-        padding: 0.3rem 1rem;
-    }
-
-    .genre-dropdown:hover .genre-list {
-        display: block;
-    }
-
-    .genre-dropdown .genre-list li:hover {
-        background-color: #f0f0f0;
-    }
-</style>

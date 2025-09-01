@@ -1,0 +1,127 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1e1e2f;
+    color: #fff;
+    padding: 0.5rem 1.5rem; /* zmniejszone odstępy */
+    font-family: Arial, sans-serif;
+    height: 100px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-left{
+    margin-left: 17rem;
+}
+
+
+.nav-left a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-left .logo {
+    height: 70px; /* trochę mniejsza, żeby nie zajmowała za dużo miejsca */
+    object-fit: contain;
+}
+
+.nav-left h1 {
+    margin: 0;
+    font-size: 40px;
+    
+}
+
+.nav-center{
+    margin-left: 10rem;
+    
+}
+
+/* Wyszukiwarka */
+.nav-center input[type="text"] {
+    padding: 0.35rem 0.8rem; 
+    font-size: 0.85rem;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    width: 400px; 
+    height: 45px; 
+}
+
+/* Linki i dropdown */
+.nav-right {
+    margin-left: 10rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem; /* zmniejszony gap między elementami */
+}
+
+.nav-right a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem; /* mniejsze paddingi */
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.nav-right a:hover {
+    background-color: #3a3a5a;
+}
+
+/* Dropdown */
+.genre-dropdown {
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.3rem 0.6rem; /* mniejsze paddingi */
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.genre-dropdown:hover {
+    background-color: #3a3a5a;
+}
+
+.genre-dropdown .genre-list {
+    display: none;
+    background: #2e2e4a;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0.3rem 0; /* mniejsze paddingi */
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.genre-dropdown .genre-list li {
+    padding: 0.35rem 0.8rem; /* mniejsze paddingi */
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.genre-dropdown .genre-list li:hover {
+    background-color: #3a3a5a;
+}
+
+.genre-dropdown:hover .genre-list {
+    display: block;
+}
+
+/* Koszyk */
+.cart-icon i {
+    font-size: 1rem; /* mniejsza ikona koszyka */
+}
+

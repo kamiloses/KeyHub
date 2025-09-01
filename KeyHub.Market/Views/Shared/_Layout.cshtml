@@ -4,15 +4,20 @@
  <html>
  <head>
      <meta charset="utf-8" />
-     <title>@ViewData["Title"] - MojaAplikacja</title>
+     <title>@ViewData["Title"] KeyHub</title>
+     <link rel="stylesheet" href="~/css/header.css" />
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+     @* <link rel="icon" type="image/png" href="~/images/keyHub-logo.png"> *@
  </head>
  <body>
 
  @await Html.PartialAsync("_Header")  
 
  <main>
-     @RenderBody()  <!-- tutaj wstawiane są widoki -->
+     @RenderBody()  
  </main>
 
  </body>
  </html>
+ s
