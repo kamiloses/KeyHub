@@ -6,11 +6,11 @@ public class Game
     
     public int Id { get; set; }
     public string Title { get; set; }
-    public string? Description { get; set; }
     public string Genre { get; set; }
     public decimal Price { get; set; }
-    //todo discount price
+    public int? Discount { get; set; }//todo zostawić czy nie "?"
     public string ImageUrl { get; set; }
+    public Platform Platform { get; set; }
     public int Stock { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

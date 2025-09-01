@@ -17,37 +17,29 @@ Layout = "_HomeLayout";
             </div>
         </div>
 
-        <div class="filter-group">
-            <label>Operating System</label>
-            <ul>
-                <li>Windows <span>(76)</span></li>
-                <li>Mac</li>
-                <li>Linux</li>
-            </ul>
-        </div>
+        
 
         <div class="filter-group">
             <label>Platform</label>
             <ul>
-                <li>Xbox Live <span>(299)</span></li>
-                <li>Windows Store <span>(111)</span></li>
-                <li>Minecraft <span>(26)</span></li>
-                <li>Steam <span>(9)</span></li>
-                <li>PSN <span>(8)</span></li>
-                <li>Nintendo <span>(6)</span></li>
-                <li>Mixcraft</li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Xbox Live <span>(299)</span></label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Windows Store <span>(111)</span></label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Minecraft <span>(26)</span></label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Steam <span>(9)</span></label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> PSN <span>(8)</span></label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Nintendo <span>(6)</span></label></li>
             </ul>
         </div>
 
         <div class="filter-group">
             <label>Genre</label>
             <ul>
-                <li>Action</li>
-                <li>Adventure</li>
-                <li>RPG</li>
-                <li>Simulation</li>
-                <li>Strategy</li>
-                <li>Sports</li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Action</label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Adventure</label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> RPG</label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Simulation</label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Strategy</label></li>
+                <li><label><input type="checkbox" class="filter-checkbox"> Sports</label></li>
             </ul>
         </div>
     </aside>
@@ -86,8 +78,6 @@ Layout = "_HomeLayout";
                 <p class="sponsor">SPONSORED</p>
                 <p class="price"><span class="final-price">41.16 PLN</span> <span class="old-price">55.39 PLN</span> <span class="discount">-26%</span></p>
             </div>
-
-            <!-- Dodaj resztę gier tutaj -->
 
         </div>
     </main>
@@ -132,20 +122,13 @@ Layout = "_HomeLayout";
 
     .filter-group ul li {
         padding: 4px 0;
-        cursor: pointer;
         font-size: 14px;
+    }
+
+    .filter-group ul li label {
+        cursor: pointer;
         display: flex;
         justify-content: space-between;
-    }
-
-    .price-filter input {
-        width: 80px;
-        padding: 4px;
-        margin-right: 4px;
-    }
-
-    .price-filter span {
-        margin-right: 4px;
     }
 
     /* Wyniki po prawej */
@@ -212,7 +195,7 @@ Layout = "_HomeLayout";
         margin-right: 5px;
     }
 
-    .game-item .price .discount {
+    .game-item .price .discount {   
         color: #e53935;
         font-weight: bold;
     }
@@ -222,3 +205,13 @@ Layout = "_HomeLayout";
         color: #000;
     }
 </style>
+
+<script>
+    document.querySelectorAll('.filter-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+            // Na razie tylko symulacja odświeżenia
+            alert('Filters updated!');
+            // Tutaj później możesz wywołać np. Ajax lub pobrać wyniki z backendu
+        });
+    });
+</script>
