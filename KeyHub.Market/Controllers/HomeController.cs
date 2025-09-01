@@ -21,9 +21,19 @@ public class HomeController : Controller
     
     
     [HttpGet("search")] 
-    public IActionResult SearchGame()
+    public IActionResult SearchGame(int page = 1, int pageSize = 10)//todo ogarnij paginacje
     {
-        var games = dbContext.Games.Take(20).ToList();
+        var gamesQuery = dbContext.Games.AsQueryable();
+        int totalGames = gamesQuery.Count();
+       
+        var games = gamesQuery
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        
+        
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);
         
         return View("searchedGames",games);
     }
