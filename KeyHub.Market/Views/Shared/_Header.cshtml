@@ -1,21 +1,21 @@
-<header>
-    <nav>
-        <div class="nav-left">
-            <a href="/">
-                <img src="~/images/keyHub-logo.png" alt="KeyHub Logo" class="logo">
-                <h1>KeyHub</h1>
+<header class="header-component">
+    <nav class="header-nav">
+        <div class="header-nav-left">
+            <a href="/" class="header-logo-link">
+                <img src="~/images/keyHub-logo.png" alt="KeyHub Logo" class="header-logo">
+                <h1 class="header-title">KeyHub</h1>
             </a>
         </div>
 
-        <div class="nav-center">
-            <input type="text" placeholder="Search for a game..." />
+        <div class="header-nav-center">
+            <input type="text" placeholder="Search for a game..." class="header-search" />
         </div>
 
-        <div class="nav-right">
-            <div class="genre-dropdown">
+        <div class="header-nav-right">
+            <div class="header-genre-dropdown">
                 <span>Genres ▼</span>
                 @* todo dynamiczna z bazy danych *@
-                <ul class="genre-list"> 
+                <ul class="header-genre-list"> 
                     <li>Action</li>
                     <li>Adventure</li>
                     <li>RPG</li>
@@ -26,15 +26,15 @@
             </div>
 
             @if (false) {
-                <a href="/Account/Login">Login</a>
-                <a href="/Account/Register">Register</a>
+                <a href="/Account/Login" class="header-link">Login</a>
+                <a href="/Account/Register" class="header-link">Register</a>
             }
             else {
-                <a href="/Cart" class="cart-icon" title="Your Cart">
+                <a href="/Cart" class="header-cart-icon" title="Your Cart">
                     <i class="fas fa-shopping-cart"></i>
                 </a>
                 
-                <a href="/Account/Logout">Logout</a>
+                <a href="/Account/Logout" class="header-link">Logout</a>
             }
         </div>
     </nav>

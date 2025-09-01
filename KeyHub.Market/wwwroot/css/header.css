@@ -5,7 +5,7 @@
     padding: 0;
 }
 
-header {
+.header-component {
     background-color: #1e1e2f;
     color: #fff;
     padding: 0.5rem 1.5rem; /* zmniejszone odstępy */
@@ -13,18 +13,16 @@ header {
     height: 100px;
 }
 
-nav {
+.header-nav {
     display: flex;
     align-items: center;
 }
 
-
-.nav-left{
+.header-nav-left {
     margin-left: 17rem;
 }
 
-
-.nav-left a {
+.header-nav-left a.header-logo-link {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -32,42 +30,40 @@ nav {
     color: #fff;
 }
 
-.nav-left .logo {
+.header-nav-left .header-logo {
     height: 70px; /* trochę mniejsza, żeby nie zajmowała za dużo miejsca */
     object-fit: contain;
 }
 
-.nav-left h1 {
+.header-nav-left .header-title {
     margin: 0;
     font-size: 40px;
-    
 }
 
-.nav-center{
+.header-nav-center {
     margin-left: 10rem;
-    
 }
 
 /* Wyszukiwarka */
-.nav-center input[type="text"] {
-    padding: 0.35rem 0.8rem; 
+.header-nav-center input.header-search[type="text"] {
+    padding: 0.35rem 0.8rem;
     font-size: 0.85rem;
     border-radius: 15px;
     border: none;
     outline: none;
-    width: 400px; 
-    height: 45px; 
+    width: 400px;
+    height: 45px;
 }
 
 /* Linki i dropdown */
-.nav-right {
+.header-nav-right {
     margin-left: 10rem;
     display: flex;
     align-items: center;
     gap: 0.7rem; /* zmniejszony gap między elementami */
 }
 
-.nav-right a {
+.header-nav-right a.header-link {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -76,12 +72,12 @@ nav {
     transition: background 0.2s;
 }
 
-.nav-right a:hover {
+.header-nav-right a.header-link:hover {
     background-color: #3a3a5a;
 }
 
 /* Dropdown */
-.genre-dropdown {
+.header-genre-dropdown {
     position: relative;
     cursor: pointer;
     font-weight: 500;
@@ -90,11 +86,11 @@ nav {
     transition: background 0.2s;
 }
 
-.genre-dropdown:hover {
+.header-genre-dropdown:hover {
     background-color: #3a3a5a;
 }
 
-.genre-dropdown .genre-list {
+.header-genre-dropdown .header-genre-list {
     display: none;
     background: #2e2e4a;
     border-radius: 5px;
@@ -105,23 +101,22 @@ nav {
     z-index: 10;
 }
 
-.genre-dropdown .genre-list li {
+.header-genre-dropdown .header-genre-list li {
     padding: 0.35rem 0.8rem; /* mniejsze paddingi */
     color: #fff;
     cursor: pointer;
     transition: background 0.2s;
 }
 
-.genre-dropdown .genre-list li:hover {
+.header-genre-dropdown .header-genre-list li:hover {
     background-color: #3a3a5a;
 }
 
-.genre-dropdown:hover .genre-list {
+.header-genre-dropdown:hover .header-genre-list {
     display: block;
 }
 
 /* Koszyk */
-.cart-icon i {
+.header-cart-icon i {
     font-size: 1rem; /* mniejsza ikona koszyka */
 }
-

@@ -9,6 +9,7 @@ public class Game
     public string? Description { get; set; }
     public string Genre { get; set; }
     public decimal Price { get; set; }
+    //todo discount price
     public string ImageUrl { get; set; }
     public int Stock { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
