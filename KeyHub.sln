@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyHub.Market", "KeyHub.Market\KeyHub.Market.csproj", "{81D1E184-273C-457B-A932-9BECF1FBAE61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyHub.Mailer", "KeyHub.Mailer\KeyHub.Mailer.csproj", "{0C5AC92E-CDF2-40F7-BCC7-54ED597E64D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyHub.Mailer.Tests", "KeyHub.Mailer.Tests\KeyHub.Mailer.Tests.csproj", "{29597AB5-CB70-4E83-B829-B7DD5362A1D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyHub.Market.Tests", "KeyHub.Market.Tests\KeyHub.Market.Tests.csproj", "{01C28B4B-2B15-41C9-A7C4-ED272521EBEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81D1E184-273C-457B-A932-9BECF1FBAE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D1E184-273C-457B-A932-9BECF1FBAE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D1E184-273C-457B-A932-9BECF1FBAE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D1E184-273C-457B-A932-9BECF1FBAE61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C5AC92E-CDF2-40F7-BCC7-54ED597E64D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5AC92E-CDF2-40F7-BCC7-54ED597E64D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5AC92E-CDF2-40F7-BCC7-54ED597E64D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5AC92E-CDF2-40F7-BCC7-54ED597E64D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29597AB5-CB70-4E83-B829-B7DD5362A1D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29597AB5-CB70-4E83-B829-B7DD5362A1D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29597AB5-CB70-4E83-B829-B7DD5362A1D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29597AB5-CB70-4E83-B829-B7DD5362A1D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C28B4B-2B15-41C9-A7C4-ED272521EBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C28B4B-2B15-41C9-A7C4-ED272521EBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C28B4B-2B15-41C9-A7C4-ED272521EBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C28B4B-2B15-41C9-A7C4-ED272521EBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
