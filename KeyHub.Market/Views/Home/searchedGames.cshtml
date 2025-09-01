@@ -1,0 +1,224 @@
+@{
+Layout = "_HomeLayout";
+}
+
+<div class="search-page-container">
+
+    <!-- Filtry po lewej -->
+    <aside class="filters">
+        <h3>Filters</h3>
+
+        <div class="filter-group">
+            <label>Price (PLN)</label>
+            <div class="price-filter">
+                <input type="number" placeholder="From">
+                <span>-</span>
+                <input type="number" placeholder="To">
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <label>Operating System</label>
+            <ul>
+                <li>Windows <span>(76)</span></li>
+                <li>Mac</li>
+                <li>Linux</li>
+            </ul>
+        </div>
+
+        <div class="filter-group">
+            <label>Platform</label>
+            <ul>
+                <li>Xbox Live <span>(299)</span></li>
+                <li>Windows Store <span>(111)</span></li>
+                <li>Minecraft <span>(26)</span></li>
+                <li>Steam <span>(9)</span></li>
+                <li>PSN <span>(8)</span></li>
+                <li>Nintendo <span>(6)</span></li>
+                <li>Mixcraft</li>
+            </ul>
+        </div>
+
+        <div class="filter-group">
+            <label>Genre</label>
+            <ul>
+                <li>Action</li>
+                <li>Adventure</li>
+                <li>RPG</li>
+                <li>Simulation</li>
+                <li>Strategy</li>
+                <li>Sports</li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Wyniki po prawej -->
+    <main class="results-section">
+        <div class="results-header">
+            <h2>Search Results</h2>
+            <select class="sort-options">
+                <option value="popularity">Sort by Popularity</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A-Z</option>
+                <option value="name-desc">Name: Z-A</option>
+            </select>
+        </div>
+
+        <div class="game-list">
+
+            <div class="game-item">
+                <h3>Grand Theft Auto V Enhanced PC</h3>
+                <p><strong>Platform:</strong> Rockstar</p>
+                <p><strong>Type:</strong> Key</p>
+                <p><strong>Region:</strong> GLOBAL</p>
+                <p><strong>Can be activated in:</strong> Poland</p>
+                <p class="sponsor">SPONSORED</p>
+                <p class="price"><span class="final-price">50.23 PLN</span> <span class="old-price">127.88 PLN</span> <span class="discount">-61%</span></p>
+            </div>
+
+            <div class="game-item">
+                <h3>Grand Theft Auto IV Complete Edition PC</h3>
+                <p><strong>Platform:</strong> Rockstar</p>
+                <p><strong>Type:</strong> Key</p>
+                <p><strong>Region:</strong> GLOBAL</p>
+                <p><strong>Can be activated in:</strong> Poland</p>
+                <p class="sponsor">SPONSORED</p>
+                <p class="price"><span class="final-price">41.16 PLN</span> <span class="old-price">55.39 PLN</span> <span class="discount">-26%</span></p>
+            </div>
+
+            <!-- Dodaj resztę gier tutaj -->
+
+        </div>
+    </main>
+
+</div>
+
+<style>
+    .search-page-container {
+        display: flex;
+        gap: 20px;
+        margin: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Filtry po lewej */
+    .filters {
+        width: 220px;
+        padding: 15px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+    }
+
+    .filters h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .filter-group ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .filter-group ul li {
+        padding: 4px 0;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .price-filter input {
+        width: 80px;
+        padding: 4px;
+        margin-right: 4px;
+    }
+
+    .price-filter span {
+        margin-right: 4px;
+    }
+
+    /* Wyniki po prawej */
+    .results-section {
+        flex: 1;
+    }
+
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .sort-options {
+        padding: 4px 8px;
+        font-size: 14px;
+    }
+
+    /* Lista gier */
+    .game-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .game-item {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .game-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .game-item h3 {
+        font-size: 17px;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+
+    .game-item p {
+        margin: 2px 0;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .game-item .sponsor {
+        font-weight: bold;
+        color: #e53935;
+    }
+
+    .game-item .price {
+        margin-top: 4px;
+    }
+
+    .game-item .price .old-price {
+        text-decoration: line-through;
+        color: #999;
+        margin-right: 5px;
+    }
+
+    .game-item .price .discount {
+        color: #e53935;
+        font-weight: bold;
+    }
+
+    .game-item .price .final-price {
+        font-weight: bold;
+        color: #000;
+    }
+</style>
