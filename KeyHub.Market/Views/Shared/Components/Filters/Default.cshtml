@@ -1,4 +1,7 @@
-<!-- Filtry po lewej -->
+@using KeyHub.Market.Models
+@model KeyHub.Market.Models.ViewModels.FiltersViewModel
+
+
 <aside class="filters">
     <h3>Filters</h3>
 
@@ -14,12 +17,12 @@
     <div class="filter-group">
         <label>Platform</label>
         <ul>
-            @foreach (var platform in Enum.GetValues(typeof(KeyHub.Market.Models.Platform)))
+            @foreach (var platform in Model.PlatformStats)
             {
             <li>
                 <label>
-                    <input type="checkbox" class="filter-checkbox"> @platform
-                    <span>(0)</span> <!-- Możesz dynamicznie policzyć -->
+                    <input type="checkbox" class="filter-checkbox"> @platform.Platform
+                    <span>@platform.Count</span> 
                 </label>
             </li>
             }
@@ -29,14 +32,16 @@
     <div class="filter-group">
         <label>Genre</label>
         <ul>
-            @* Możesz wypisać unikalne gatunki z bazy *@
-           
+        @foreach (var genre in Model.GenreStats)
+        {
+
             <li>
                 <label>
-                    <input type="checkbox" class="filter-checkbox">
+                    <input type="checkbox" class="filter-checkbox"> @genre.Genre
+                    <span>@genre.Count</span> 
                 </label>
             </li>
-            
+        }
         </ul>
     </div>
 </aside>

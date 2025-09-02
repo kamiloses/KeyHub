@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.Views.ViewComponents
-{
+{//todo cache
     public class FiltersViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext _dbContext;
