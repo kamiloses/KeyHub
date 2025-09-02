@@ -1,26 +1,26 @@
 using KeyHub.Market.data;
-using KeyHub.Market.Models;
+using KeyHub.Market.Models.Dto;
+using KeyHub.Market.Services.impl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
-//todo zmien nazwe homeController
+
 public class HomeController : Controller
 {
-    private readonly ApplicationDbContext dbContext;
+    private readonly HomeService _homeService;
 
-    public HomeController(ApplicationDbContext dbContext)
+
+    public HomeController(HomeService homeService)
     {
-        this.dbContext = dbContext;
+        _homeService = homeService;
     }
 
     [HttpGet("")] 
     public IActionResult Index()
-    {
-       //todo zamienić na znizke najwiekszą
-       List<Game> recentlyAddedGames= dbContext.Games.AsQueryable().OrderBy(game => game.CreatedAt).Take(5).ToList();
-        //todo zamienić na gameDto
+    {//todo daj inną nazwe zmiennej oraz metody 
+       List<GameDto> gamesWithBiggestDiscount = _homeService.GetFiveGamesWithTheBiggestDiscount();
         
-        return View("home",recentlyAddedGames);
+        return View("home",gamesWithBiggestDiscount);
     }
     
     

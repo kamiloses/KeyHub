@@ -1,6 +1,4 @@
-using KeyHub.Market.Models;
-
-namespace KeyHub.Market.Dto;
+namespace KeyHub.Market.Models.Dto;
 #pragma warning disable CS8618
 
 public class GameDto

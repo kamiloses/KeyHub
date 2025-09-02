@@ -1,5 +1,6 @@
 using KeyHub.Market.data;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -17,29 +18,38 @@ public class GamesController : Controller
 
 
      [HttpGet("search")] 
-    public IActionResult SearchGame(int page = 1, int pageSize = 10,GameSort sortBy=GameSort.ByName,Platform[]? platforms = null)//todo ogarnij paginacje
-    {
-        
-        ViewBag.CurrentSort = sortBy.ToString();
-        
-        LoadGameSortOptions();
-        
-        IQueryable<Game> gamesQuery = SortGames(sortBy);
-        
-        gamesQuery = FilterByPlatform(gamesQuery, platforms);
-        int totalGames = gamesQuery.Count();
-       
-        var games = gamesQuery
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToList();
-        
-        
-        ViewBag.CurrentPage = page;
-        ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);
-        
-        return View("searchedGames",games);
-    }
+     public IActionResult SearchGame(int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName, Platform[]? platforms = null)
+     {
+         ViewBag.CurrentSort = sortBy.ToString();
+         LoadGameSortOptions();
+
+         IQueryable<Game> gamesQuery = SortGames(sortBy);
+         gamesQuery = FilterByPlatform(gamesQuery, platforms);
+
+         int totalGames = gamesQuery.Count();
+
+         var games = gamesQuery
+             .Skip((page - 1) * pageSize)
+             .Take(pageSize)
+             .Select(game => new GameDto
+             {
+                 Id = game.Id,
+                 Title = game.Title,
+                 Genre = game.Genre,
+                 Price = game.Price,
+                 Discount = game.Discount,
+                 ImageUrl = game.ImageUrl,
+                 Platform = game.Platform,
+                 Stock = game.Stock,
+                 CreatedAt = game.CreatedAt
+             })
+             .ToList();
+
+         ViewBag.CurrentPage = page;
+         ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);
+
+         return View("searchedGames", games);
+     }
 
     public enum GameSort
     {
