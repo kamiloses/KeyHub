@@ -1,3 +1,5 @@
+using KeyHub.Market.Controllers;
+
 namespace KeyHub.Market.Models;
 
 #pragma warning disable CS8618
@@ -6,7 +8,7 @@ public class Game
     
     public int Id { get; set; }
     public string Title { get; set; }
-    public string Genre { get; set; } //todo zamień na enum
+    public Genre Genre { get; set; } //todo zamień na enum
     public decimal Price { get; set; }
     public int? Discount { get; set; }//todo zostawić czy nie "?"
     public string ImageUrl { get; set; }

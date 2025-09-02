@@ -1,12 +1,13 @@
 using KeyHub.Market.data;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
 //todo zmien nazwe homeController
 public class HomeController : Controller
 {
-    private ApplicationDbContext dbContext;
+    private readonly ApplicationDbContext dbContext;
 
     public HomeController(ApplicationDbContext dbContext)
     {
@@ -22,7 +23,7 @@ public class HomeController : Controller
     
     
     [HttpGet("search")] 
-    public IActionResult SearchGame(int page = 1, int pageSize = 10,GameSort sortBy=GameSort.ByName)//todo ogarnij paginacje
+    public IActionResult SearchGame(int page = 1, int pageSize = 10,GameSort sortBy=GameSort.ByName,Platform[]? platforms = null)//todo ogarnij paginacje
     {
         
         ViewBag.CurrentSort = sortBy.ToString();
@@ -30,6 +31,8 @@ public class HomeController : Controller
         LoadGameSortOptions();
         
         IQueryable<Game> gamesQuery = SortGames(sortBy);
+        
+        gamesQuery = FilterByPlatform(gamesQuery, platforms);
         int totalGames = gamesQuery.Count();
        
         var games = gamesQuery
@@ -55,7 +58,7 @@ public class HomeController : Controller
 
 
     public IQueryable<Game> SortGames(GameSort sortBy = GameSort.ByName)
-    {
+    {  
         IQueryable<Game> games = dbContext.Games.AsQueryable();
 
         switch (sortBy)
@@ -85,5 +88,27 @@ public class HomeController : Controller
         ViewBag.ByPriceAsc = GameSort.ByPriceAsc;
         ViewBag.ByPriceDesc = GameSort.ByPriceDesc;
     }
-    
+
+
+    public IQueryable<Game> FilterByPlatform(IQueryable<Game> games, Platform[]? platforms)
+    {
+        if (platforms == null || platforms.Length == 0)
+            return games; // brak filtra – zwróć wszystkie gry
+
+        // filtrujemy tylko po wybranych platformach
+        return games.Where(g => platforms.Contains(g.Platform));
+    }
+
+
+    // public IQueryable<Game> FilterByGenres(IQueryable<Game> games, Genre[]? selectedGenres)
+    // {
+    //     if (selectedGenres == null || selectedGenres.Length == 0)
+    //         return games; 
+    //
+    //     return games.Where(game => selectedGenres.Contains(game.Genre));
+    // }
 }
+    
+    
+    
+    

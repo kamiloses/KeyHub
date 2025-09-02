@@ -14,36 +14,47 @@
         </div>
     </div>
 
-    <div class="filter-group">
-        <label>Platform</label>
-        <ul>
-            @foreach (var platform in Model.PlatformStats)
-            {
-            <li>
-                <label>
-                    <input type="checkbox" class="filter-checkbox"> @platform.Platform
-                    <span>@platform.Count</span> 
-                </label>
-            </li>
-            }
-        </ul>
-    </div>
+    <form method="get" asp-action="SearchGame">
+        <div class="filter-group">
+            <label>Platform</label>
+            <ul>
+                @foreach (var platform in Model.PlatformStats)
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" name="platforms" value="@platform.Platform" 
+                                   @(ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Contains(platform.Platform) ? "checked" : "")>
+                            @platform.Platform
+                            <span>@platform.Count</span>
+                        </label>
+                    </li>
+                }
+            </ul>
+        </div>
 
-    <div class="filter-group">
-        <label>Genre</label>
-        <ul>
-        @foreach (var genre in Model.GenreStats)
-        {
+        <button type="submit">Apply</button>
+    </form>
 
-            <li>
-                <label>
-                    <input type="checkbox" class="filter-checkbox"> @genre.Genre
-                    <span>@genre.Count</span> 
-                </label>
-            </li>
-        }
-        </ul>
-    </div>
+    <form method="get" asp-action="SearchGame">
+        <div class="filter-group">
+            <label>Genre</label>
+            <ul>
+                @foreach (var genre in Model.GenreStats)
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" name="genres" value="@genre.Genre"
+                                   @(ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre) ? "checked" : "")>
+                            @genre.Genre
+                            <span>@genre.Count</span>
+                        </label>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <button type="submit">Apply</button>
+    </form>
 </aside>
 <style>
 

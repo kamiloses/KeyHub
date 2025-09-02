@@ -15,6 +15,7 @@
         <div class="results-header">
             <h2>Search Results</h2>
             <form method="get">
+                @* todo ogarnij this.form submit ponizej *@
                 <select name="sortBy" onchange="this.form.submit()">
                     <option value="ByName" @(ViewBag.CurrentSort == "ByName" ? "selected" : "")>Name A-Z</option>
                     <option value="ByPriceAsc" @(ViewBag.CurrentSort == "ByPriceAsc" ? "selected" : "")>Price Low to High</option>
@@ -28,6 +29,7 @@
             @foreach (var game in Model) 
             {
                 <div class="game-item">
+                    <img src="@game.ImageUrl" alt="Bład zdjecia" width="100px height=100px">
                     <h3>@game.Title</h3>
                     <p><strong>Platform:</strong> @game.Platform</p>
                     <p><strong>Genre:</strong> @game.Genre</p>
@@ -38,7 +40,7 @@
                         <p class="sponsor">SPONSORED</p>
                     }
                     <p class="price">
-                        <span class="final-price">@String.Format("{0:C}", game.Price * (1 - (game.Discount ?? 0)/100m))</span>
+                        <span class="final-price">@String.Format("{0:C}", game.Price * (1 - (game.Discount ?? 0) / 100m))</span>
                         <span class="old-price">@String.Format("{0:C}", game.Price)</span>
                         <span class="discount">-@game.Discount%</span>
                     </p>

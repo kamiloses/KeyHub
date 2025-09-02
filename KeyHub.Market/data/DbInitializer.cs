@@ -6,6 +6,11 @@ namespace KeyHub.Market.data
     {
         public static void Seed(ApplicationDbContext context)
         {
+            // context.Games.RemoveRange(context.Games);
+            // context.SaveChanges();
+            //
+            //
+            
             if (context.Games.Any())
                 return;
 
@@ -20,13 +25,10 @@ namespace KeyHub.Market.data
                 "Animal Crossing", "Forza Horizon 5"
             };
 
-            string[] genres = new[]
-            {
-                "Action", "Adventure", "RPG", "Shooter", "Sports", "Simulation", "Strategy"
-            };
+           
 
             Platform[] platforms = (Platform[])Enum.GetValues(typeof(Platform));
-
+            var genres = (Genre[])Enum.GetValues(typeof(Genre)); 
             var random = new Random();
             for (int i = 0; i < 100; i++)
             {
@@ -36,7 +38,7 @@ namespace KeyHub.Market.data
                     Genre = genres[random.Next(genres.Length)],
                     Price = Math.Round((decimal)(10 + random.NextDouble() * 50), 2), // 10-60$
                     Discount = 0,
-                    ImageUrl = "https://via.placeholder.com/150", // jedno zdjęcie dla wszystkich
+                    ImageUrl = "https://m.media-amazon.com/images/I/81W+fYqjU0L._AC_SX569_.jpg", // jedno zdjęcie dla wszystkich
                     Platform = platforms[random.Next(platforms.Length)],
                     Stock = random.Next(10, 101), // 10-100 sztuk
                     CreatedAt = DateTime.UtcNow
