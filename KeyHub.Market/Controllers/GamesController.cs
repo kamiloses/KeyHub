@@ -62,8 +62,8 @@ public class GamesController : Controller
 
 
     public IQueryable<Game> SortGames(GameSort sortBy = GameSort.ByName)
-    {  
-        IQueryable<Game> games = dbContext.Games.AsQueryable();
+    {
+        IQueryable<Game> games = dbContext.Games;
 
         switch (sortBy)
         {

@@ -37,7 +37,7 @@ namespace KeyHub.Market.data
                     Title = titles[random.Next(titles.Length)] + $" #{i + 1}",
                     Genre = genres[random.Next(genres.Length)],
                     Price = Math.Round((decimal)(10 + random.NextDouble() * 50), 2), // 10-60$
-                    Discount = 0,
+                    Discount = random.Next(5, 70),
                     ImageUrl = "https://m.media-amazon.com/images/I/81W+fYqjU0L._AC_SX569_.jpg", // jedno zdjęcie dla wszystkich
                     Platform = platforms[random.Next(platforms.Length)],
                     Stock = random.Next(10, 101), // 10-100 sztuk

@@ -11,7 +11,7 @@
     <div class="recommended-games">
         @foreach (var game in Model)
         {
-            @await Html.PartialAsync("_GameItem", game)
+            @await Html.PartialAsync("_GameItem", game,new ViewDataDictionary(ViewData) { { "Context", "Home" } })
         }
         
         

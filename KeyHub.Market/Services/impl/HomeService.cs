@@ -13,8 +13,8 @@ public class HomeService : IHomeService
     }
 //todo upewnij sie ze najwyzsza znizka 
     public List<GameDto> GetFiveGamesWithTheBiggestDiscount()
-    {
-     return   _dbContext.Games.AsQueryable()
+    { 
+     return   _dbContext.Games
             .OrderByDescending(game => game.Discount).Take(5)
             .Select(game => new GameDto { Id = game.Id, 
                 Title = game.Title, 
