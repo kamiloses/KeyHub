@@ -17,7 +17,7 @@ namespace KeyHub.Market.Views.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var platformStats = await _dbContext.Games
+            List<PlatformStatDto> platformStats = await _dbContext.Games
                 .GroupBy(game => game.Platform)
                 .Select(game => new PlatformStatDto
                 {
@@ -26,7 +26,7 @@ namespace KeyHub.Market.Views.ViewComponents
                 })
                 .ToListAsync();
 
-            var genreStats = await _dbContext.Games
+              List<GenreStatDto> genreStats = await _dbContext.Games
                 .GroupBy(game => game.Genre)
                 .Select(game => new GenreStatDto
                 {
@@ -35,7 +35,7 @@ namespace KeyHub.Market.Views.ViewComponents
                 })
                 .ToListAsync();
 
-            var filters = new FiltersViewModel
+            FiltersViewModel filters = new FiltersViewModel
             {
                 PlatformStats = platformStats,
                 GenreStats = genreStats
