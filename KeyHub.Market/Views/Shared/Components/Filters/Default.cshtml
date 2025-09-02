@@ -1,0 +1,85 @@
+<!-- Filtry po lewej -->
+<aside class="filters">
+    <h3>Filters</h3>
+
+    <div class="filter-group">
+        <label>Price (PLN)</label>
+        <div class="price-filter">
+            <input type="number" placeholder="From">
+            <span>-</span>
+            <input type="number" placeholder="To">
+        </div>
+    </div>
+
+    <div class="filter-group">
+        <label>Platform</label>
+        <ul>
+            @foreach (var platform in Enum.GetValues(typeof(KeyHub.Market.Models.Platform)))
+            {
+            <li>
+                <label>
+                    <input type="checkbox" class="filter-checkbox"> @platform
+                    <span>(0)</span> <!-- Możesz dynamicznie policzyć -->
+                </label>
+            </li>
+            }
+        </ul>
+    </div>
+
+    <div class="filter-group">
+        <label>Genre</label>
+        <ul>
+            @* Możesz wypisać unikalne gatunki z bazy *@
+           
+            <li>
+                <label>
+                    <input type="checkbox" class="filter-checkbox">
+                </label>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+<style>
+
+    .filters {
+        width: 220px;
+        padding: 15px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+    }
+
+    .filters h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .filter-group {
+        margin-bottom: 20px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .filter-group ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .filter-group ul li {
+        padding: 4px 0;
+        font-size: 14px;
+    }
+
+    .filter-group ul li label {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+</style>

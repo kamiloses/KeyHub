@@ -5,7 +5,7 @@ public enum Platform
     
     XboxLive,
     WindowsStore,
-    Minecraft,
+    Minecraft,//todo usun 
     Steam,
     PSN,
     Nintendo

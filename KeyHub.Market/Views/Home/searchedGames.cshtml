@@ -6,49 +6,9 @@
 
 <div class="search-page-container">
 
-    <!-- Filtry po lewej -->
-    <aside class="filters">
-        <h3>Filters</h3>
-
-        <div class="filter-group">
-            <label>Price (PLN)</label>
-            <div class="price-filter">
-                <input type="number" placeholder="From">
-                <span>-</span>
-                <input type="number" placeholder="To">
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <label>Platform</label>
-            <ul>
-                @foreach (var platform in Enum.GetValues(typeof(KeyHub.Market.Models.Platform)))
-                {
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox"> @platform
-                            <span>(0)</span> <!-- Możesz dynamicznie policzyć -->
-                        </label>
-                    </li>
-                }
-            </ul>
-        </div>
-
-        <div class="filter-group">
-            <label>Genre</label>
-            <ul>
-                @* Możesz wypisać unikalne gatunki z bazy *@
-                @foreach (var genre in Model.Select(g => g.Genre).Distinct())
-                {
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filter-checkbox"> @genre
-                        </label>
-                    </li>
-                }
-            </ul>
-        </div>
-    </aside>
+   
+    //FILTRY
+    @await Component.InvokeAsync("Filters")
 
     <!-- Wyniki po prawej -->
     <main class="results-section">
@@ -105,12 +65,4 @@
         }
     }
 </div>
-<script>
-    document.querySelectorAll('.filter-checkbox').forEach(cb => {
-        cb.addEventListener('change', () => {
-            // Na razie tylko symulacja odświeżenia
-            alert('Filters updated!');
-            // Tutaj później możesz wywołać np. Ajax lub pobrać wyniki z backendu
-        });
-    });
-</script>
+
