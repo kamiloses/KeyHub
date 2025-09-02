@@ -21,62 +21,6 @@
     font-size: 14px;
 }
 
-.game-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.game-item {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.game-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-.game-item h3 {
-    font-size: 17px;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-.game-item p {
-    margin: 2px 0;
-    font-size: 14px;
-    color: #333;
-}
-
-.game-item .sponsor {
-    font-weight: bold;
-    color: #e53935;
-}
-
-.game-item .price {
-    margin-top: 4px;
-}
-
-.game-item .price .old-price {
-    text-decoration: line-through;
-    color: #999;
-    margin-right: 5px;
-}
-
-.game-item .price .discount {
-    color: #e53935;
-    font-weight: bold;
-}
-
-.game-item .price .final-price {
-    font-weight: bold;
-    color: #000;
-}
-
 .pagination {
     margin-top: 20px;
     display: flex;

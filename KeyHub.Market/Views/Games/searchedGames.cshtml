@@ -28,23 +28,7 @@
         <div class="game-list">
             @foreach (var game in Model) 
             {
-                <div class="game-item">
-                    <img src="@game.ImageUrl" alt="Bład zdjecia" width="100px height=100px">
-                    <h3>@game.Title</h3>
-                    <p><strong>Platform:</strong> @game.Platform</p>
-                    <p><strong>Genre:</strong> @game.Genre</p>
-                    <p><strong>Region:</strong> GLOBAL</p>
-                    <p><strong>Can be activated in:</strong> Poland</p>
-                    @if (game.Discount > 0)
-                    {
-                        <p class="sponsor">SPONSORED</p>
-                    }
-                    <p class="price">
-                        <span class="final-price">@String.Format("{0:C}", game.Price * (1 - (game.Discount ?? 0) / 100m))</span>
-                        <span class="old-price">@String.Format("{0:C}", game.Price)</span>
-                        <span class="discount">-@game.Discount%</span>
-                    </p>
-                </div>
+                @await Html.PartialAsync("_GameItem", game)
             }
         </div>
     </main>
