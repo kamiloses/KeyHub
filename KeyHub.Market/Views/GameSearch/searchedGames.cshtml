@@ -1,16 +1,16 @@
+@using KeyHub.Market.Enums
 @model IEnumerable<KeyHub.Market.Models.Dto.GameDto>
 
 @{
     Layout = "_HomeLayout";
+    var pageContext = ViewContextType.Search;
 }
 
 <div class="search-page-container">
 
    
-    //FILTRY
-    @await Component.InvokeAsync("Filters")
+    @* @await Component.InvokeAsync("Filters") *@
 
-    <!-- Wyniki po prawej -->
     <main class="results-section">
         <div class="results-header">
             <h2>Search Results</h2>
@@ -28,13 +28,14 @@
         <div class="game-list">
             @foreach (var game in Model) 
             {
-                @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { { "Context", "Search" } })
+                @await Html.PartialAsync("_GameOverview", game,  new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
             }
         </div>
     </main>
     
 </div>
 
+@* todo ogarnij paginacje*@
 
 <div class="pagination">
     @if (ViewBag.TotalPages > 1)
