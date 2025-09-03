@@ -28,7 +28,7 @@
         <div class="game-list">
             @foreach (var game in Model) 
             {
-                @await Html.PartialAsync("_GameItem", game, new ViewDataDictionary(ViewData) { { "Context", "Search" } })
+                @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { { "Context", "Search" } })
             }
         </div>
     </main>

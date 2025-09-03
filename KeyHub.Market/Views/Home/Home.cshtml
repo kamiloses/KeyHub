@@ -1,8 +1,9 @@
+@using KeyHub.Market.Enums
 @model IEnumerable<KeyHub.Market.Models.Dto.GameDto>
 @{
-    Layout = "_HomeLayout";            // wskazuje layout
+    Layout = "_HomeLayout";
+    var pageContext = ViewContextType.Home;
 }
-@* todo upewnij sie czy nazwa pliku jest poprawna oraz czy z małej czy duzej litery nazwa *@
 
 <img class="home-main-logo" src="~/images/c.png" alt="KeyHub Logo" >
 
@@ -11,9 +12,9 @@
     <div class="recommended-games">
         @foreach (var game in Model)
         {
-            @await Html.PartialAsync("_GameItem", game,new ViewDataDictionary(ViewData) { { "Context", "Home" } })
+            @await Html.PartialAsync("_GameOverview", game,  new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
         }
-        
-        
+
+
     </div>
 </div>

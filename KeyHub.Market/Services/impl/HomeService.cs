@@ -1,5 +1,6 @@
 using KeyHub.Market.data;
 using KeyHub.Market.Models.Dto;
+using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.Services.impl;
 
@@ -11,11 +12,10 @@ public class HomeService : IHomeService
     {
         _dbContext = dbContext;
     }
-//todo upewnij sie ze najwyzsza znizka 
-    public List<GameDto> GetFiveGamesWithTheBiggestDiscount()
+    public async Task<List<GameDto>>  GetTopDiscountedGamesAsync(int count)
     { 
-     return   _dbContext.Games
-            .OrderByDescending(game => game.Discount).Take(5)
+        return   await _dbContext.Games.AsNoTracking()
+            .OrderByDescending(game => game.Discount).Take(count)
             .Select(game => new GameDto { Id = game.Id, 
                 Title = game.Title, 
                 Genre = game.Genre, Price = game.Price, 
@@ -24,7 +24,7 @@ public class HomeService : IHomeService
                 Platform = game.Platform, 
                 Stock = game.Stock,
                 CreatedAt = game.CreatedAt })
-            .ToList();
+            .ToListAsync();
 
     }
 }
