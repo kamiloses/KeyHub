@@ -11,9 +11,11 @@
 
 .results-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    margin-left: 550px;
+    justify-content: flex-start; 
+    gap: 20px
 }
 
 .sort-options {
@@ -41,4 +43,35 @@
     border-radius: 4px;
     background: #333;
     color: #fff;
+}
+
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    margin-left: 500px;
+}
+
+.custom-select-wrapper select {
+    width: 100%;
+    padding: 6px 30px 6px 10px; /* miejsce na strzałkę */
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    appearance: none; /* usuwa domyślną strzałkę */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 14px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.custom-select-wrapper::after {
+    content: "▼"; /* strzałka w dół */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 12px;
 }

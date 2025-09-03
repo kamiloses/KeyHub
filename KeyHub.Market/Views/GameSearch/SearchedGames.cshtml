@@ -33,12 +33,14 @@
                 }
                 @* todo HTML hidden input in GET forms to preserve state *@
                 @* //todo name i value ogarnij  oraz to nizej*@
-                <select name="sortBy" onchange="this.form.submit()">
-                    <option value="ByName" @(ViewBag.CurrentSort == "ByName" ? "selected" : "")>Name A-Z</option>
-                    <option value="ByPriceAsc" @(ViewBag.CurrentSort == "ByPriceAsc" ? "selected" : "")>Price Low to High</option>
-                    <option value="ByPriceDesc" @(ViewBag.CurrentSort == "ByPriceDesc" ? "selected" : "")>Price High to Low</option>
-                    <option value="ByDate" @(ViewBag.CurrentSort == "ByDate" ? "selected" : "")>Newest</option>
-                </select>
+                <div class="custom-select-wrapper">
+                    <select name="sortBy" onchange="this.form.submit()">
+                        <option value="ByName" @(ViewBag.CurrentSort == "ByName" ? "selected" : "")>Name A-Z</option>
+                        <option value="ByPriceAsc" @(ViewBag.CurrentSort == "ByPriceAsc" ? "selected" : "")>Price Low to High</option>
+                        <option value="ByPriceDesc" @(ViewBag.CurrentSort == "ByPriceDesc" ? "selected" : "")>Price High to Low</option>
+                        <option value="ByDate" @(ViewBag.CurrentSort == "ByDate" ? "selected" : "")>Newest</option>
+                    </select>
+                </div>
             </form>
         </div>
 
