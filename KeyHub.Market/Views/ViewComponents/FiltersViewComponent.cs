@@ -5,7 +5,7 @@ using KeyHub.Market.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-//todo cache
+
 namespace KeyHub.Market.Views.ViewComponents;
 
 public class FiltersViewComponent : ViewComponent
@@ -15,7 +15,7 @@ public class FiltersViewComponent : ViewComponent
     public FiltersViewComponent(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-    }
+    }//todo cache
 
     public async Task<IViewComponentResult> InvokeAsync(Platform[]? selectedPlatforms = null, Genre[]? selectedGenres = null)
     {

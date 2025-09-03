@@ -19,7 +19,7 @@
                 {
                     var isChecked = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Contains(platform.Platform);
                     var hasAnySelected = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Length > 0;
-                    var isDeemphasized = hasAnySelected && !isChecked; 
+                    var isDeemphasized = hasAnySelected && !isChecked; // te które nie są wybrane
 
                     <li>
                         <label class="@(isDeemphasized ? "deemphasized" : "")">
@@ -51,21 +51,7 @@
                         </label>
                     </li>
                 }
-            </ul>@foreach (var genre in Model.GenreStats)
-{
-    var isChecked = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre);
-    var hasAnySelected = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Length > 0;
-    var isDeemphasized = hasAnySelected && !isChecked;
-
-    <li>
-        <label class="@(isDeemphasized ? "c" : "")">
-            <input type="checkbox" name="genres" value="@genre.Genre"
-                   @(isChecked ? "checked" : "")>
-            @genre.Genre
-            <span>@genre.Count</span>
-        </label>
-    </li>
-}
+            </ul>
         </div>
 
         <button type="submit">Apply</button>
@@ -75,10 +61,11 @@
 <style>
 
     .filters label.deemphasized {
-        color: #777; 
-        opacity: 0.6; 
+        color: #777; /* ciemnoszary tekst */
+        opacity: 0.6; /* półprzezroczyste */
         transition: opacity 0.2s ease, color 0.2s ease;
     }
+
     .filters label.deemphasized span {
         color: #777;
     }
