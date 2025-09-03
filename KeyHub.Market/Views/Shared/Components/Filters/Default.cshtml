@@ -17,10 +17,14 @@
             <ul>
                 @foreach (var platform in Model.PlatformStats)
                 {
+                    var isChecked = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Contains(platform.Platform);
+                    var hasAnySelected = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Length > 0;
+                    var isDeemphasized = hasAnySelected && !isChecked; 
+
                     <li>
-                        <label>
+                        <label class="@(isDeemphasized ? "deemphasized" : "")">
                             <input type="checkbox" name="platforms" value="@platform.Platform" 
-                                   @(ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Contains(platform.Platform) ? "checked" : "")>
+                                   @(isChecked ? "checked" : "")>
                             @platform.Platform
                             <span>@platform.Count</span>
                         </label>
@@ -34,16 +38,34 @@
             <ul>
                 @foreach (var genre in Model.GenreStats)
                 {
+                    var isChecked = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre);
+                    var hasAnySelected = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Length > 0;
+                    var isDeemphasized = hasAnySelected && !isChecked;
+
                     <li>
-                        <label>
+                        <label class="@(isDeemphasized ? "deemphasized" : "")">
                             <input type="checkbox" name="genres" value="@genre.Genre"
-                                   @(ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre) ? "checked" : "")>
+                                   @(isChecked ? "checked" : "")>
                             @genre.Genre
                             <span>@genre.Count</span>
                         </label>
                     </li>
                 }
-            </ul>
+            </ul>@foreach (var genre in Model.GenreStats)
+{
+    var isChecked = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre);
+    var hasAnySelected = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Length > 0;
+    var isDeemphasized = hasAnySelected && !isChecked;
+
+    <li>
+        <label class="@(isDeemphasized ? "c" : "")">
+            <input type="checkbox" name="genres" value="@genre.Genre"
+                   @(isChecked ? "checked" : "")>
+            @genre.Genre
+            <span>@genre.Count</span>
+        </label>
+    </li>
+}
         </div>
 
         <button type="submit">Apply</button>
@@ -51,6 +73,21 @@
 </aside>
 
 <style>
+
+    .filters label.deemphasized {
+        color: #777; 
+        opacity: 0.6; 
+        transition: opacity 0.2s ease, color 0.2s ease;
+    }
+    .filters label.deemphasized span {
+        color: #777;
+    }
+
+
+
+
+
+
     .filters {
         width: 220px;
         padding: 15px;
