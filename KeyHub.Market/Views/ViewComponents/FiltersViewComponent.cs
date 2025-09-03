@@ -15,7 +15,7 @@ namespace KeyHub.Market.Views.ViewComponents
             _dbContext = dbContext;
         }
 
-        public async Task<IViewComponentResult> GetFiltersDataAsync()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             List<PlatformStatDto> platformStats = await _dbContext.Games.AsNoTracking()
                 .GroupBy(game => game.Platform)

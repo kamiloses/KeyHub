@@ -6,18 +6,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.Services.impl;
 
-public class GameSearchService
+public class GameSearchService : IGameSearchService
 {
     
     private readonly ApplicationDbContext _dbContext;
-    private readonly FilteringService _filteringService;
-    private readonly SortingService _sortingService;
-    public GameSearchService(ApplicationDbContext dbContext, SortingService sortingService, FilteringService filteringService)
+    private readonly IFilteringService _filteringService;
+    private readonly ISortingService _sortingService;
+
+    public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService, ISortingService sortingService)
     {
         _dbContext = dbContext;
-        _sortingService = sortingService;
         _filteringService = filteringService;
+        _sortingService = sortingService;
     }
+
 
     public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy,Platform[]? platforms,Genre[]? genres)
     {

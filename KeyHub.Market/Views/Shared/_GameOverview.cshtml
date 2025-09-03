@@ -3,7 +3,7 @@
 
 @{
 var styleContext = ViewData["Context"]!;
-
+Console.WriteLine("HALOOO "+styleContext);
 var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount ?? 0) / 100m), 2);
 var oldPrice = Math.Round(Model.Price, 2);
 }
@@ -26,7 +26,9 @@ var oldPrice = Math.Round(Model.Price, 2);
 
 @if (styleContext.Equals(ViewContextType.Home))
 {
-<style>
+
+
+    <style>
 .game-item {
     padding: 16px;
     border-radius: 10px;
@@ -105,11 +107,22 @@ var oldPrice = Math.Round(Model.Price, 2);
     font-size: 16px;
 }
 </style>
-
-@if (styleContext.Equals("Search"))
+}
+@if (styleContext.Equals(ViewContextType.Search))
 {
 <style>
 
+    .game-list {
+        display: flex;       
+        flex-wrap: wrap;     
+        gap: 16px;         
+    }
+/*      .game-list {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px; 
+    }*/
+    
 .game-item {
     padding: 16px;
     border-radius: 10px;
@@ -189,6 +202,6 @@ var oldPrice = Math.Round(Model.Price, 2);
     font-size: 16px;
 }
 </style>
-}
+
 
 }

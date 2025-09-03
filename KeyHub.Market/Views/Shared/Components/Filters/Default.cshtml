@@ -1,20 +1,17 @@
 @using KeyHub.Market.Models
 @model KeyHub.Market.Models.ViewModels.FiltersViewModel
 
-
 <aside class="filters">
-    <h3>Filters</h3>
-
-    <div class="filter-group">
-        <label>Price (PLN)</label>
-        <div class="price-filter">
-            <input type="number" placeholder="From">
-            <span>-</span>
-            <input type="number" placeholder="To">
-        </div>
-    </div>
-
     <form method="get" asp-action="SearchGame">
+        <div class="filter-group">
+            <label>Price (PLN)</label>
+            <div class="price-filter">
+                <input type="number" placeholder="From">
+                <span>-</span>
+                <input type="number" placeholder="To">
+            </div>
+        </div>
+
         <div class="filter-group">
             <label>Platform</label>
             <ul>
@@ -32,10 +29,6 @@
             </ul>
         </div>
 
-        <button type="submit">Apply</button>
-    </form>
-
-    <form method="get" asp-action="SearchGame">
         <div class="filter-group">
             <label>Genre</label>
             <ul>
@@ -56,18 +49,15 @@
         <button type="submit">Apply</button>
     </form>
 </aside>
-<style>
 
+<style>
     .filters {
         width: 220px;
         padding: 15px;
-        background-color: #f7f7f7;
-        border-radius: 8px;
-    }
-
-    .filters h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .filter-group {
@@ -75,27 +65,72 @@
     }
 
     .filter-group label {
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 14px;
         display: block;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .price-filter {
+        display: flex;
+        gap: 5px;
+    }
+
+    .price-filter input {
+        width: 80px;
+        padding: 4px 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+
+    .price-filter span {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #666;
     }
 
     .filter-group ul {
         list-style: none;
         padding-left: 0;
+        margin: 0;
     }
 
     .filter-group ul li {
-        padding: 4px 0;
-        font-size: 14px;
+        padding: 5px 0;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .filter-group ul li label {
         cursor: pointer;
         display: flex;
         justify-content: space-between;
+        width: 100%;
     }
 
+    .filter-group input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: #4CAF50;
+    }
 
+    button[type="submit"] {
+        width: 100%;
+        padding: 8px;
+        background-color: #4CAF50;
+        color: white;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
 
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
 </style>

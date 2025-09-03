@@ -9,7 +9,7 @@
 <div class="search-page-container">
 
    
-    @* @await Component.InvokeAsync("Filters") *@
+    @await Component.InvokeAsync("Filters")
 
     <main class="results-section">
         <div class="results-header">
@@ -28,7 +28,9 @@
         <div class="game-list">
             @foreach (var game in Model) 
             {
-                @await Html.PartialAsync("_GameOverview", game,  new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
+                <text>
+                    @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
+                </text>
             }
         </div>
     </main>

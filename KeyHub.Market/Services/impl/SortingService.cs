@@ -5,7 +5,7 @@ using KeyHub.Market.Models.Dto;
 
 namespace KeyHub.Market.Services.impl;
 
-public class SortingService
+public class SortingService : ISortingService
 {
     
     private readonly ApplicationDbContext _dbContext;

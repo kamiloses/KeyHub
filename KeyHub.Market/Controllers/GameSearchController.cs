@@ -23,6 +23,9 @@ public class GameSearchController : Controller
         LoadGameSortOptions();
         ViewBag.CurrentSort = sortBy.ToString();
 
+        ViewBag.SelectedPlatforms= platforms;
+        ViewBag.SelectedGenres= genres;
+        
 
         IQueryable<Game> gamesQuery = _gameSearchService.GetFilteredAndSortedGames(sortBy, platforms, genres);
 
