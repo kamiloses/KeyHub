@@ -9,6 +9,9 @@ namespace KeyHub.Market.Controllers;
 public class GameSearchController : Controller
 
 {
+    // TODO 1 filtry min max price , 2 jezeli mam właczone filtry to jak sortowanie dam to by nie usuwało filtru 3 dynamiczny filtr, 4 poprawa css  by bardziej an prawo gry były
+    //todo 5 css sortowania inny 6 paginacja inna css
+    
     private readonly IGameSearchService _gameSearchService;
 
     public GameSearchController(IGameSearchService gameSearchService)

@@ -9,7 +9,7 @@
 <div class="search-page-container">
 
    
-    @await Component.InvokeAsync("Filters")
+    @await Component.InvokeAsync("Filters", new { selectedPlatforms = ViewBag.SelectedPlatforms, selectedGenres = ViewBag.SelectedGenres })
 
     <main class="results-section">
         <div class="results-header">
