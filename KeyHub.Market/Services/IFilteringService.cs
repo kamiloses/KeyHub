@@ -6,7 +6,7 @@ public interface IFilteringService
 {
     public IQueryable<Game> FilterByPlatform(IQueryable<Game> games, Platform[]? platforms);
     public IQueryable<Game> FilterByGenres(IQueryable<Game> games, Genre[]? selectedGenres);
-    public IQueryable<Game> FilterByPrice(IQueryable<Game> games, int? minPrice = null, int? maxPrice = null);
+    public IQueryable<Game> FilterByPrice(IQueryable<Game> games, decimal? minPrice = null, decimal? maxPrice = null);
 
 
 }

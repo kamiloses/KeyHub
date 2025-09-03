@@ -9,8 +9,8 @@ namespace KeyHub.Market.Controllers;
 public class GameSearchController : Controller
 
 {
-    // TODO 1 filtry min max price , paginacja inna css
-    
+    // TODO 1 filtry min max price bo nie działa , paginacja inna css
+
     private readonly IGameSearchService _gameSearchService;
 
     public GameSearchController(IGameSearchService gameSearchService)
@@ -20,16 +20,19 @@ public class GameSearchController : Controller
 
 
     [HttpGet("search")]
-    public IActionResult SearchedGames(int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName, Platform[]? platforms = null, Genre[]? genres = null)
+    public IActionResult SearchedGames(int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName,
+        Platform[]? platforms = null, Genre[]? genres = null,
+        decimal? minPrice = null,
+        decimal? maxPrice = null)
     {
         LoadGameSortOptions();
         ViewBag.CurrentSort = sortBy.ToString();
 
-        ViewBag.SelectedPlatforms= platforms;
-        ViewBag.SelectedGenres= genres;
-        
+        ViewBag.SelectedPlatforms = platforms;
+        ViewBag.SelectedGenres = genres;
 
-        IQueryable<Game> gamesQuery = _gameSearchService.GetFilteredAndSortedGames(sortBy, platforms, genres);
+
+        IQueryable<Game> gamesQuery = _gameSearchService.GetFilteredAndSortedGames(sortBy, platforms, genres, minPrice, maxPrice);
 
 
         int totalGames = gamesQuery.Count();

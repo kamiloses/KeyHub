@@ -5,5 +5,6 @@ namespace KeyHub.Market.Services;
 
 public interface IGameSearchService
 {
-    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres);
+    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+        decimal? minPrice = null, decimal? maxPrice = null);
 }

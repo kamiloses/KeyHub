@@ -21,18 +21,22 @@ public class GameSearchService : IGameSearchService
     }
 
 
-    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy,Platform[]? platforms,Genre[]? genres)
+    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres, decimal? minPrice = null, decimal? maxPrice = null)
     {
         IQueryable<Game> games = _dbContext.Games.AsNoTracking();
-        
-        IQueryable<Game> gamesQuery = _sortingService.SortGames(games,sortBy);
-        IQueryable<Game> filteredGamesByPlatform=_filteringService.FilterByPlatform(gamesQuery, platforms);
- return _filteringService.FilterByGenres(filteredGamesByPlatform, genres);
-
+    
+        IQueryable<Game> gamesQuery = _sortingService.SortGames(games, sortBy);
+        IQueryable<Game> filteredGamesByPlatform = _filteringService.FilterByPlatform(gamesQuery, platforms);
+        IQueryable<Game> filteredGamesByGenres = _filteringService.FilterByGenres(filteredGamesByPlatform, genres);
+    
+        filteredGamesByGenres = _filteringService.FilterByPrice(filteredGamesByGenres, minPrice, maxPrice);
+    
+        return filteredGamesByGenres;
+    }
  
         
         
-    }
+    
     
     
 }

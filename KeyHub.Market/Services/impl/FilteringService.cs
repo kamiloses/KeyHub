@@ -25,20 +25,15 @@ public class FilteringService : IFilteringService
     }
 
 
-    public IQueryable<Game> FilterByPrice(IQueryable<Game> games, int? minPrice = null, int? maxPrice = null)
+    public IQueryable<Game> FilterByPrice(IQueryable<Game> games, decimal? minPrice = null, decimal? maxPrice = null)
     {
         if (minPrice.HasValue)
-        {
             games = games.Where(game => game.Price >= minPrice.Value);
-        }
 
         if (maxPrice.HasValue)
-        {
             games = games.Where(game => game.Price <= maxPrice.Value);
-        }
 
         return games;
     }
-    
     
 }

@@ -6,9 +6,9 @@
         <div class="filter-group">
             <label>Price (PLN)</label>
             <div class="price-filter">
-                <input type="number" placeholder="From">
+                <input type="number" name="minPrice" placeholder="From" value="@ViewBag.MinPrice">
                 <span>-</span>
-                <input type="number" placeholder="To">
+                <input type="number" name="maxPrice" placeholder="To" value="@ViewBag.MaxPrice">
             </div>
         </div>
 
