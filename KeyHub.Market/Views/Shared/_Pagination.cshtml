@@ -1,0 +1,23 @@
+<div class="pagination">
+    @if (ViewBag.TotalPages > 1)
+    {
+        for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.CurrentPage)
+            {
+                <span class="current-page">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("SearchedGames", new {
+                             page = i,
+                             sortBy = ViewBag.CurrentSort,
+                             platforms = ViewBag.SelectedPlatforms,
+                             genres = ViewBag.SelectedGenres,
+                             minPrice = ViewBag.MinPrice,
+                             maxPrice = ViewBag.MaxPrice
+                         })">@i</a>
+            }
+        }
+    }
+</div>
