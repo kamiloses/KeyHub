@@ -1,36 +1,28 @@
-.home-main-logo {
-    width: 100%;
-    height: 300px; /* stała wysokość banera */
-
+.recommended-title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
-.home-games-ps5 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px;
+.recommended-title::after {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 3px;
+    background-color: #feb47b;
+    margin: 8px auto 0;
+    border-radius: 2px;
 }
 
-.home-games-ps5 img {
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.home-games-ps5 img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-
-/* Kontener sekcji */
 .home-recommended {
     margin: 40px 20px;
 }
 
-/* Nagłówek sekcji */
 .home-recommended h2 {
     font-size: 24px;
     font-weight: bold;
@@ -38,7 +30,6 @@
     text-align: center;
 }
 
-/* Kontener dla gier */
 .recommended-games {
     display: flex;
     flex-wrap: wrap;

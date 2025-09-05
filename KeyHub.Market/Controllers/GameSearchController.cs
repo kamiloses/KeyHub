@@ -17,7 +17,7 @@ public class GameSearchController : Controller
     {
         _gameSearchService = gameSearchService;
     }
-
+//todo cache
 
     [HttpGet("search")]
     public IActionResult SearchedGames(int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName,

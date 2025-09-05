@@ -15,7 +15,7 @@ public class FiltersViewComponent : ViewComponent
     public FiltersViewComponent(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-    }//todo cache
+    }
 
     public async Task<IViewComponentResult> InvokeAsync(Platform[]? selectedPlatforms = null, Genre[]? selectedGenres = null)
     {
