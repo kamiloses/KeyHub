@@ -17,7 +17,7 @@ public class GameSearchController : Controller
     {
         _gameSearchService = gameSearchService;
     }
-//todo cache
+
 
     [HttpGet("search")]
     public IActionResult SearchedGames(int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName,
@@ -27,32 +27,14 @@ public class GameSearchController : Controller
     {
         LoadGameSortOptions();
         ViewBag.CurrentSort = sortBy.ToString();
-
         ViewBag.SelectedPlatforms = platforms;
         ViewBag.SelectedGenres = genres;
 
 
-        IQueryable<Game> gamesQuery = _gameSearchService.GetFilteredAndSortedGames(sortBy, platforms, genres, minPrice, maxPrice);
+        var (games, totalGames) = _gameSearchService.GetSearchedGames(
+            sortBy, platforms, genres, minPrice, maxPrice, page, pageSize);
+      
 
-
-        int totalGames = gamesQuery.Count();
-
-        var games = gamesQuery
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .Select(game => new GameDto
-            {
-                Id = game.Id,
-                Title = game.Title,
-                Genre = game.Genre,
-                Price = game.Price,
-                Discount = game.Discount,
-                ImageUrl = game.ImageUrl,
-                Platform = game.Platform,
-                Stock = game.Stock,
-                CreatedAt = game.CreatedAt
-            })
-            .ToList();
 
         ViewBag.CurrentPage = page;
         ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);

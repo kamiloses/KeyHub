@@ -1,3 +1,8 @@
+.game-list{
+    margin-top: 60px;
+    
+}
+
 .search-page-container {
     display: flex;
     gap: 20px;
@@ -21,28 +26,6 @@
 .sort-options {
     padding: 4px 8px;
     font-size: 14px;
-}
-
-.pagination {
-    margin-top: 20px;
-    display: flex;
-    gap: 8px;
-}
-
-.pagination a {
-    padding: 6px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #333;
-}
-
-.pagination .current-page {
-    padding: 6px 12px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background: #333;
-    color: #fff;
 }
 
 .custom-select-wrapper {

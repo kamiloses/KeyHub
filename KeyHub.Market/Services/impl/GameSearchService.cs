@@ -8,35 +8,59 @@ namespace KeyHub.Market.Services.impl;
 
 public class GameSearchService : IGameSearchService
 {
-    
     private readonly ApplicationDbContext _dbContext;
     private readonly IFilteringService _filteringService;
     private readonly ISortingService _sortingService;
 
-    public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService, ISortingService sortingService)
+    public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService,
+        ISortingService sortingService)
     {
         _dbContext = dbContext;
         _filteringService = filteringService;
         _sortingService = sortingService;
     }
 
+    public (List<GameDto> Games, int TotalGames) GetSearchedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+        decimal? minPrice,
+        decimal? maxPrice,
+        int page,
+        int pageSize)
+    {
+        IQueryable<Game> gamesQuery = GetFilteredAndSortedGames(sortBy, platforms, genres, minPrice, maxPrice);
 
-    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres, decimal? minPrice = null, decimal? maxPrice = null)
+        int totalGames = gamesQuery.Count();
+
+        var games = gamesQuery
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(game => new GameDto
+            {
+                Id = game.Id,
+                Title = game.Title,
+                Genre = game.Genre,
+                Price = game.Price,
+                Discount = game.Discount,
+                ImageUrl = game.ImageUrl,
+                Platform = game.Platform,
+                Stock = game.Stock,
+                CreatedAt = game.CreatedAt
+            })
+            .ToList();
+
+        return (games, totalGames);
+    }
+
+    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+        decimal? minPrice = null, decimal? maxPrice = null)
     {
         IQueryable<Game> games = _dbContext.Games.AsNoTracking();
-    
+
         IQueryable<Game> gamesQuery = _sortingService.SortGames(games, sortBy);
         IQueryable<Game> filteredGamesByPlatform = _filteringService.FilterByPlatform(gamesQuery, platforms);
         IQueryable<Game> filteredGamesByGenres = _filteringService.FilterByGenres(filteredGamesByPlatform, genres);
-    
+
         filteredGamesByGenres = _filteringService.FilterByPrice(filteredGamesByGenres, minPrice, maxPrice);
-    
+
         return filteredGamesByGenres;
     }
- 
-        
-        
-    
-    
-    
 }

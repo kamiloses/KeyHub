@@ -5,6 +5,8 @@
 @{
     Layout = "_HomeLayout";
     var pageContext = ViewContextType.Search;
+    
+    
 }
 
 <div class="search-page-container">
@@ -14,8 +16,8 @@
     <main class="results-section">
         <div class="results-header">
             <h2>Search Results</h2>
-@* //todo ogarnij form method *@
-            <form method="get">
+ 
+            <form method="get" action="/search">
                 @if (ViewBag.SelectedPlatforms != null)
                 {
                     foreach (var platform in (Platform[])ViewBag.SelectedPlatforms)
@@ -33,6 +35,7 @@
                 }
                 @* todo HTML hidden input in GET forms to preserve state *@
                 @* //todo name i value ogarnij  oraz to nizej*@
+                @* todo ogarnij view searchedGames *@
                 <div class="custom-select-wrapper">
                     <select name="sortBy" onchange="this.form.submit()">
                         <option value="ByName" @(ViewBag.CurrentSort == "ByName" ? "selected" : "")>Name A-Z</option>
@@ -56,6 +59,6 @@
     
 </div>
 
-
+@* pagination *@
 @await Html.PartialAsync("_Pagination")
 
