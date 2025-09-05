@@ -1,0 +1,56 @@
+@using KeyHub.Market.Models
+<!-- MODAL -->
+<div id="gameModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Add New Game</h2>
+        <form method="post" asp-action="AddGame" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="Title" placeholder="Game title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select id="genre" name="Genre" required>
+                    @foreach (Genre genre in Enum.GetValues(typeof(Genre)))
+                    {
+                        <option value="@genre">@genre</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price (PLN)</label>
+                <input type="number" id="price" name="Price" step="0.01" min="0" placeholder="0.00" required>
+            </div>
+
+            <div class="form-group">
+                <label for="discount">Discount (%)</label>
+                <input type="number" id="discount" name="Discount" min="0" max="100" placeholder="0">
+            </div>
+
+            <div class="form-group">
+                <label for="platform">Platform</label>
+                <select id="platform" name="Platform" required>
+                    @foreach (Platform platform in Enum.GetValues(typeof(Platform)))
+                    {
+                        <option value="@platform">@platform</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="Stock" min="0" placeholder="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Game Image</label>
+                <input type="file" id="image" name="ImageFile" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="add-game-btn">Add Game</button>
+        </form>
+    </div>
+</div>
