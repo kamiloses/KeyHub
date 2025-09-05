@@ -5,7 +5,7 @@ using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
-
+//<div data-id="@Model.Id"></div>
 public class GameSearchController : Controller
 
 {
