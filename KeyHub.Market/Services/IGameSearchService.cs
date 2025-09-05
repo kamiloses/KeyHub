@@ -6,13 +6,13 @@ namespace KeyHub.Market.Services;
 
 public interface IGameSearchService
 {
-    public (List<GameDto> Games, int TotalGames) GetSearchedGames(GameSort sortBy, Platform[]? platforms,
+    public (List<GameDto> Games, int TotalGames) GetSearchedGames(string? title,GameSort sortBy, Platform[]? platforms,
         Genre[]? genres, decimal? minPrice,
         decimal? maxPrice,
         int page,
         int pageSize);
     
     
-    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+    public IQueryable<Game> GetFilteredAndSortedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
         decimal? minPrice = null, decimal? maxPrice = null);
 }

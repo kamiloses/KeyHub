@@ -20,13 +20,13 @@ public class GameSearchService : IGameSearchService
         _sortingService = sortingService;
     }
 
-    public (List<GameDto> Games, int TotalGames) GetSearchedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+    public (List<GameDto> Games, int TotalGames) GetSearchedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
         decimal? minPrice,
         decimal? maxPrice,
         int page,
         int pageSize)
     {
-        IQueryable<Game> gamesQuery = GetFilteredAndSortedGames(sortBy, platforms, genres, minPrice, maxPrice);
+        IQueryable<Game> gamesQuery = GetFilteredAndSortedGames(title,sortBy, platforms, genres, minPrice, maxPrice);
 
         int totalGames = gamesQuery.Count();
 
@@ -50,10 +50,17 @@ public class GameSearchService : IGameSearchService
         return (games, totalGames);
     }
 
-    public IQueryable<Game> GetFilteredAndSortedGames(GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+    public IQueryable<Game> GetFilteredAndSortedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
         decimal? minPrice = null, decimal? maxPrice = null)
     {
+        
         IQueryable<Game> games = _dbContext.Games.AsNoTracking();
+
+        if (!string.IsNullOrEmpty(title))
+        {
+            games = games.Where(game => game.Title.Contains(title));
+        }
+
 
         IQueryable<Game> gamesQuery = _sortingService.SortGames(games, sortBy);
         IQueryable<Game> filteredGamesByPlatform = _filteringService.FilterByPlatform(gamesQuery, platforms);

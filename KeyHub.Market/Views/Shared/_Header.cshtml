@@ -8,7 +8,15 @@
         </div>
 
         <div class="header-nav-center">
-            <input type="text" placeholder="Search for a game..." class="header-search" />
+            <form method="get" action="/search">
+                <input 
+                    type="text" 
+                    name="title" 
+                    placeholder="Search for a game..." 
+                    class="header-search" 
+                    value="@ViewBag.SearchTitle" />
+                <button type="submit">Search</button>
+            </form>
         </div>
 
         <div class="header-nav-right">
