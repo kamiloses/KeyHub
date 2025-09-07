@@ -1,0 +1,83 @@
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background: linear-gradient(135deg, #14142b, #1e1e2f); /* gradient ciemnego granatu */
+    font-family: Arial, sans-serif;
+}
+/* Box logowania */
+.login-box {
+    background: #2e2e4a;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    width: 350px;
+    text-align: center;
+}
+
+/* Tytuł */
+.login-title {
+    color: #fff;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+/* Pola formularza */
+.login-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: #1e1e2f;
+    color: #fff;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.login-form input:focus {
+    border: 1px solid #3a3a5a;
+    box-shadow: 0 0 6px rgba(0,120,212,0.4);
+}
+
+/* Przycisk */
+.btn-login {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #0078d4;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #005ea6;
+}
+
+/* Stopka pod formularzem */
+.login-footer {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.login-footer a {
+    color: #4aa3ff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}

@@ -20,4 +20,9 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\auth\login.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\auth\register.css" />
+    </ItemGroup>
+
 </Project>
