@@ -14,6 +14,7 @@ builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 builder.Services.AddScoped<ISortingService, SortingService>();
 builder.Services.AddScoped<IFilteringService,FilteringService>();
+builder.Services.AddScoped<IAuthService,AuthService>();
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();
