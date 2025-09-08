@@ -1,37 +1,31 @@
- <!DOCTYPE html>
- <html lang="eng">
- <head>
-     <meta charset="utf-8" />
-     <title>@ViewData["Title"] KeyHub</title>
-     <link rel="stylesheet" href="~/css/home.css" />
-     <link rel="stylesheet" href="~/css/header.css" />
-     <link rel="stylesheet" href="~/css/footer.css" />
-     <link rel="stylesheet" href="~/css/searchedGames.css" />
-     <link rel="stylesheet" href="~/css/shared/pagination.css" />
-     <link rel="stylesheet" href="~/css/auth/login.css" />
-     <link rel="stylesheet" href="~/css/auth/register.css" />
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] KeyHub</title>
+    <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link rel="stylesheet" href="~/css/searchedGames.css" />
+    <link rel="stylesheet" href="~/css/shared/pagination.css" />
+    <link rel="stylesheet" href="~/css/auth/login.css" />
+    <link rel="stylesheet" href="~/css/auth/register.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+@await RenderSectionAsync("Scripts", required: false)
 
- </head>
- <body>
+@await Html.PartialAsync("_Header")  
 
- @await Html.PartialAsync("_Header")  
+<main>
+    @RenderBody()  
+</main>
 
- <main>
-     @RenderBody()  
- </main>
+@await Html.PartialAsync("_Footer")
 
- 
- @await Html.PartialAsync("_Footer")  
- </body>
- </html>
 
- 
- 
- 
- 
- 
- 
- <style>
-     body{background: linear-gradient(135deg, #14142b, #1e1e2f);}
- </style>
+</body>
+<style>
+    body { background: linear-gradient(135deg, #14142b, #1e1e2f); }
+</style>
+</html>

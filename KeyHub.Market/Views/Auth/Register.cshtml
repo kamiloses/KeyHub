@@ -1,29 +1,31 @@
+@model KeyHub.Market.Models.RegisterViewModel
 @{
     Layout = "_HomeLayout";
 }
-
+@* todo zamien ten login class na register co ponizej jest *@
 <div class="login-page">
     <div class="login-box">
         <h2 class="login-title">Create a KeyHub Account</h2>
         
-        <form method="post" action="/auth/register" class="login-form">
+        <form asp-action="Register" asp-controller="Auth" method="post" class="login-form">
+            @*todo upewnij sie czy to nizej wymagane*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input type="text" id="firstName" name="FirstName" placeholder="First Name" required />
+                <input asp-for="UserName" class="form-control" placeholder="Username"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" id="lastName" name="LastName" placeholder="Last Name" required />
+                <input asp-for="Email" class="form-control" placeholder="Email"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="email" id="email" name="Email" placeholder="Email" required />
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            
-            <div class="form-group">
-                <input type="password" id="password" name="Password" placeholder="Password" required />
-            </div>
-            
-            <button type="submit" class="btn-login">Register</button>
+
+            <input type="submit" value="Register" class="btn btn-success w-100 p-2" />
         </form>
 
         <div class="login-footer">
@@ -32,3 +34,8 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

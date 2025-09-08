@@ -15,26 +15,15 @@ public class AuthService : IAuthService
         _userManager = userManager;
     }
 
+  
+
     public async Task Register(string username, string email, string password)
     {
 
         IdentityUser user = new IdentityUser() { UserName = username, Email = email };
         IdentityResult result =await  _userManager.CreateAsync(user, password);
-        Console.WriteLine("DZIALA");
-        if (result.Succeeded)
-        {
-            Console.BackgroundColor = ConsoleColor.Green;
-            Console.WriteLine("AAAAAAAA");
-        }
-        else
-        {
-                Console.WriteLine("BBBBBBBBB");
-            foreach (var error in result.Errors)
-            {
-            Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Błąd: {error.Description}");
-            }
-        }
+  
+            
         // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
         //

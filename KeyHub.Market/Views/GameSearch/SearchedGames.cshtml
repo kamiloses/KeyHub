@@ -1,5 +1,4 @@
 @using KeyHub.Market.Enums
-@using KeyHub.Market.Models
 @model IEnumerable<KeyHub.Market.Models.Dto.GameDto>
 
 @{
@@ -11,7 +10,7 @@
 
 <div class="search-page-container">
 
-    @await Component.InvokeAsync("Filters", new { selectedPlatforms = ViewBag.SelectedPlatforms, selectedGenres = ViewBag.SelectedGenres })
+    @* @await System.ComponentModel.Component.InvokeAsync("Filters", new { selectedPlatforms = ViewBag.SelectedPlatforms, selectedGenres = ViewBag.SelectedGenres }) *@
 
     <main class="results-section">
         <div class="results-header">
@@ -38,10 +37,10 @@
                 @* todo ogarnij view searchedGames *@
                 <div class="custom-select-wrapper">
                     <select name="sortBy" onchange="this.form.submit()">
-                        <option value="ByName" @(ViewBag.CurrentSort == "ByName" ? "selected" : "")>Name A-Z</option>
-                        <option value="ByPriceAsc" @(ViewBag.CurrentSort == "ByPriceAsc" ? "selected" : "")>Price Low to High</option>
-                        <option value="ByPriceDesc" @(ViewBag.CurrentSort == "ByPriceDesc" ? "selected" : "")>Price High to Low</option>
-                        <option value="ByDate" @(ViewBag.CurrentSort == "ByDate" ? "selected" : "")>Newest</option>
+                        <option value="ByName" selected="@(ViewBag.CurrentSort == "ByName")">Name A-Z</option>
+                        <option value="ByPriceAsc" selected="@(ViewBag.CurrentSort == "ByPriceAsc")">Price Low to High</option>
+                        <option value="ByPriceDesc" selected="@(ViewBag.CurrentSort == "ByPriceDesc")">Price High to Low</option>
+                        <option value="ByDate" selected="@(ViewBag.CurrentSort == "ByDate")">Newest</option>
                     </select>
                 </div>
             </form>
