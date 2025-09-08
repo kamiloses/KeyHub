@@ -12,10 +12,12 @@ public class AuthController : Controller
 {
 
     private readonly IAuthService _authService;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, UserManager<IdentityUser> userManager)
     {
         _authService = authService;
+        _userManager = userManager;
     }
 
     [HttpGet("/login")]
@@ -38,21 +40,22 @@ public class AuthController : Controller
     [HttpPost("/register")]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        if (!ModelState.IsValid)
+        if (ModelState.IsValid)
         {
-           
-            foreach (var kv in ModelState)
+            IdentityUser users = new IdentityUser()
             {
-                foreach (var err in kv.Value.Errors)
-                {
-                    Console.WriteLine($"{kv.Key}: {err.ErrorMessage}");
-                }
+                Email = model.Email,
+                UserName = model.Email,
+            };
+            var result = await _userManager.CreateAsync(users, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Login", "Auth");
             }
-            
-            return View(model);
+
+
         }
 
-        return RedirectToAction("Login");
-    }
-
+     return View(model);}
+    
 }
