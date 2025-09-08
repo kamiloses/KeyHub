@@ -3,7 +3,6 @@
 
 @{
 var styleContext = ViewData["Context"]!;
-Console.WriteLine("HALOOO "+styleContext);
 var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount ?? 0) / 100m), 2);
 var oldPrice = Math.Round(Model.Price, 2);
 }

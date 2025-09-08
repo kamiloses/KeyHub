@@ -1,3 +1,5 @@
+@using KeyHub.Market.Models
+    
 <header class="header-component">
     <nav class="header-nav">
         <div class="header-nav-left">
@@ -23,18 +25,15 @@
             <div class="header-genre-dropdown">
                 <span>Genre ▼</span>
                 @* todo dynamiczna z bazy danych *@
-                <ul class="header-genre-list"> 
-                    <li>Action</li>
-                    <li>Adventure</li>
-                    <li>RPG</li>
-                    <li>Strategy</li>
-                    <li>Simulation</li>
-                    <li>Sports</li>
+                <ul class="header-genre-list">
+                    @foreach(var genre in Enum.GetValues(typeof(Genre))){
+                        <li><a href="/search?genres=@genre">@genre</a></li>
+                    }
                 </ul>
             </div>
 
             @if (true) {
-                <a href="/lLogin" class="header-link">Login</a>
+                <a href="/login" class="header-link">Login</a>
                 <a href="/register" class="header-link">Register</a>
             }
             else {

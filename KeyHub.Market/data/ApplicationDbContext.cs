@@ -1,4 +1,6 @@
 using KeyHub.Market.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.data;
@@ -7,7 +9,7 @@ namespace KeyHub.Market.data;
 // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 // dotnet add package Microsoft.EntityFrameworkCore.Tools
 
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext :  IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         

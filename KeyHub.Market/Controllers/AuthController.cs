@@ -22,11 +22,16 @@ public class AuthController : Controller
     
     
     [HttpGet("/register")]
-    public IActionResult Register()
+    public async Task<IActionResult> Register()
     {
+        
+       // await _authService.Register("admin1", "admin@gmail.com", "admin1+");
         return View("Register");
         
     }
+    
+    
+    
     
     
 }
