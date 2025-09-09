@@ -32,24 +32,14 @@ public class GameSearchService : IGameSearchService
 
         int totalGames = gamesQuery.Count();
 
-        var games = gamesQuery
+        List<Game> games = gamesQuery
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
-            .Select(game => new GameDto
-            {
-                Id = game.Id,
-                Title = game.Title,
-                Genre = game.Genre,
-                Price = game.Price,
-                Discount = game.Discount,
-                ImageUrl = game.ImageUrl,
-                Platform = game.Platform,
-                Stock = game.Stock,
-                CreatedAt = game.CreatedAt
-            })
             .ToList();
 
-        return (games, totalGames);
+     List<GameDto> mappedGames  = _mapper.Map<List<GameDto>>(games);
+        
+        return (mappedGames, totalGames);
     }
 
     public IQueryable<Game> GetFilteredAndSortedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
@@ -63,13 +53,11 @@ public class GameSearchService : IGameSearchService
             games = games.Where(game => game.Title.Contains(title));
         }
 
+        games = _filteringService.FilterByPlatform(games, platforms);
+        games = _filteringService.FilterByGenres(games, genres);
+        games = _filteringService.FilterByPrice(games, minPrice, maxPrice);
+        games = _sortingService.SortGames(games, sortBy);
 
-        IQueryable<Game> gamesQuery = _sortingService.SortGames(games, sortBy);
-        IQueryable<Game> filteredGamesByPlatform = _filteringService.FilterByPlatform(gamesQuery, platforms);
-        IQueryable<Game> filteredGamesByGenres = _filteringService.FilterByGenres(filteredGamesByPlatform, genres);
-
-        filteredGamesByGenres = _filteringService.FilterByPrice(filteredGamesByGenres, minPrice, maxPrice);
-
-        return filteredGamesByGenres;
+        return games;
     }
 }
