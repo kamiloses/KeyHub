@@ -11,9 +11,9 @@ public class HomeController : Controller
     private const int TopGamesCount = 5;
     public HomeController(IHomeService homeService)
     {
-        _homeService = homeService;
-    }
-
+        _homeService = homeService; 
+    } 
+// todo exception rzycaby w razie wyjatku oraz cache
     [HttpGet("/")]
     public async Task<IActionResult> Home()
     {

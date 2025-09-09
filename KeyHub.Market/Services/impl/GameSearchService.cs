@@ -1,3 +1,4 @@
+using AutoMapper;
 using KeyHub.Market.data;
 using KeyHub.Market.Enums;
 using KeyHub.Market.Models;
@@ -11,13 +12,14 @@ public class GameSearchService : IGameSearchService
     private readonly ApplicationDbContext _dbContext;
     private readonly IFilteringService _filteringService;
     private readonly ISortingService _sortingService;
-
+    private readonly IMapper _mapper;
     public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService,
-        ISortingService sortingService)
+        ISortingService sortingService, IMapper mapper)
     {
         _dbContext = dbContext;
         _filteringService = filteringService;
         _sortingService = sortingService;
+        _mapper = mapper;
     }
 
     public (List<GameDto> Games, int TotalGames) GetSearchedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,

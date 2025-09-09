@@ -1,11 +1,10 @@
 using KeyHub.Market.Enums;
 using KeyHub.Market.Models;
-using KeyHub.Market.Models.Dto;
+using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
-//<div data-id="@Model.Id"></div>
 public class GameSearchController : Controller
 
 {
@@ -17,38 +16,21 @@ public class GameSearchController : Controller
     {
         _gameSearchService = gameSearchService;
     }
+    
+     
 
+        [HttpGet("search")]
+        public IActionResult SearchedGames([FromQuery] GameSearchViewModel model)
+        {
+            var (games, totalGames) = _gameSearchService.GetSearchedGames(
+                model.Title, model.CurrentSort, model.SelectedPlatforms,
+                model.SelectedGenres, model.MinPrice, model.MaxPrice,
+                model.CurrentPage, pageSize: 10
+            );
+        
+            model.Games = games;
+            model.TotalPages = (int)Math.Ceiling(totalGames / 10.0);
 
-    [HttpGet("search")]
-    public IActionResult SearchedGames(string? title,
-        int page = 1, int pageSize = 10, GameSort sortBy = GameSort.ByName,
-        Platform[]? platforms = null, Genre[]? genres = null,
-        decimal? minPrice = null,
-        decimal? maxPrice = null)
-    {
-        LoadGameSortOptions();
-        ViewBag.CurrentSort = sortBy.ToString();
-        ViewBag.SelectedPlatforms = platforms;
-        ViewBag.SelectedGenres = genres;
-        ViewBag.SearchTitle = title;
-
-        var (games, totalGames) = _gameSearchService.GetSearchedGames(title,
-            sortBy, platforms, genres, minPrice, maxPrice, page, pageSize);
-      
-
-
-        ViewBag.CurrentPage = page;
-        ViewBag.TotalPages = (int)Math.Ceiling(totalGames / (double)pageSize);
-
-        return View("searchedGames", games);
+            return View("SearchedGames", model);
+        }
     }
-
-
-    public void LoadGameSortOptions()
-    {
-        ViewBag.ByDate = GameSort.ByDate;
-        ViewBag.ByName = GameSort.ByName;
-        ViewBag.ByPriceAsc = GameSort.ByPriceAsc;
-        ViewBag.ByPriceDesc = GameSort.ByPriceDesc;
-    }
-}
