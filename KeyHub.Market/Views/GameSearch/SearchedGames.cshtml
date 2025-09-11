@@ -18,24 +18,24 @@
                 {
                     foreach (var platform in Model.SelectedPlatforms)
                     {
-                        <input type="hidden" name="platforms" value="@platform"/>
+                        <input type="hidden" name="SelectedPlatforms" value="@( (int)platform )" />
                     }
                 }
                 @if (Model.SelectedGenres != null)
                 {
                     foreach (var genre in Model.SelectedGenres)
                     {
-                        <input type="hidden" name="genres" value="@genre"/>
+                        <input type="hidden" name="SelectedGenres" value="@( (int)genre )" />
                     }
                 }
                 @* todo HTML hidden input in GET forms to preserve state *@
                 @* //todo name i value ogarnij  oraz to nizej*@
                 @* todo ogarnij view searchedGames *@
                 <div class="custom-select-wrapper">
-                    <select name="sortBy" onchange="this.form.submit()">
+                    <select name="CurrentSort" onchange="this.form.submit()">
                         @foreach (var sort in Model.SortOptions)
                         {
-                            <option value="@sort" selected="@(sort == Model.CurrentSort)">
+                            <option value="@sort" selected="@(sort.ToString().Equals(Model.CurrentSort.ToString()))">
                                 @sort.ToString()
                             </option>
                         }
