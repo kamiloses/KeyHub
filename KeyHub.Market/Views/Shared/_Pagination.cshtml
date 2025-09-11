@@ -1,9 +1,12 @@
+@model KeyHub.Market.Models.ViewModels.PaginationViewModel
+
+
 <div class="pagination">
-    @if (ViewBag.TotalPages > 1)
+    @if (Model.TotalPages > 1)
     {
-        for (int i = 1; i <= ViewBag.TotalPages; i++)
+        for (int i = 1; i <= Model.TotalPages; i++)
         {
-            if (i == ViewBag.CurrentPage)
+            if (i == Model.CurrentPage)
             {
                 <span class="current-page">@i</span>
             }
@@ -11,11 +14,11 @@
             {
                 <a href="@Url.Action("SearchedGames", new {
                              page = i,
-                             sortBy = ViewBag.CurrentSort,
-                             platforms = ViewBag.SelectedPlatforms,
-                             genres = ViewBag.SelectedGenres,
-                             minPrice = ViewBag.MinPrice,
-                             maxPrice = ViewBag.MaxPrice
+                             sortBy = Model.CurrentSort,
+                             platforms = Model.SelectedPlatforms,
+                             genres = Model.SelectedGenres,
+                             minPrice = Model.MinPrice,
+                             maxPrice = Model.MaxPrice
                          })">@i</a>
             }
         }
