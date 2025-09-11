@@ -17,7 +17,7 @@ public class FiltersViewComponent : ViewComponent
         _dbContext = dbContext;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync(Platform[]? selectedPlatforms = null, Genre[]? selectedGenres = null)
+    public async Task<IViewComponentResult> InvokeAsync(decimal? minPrice=null,decimal? maxPrice=null,Platform[]? selectedPlatforms = null, Genre[]? selectedGenres = null)
     {
        
         var gamesQuery = _dbContext.Games.AsNoTracking();
@@ -25,7 +25,8 @@ public class FiltersViewComponent : ViewComponent
         var platformStats = await GetPlatformStatsAsync(gamesQuery, selectedGenres);
         var genreStats = await GetGenreStatsAsync(gamesQuery, selectedPlatforms);
         FiltersViewModel filters = new FiltersViewModel
-        {
+        {   MinPrice = minPrice,
+            MaxPrice = maxPrice,
             PlatformStats = platformStats,
             GenreStats = genreStats,
             SelectedGenres = selectedGenres,

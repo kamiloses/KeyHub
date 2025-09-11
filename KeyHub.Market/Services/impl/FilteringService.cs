@@ -1,6 +1,4 @@
 using KeyHub.Market.Models;
-using KeyHub.Market.Models.Dto;
-using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.Services.impl;
 
@@ -28,10 +26,10 @@ public class FilteringService : IFilteringService
     public IQueryable<Game> FilterByPrice(IQueryable<Game> games, decimal? minPrice = null, decimal? maxPrice = null)
     {
         if (minPrice.HasValue)
-            games = games.Where(game => game.Price >= minPrice.Value);
+            games = games.Where(game => game.Price * (1 -(decimal) game.Discount / 100) >= minPrice.Value);
 
         if (maxPrice.HasValue)
-            games = games.Where(game => game.Price <= maxPrice.Value);
+            games = games.Where(game => game.Price * (1 - (decimal)game.Discount / 100)<= maxPrice.Value);
 
         return games;
     }

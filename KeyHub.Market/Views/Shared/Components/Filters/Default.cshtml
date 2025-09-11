@@ -5,9 +5,9 @@
         <div class="filter-group">
             <label>Price (PLN)</label>
             <div class="price-filter">
-                <input type="number" name="minPrice" placeholder="From" value="@ViewBag.MinPrice">
+                <input type="number" name="minPrice" placeholder="From" value="@Model.MinPrice">
                 <span>-</span>
-                <input type="number" name="maxPrice" placeholder="To" value="@ViewBag.MaxPrice">
+                <input type="number" name="maxPrice" placeholder="To" value="@Model.MaxPrice">
             </div>
         </div>
 
@@ -21,7 +21,7 @@
                     var isDeemphasized = hasAnySelected && !isChecked;
                     <li>
                         <label class="@(isDeemphasized ? "deemphasized" : "")">
-                            <input type="checkbox" name="SelectedPlatforms" value="@( (int)platform.Platform )" @(isChecked ? "checked" : "") />
+                            <input type="checkbox" name="SelectedPlatforms" value="@platform.Platform" @(isChecked ? "checked" : "") />
                             @platform.Platform
                             <span>@platform.Count</span>
                         </label>
@@ -40,7 +40,7 @@
                     var isDeemphasized = hasAnySelected && !isChecked;
                     <li>
                         <label class="@(isDeemphasized ? "deemphasized" : "")">
-                            <input type="checkbox" name="SelectedGenres" value="@( (int)genre.Genre )" @(isChecked ? "checked" : "") />
+                            <input type="checkbox" name="SelectedGenres" value="@genre.Genre" @(isChecked ? "checked" : "") />
                             @genre.Genre
                             <span>@genre.Count</span>
                         </label>
@@ -70,12 +70,14 @@
     }
 
     .filters {
+        margin-top: 90px;
         width: 220px;
         padding: 15px;
         background-color: #fff;
         border-radius: 12px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 680px;
     }
 
     .filter-group {
