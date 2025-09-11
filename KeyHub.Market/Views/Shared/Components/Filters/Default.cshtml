@@ -1,7 +1,7 @@
 @model KeyHub.Market.Models.ViewModels.FiltersViewModel
 
 <aside class="filters">
-    <form method="get" asp-action="SearchGame">
+    <form method="get" asp-action="SearchedGames">
         <div class="filter-group">
             <label>Price (PLN)</label>
             <div class="price-filter">
@@ -16,12 +16,13 @@
             <ul>
                 @foreach (var platform in Model.PlatformStats)
                 {
-                    var isChecked = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Contains(platform.Platform);
-                    var hasAnySelected = ViewBag.SelectedPlatforms != null && ((Platform[])ViewBag.SelectedPlatforms).Length > 0;
+                    var isChecked = Model.SelectedPlatforms != null && Model.SelectedPlatforms.Contains(platform.Platform);
+                    var hasAnySelected = Model.SelectedPlatforms != null && Model.SelectedPlatforms.Length > 0;
                     var isDeemphasized = hasAnySelected && !isChecked;
                     <li>
                         <label class="@(isDeemphasized ? "deemphasized" : "")">
-                            <input type="checkbox" name="platforms" value="@platform.Platform" @(isChecked ? "checked" : "")> @platform.Platform
+                            <input type="checkbox" name="SelectedPlatforms" value="@( (int)platform.Platform )" @(isChecked ? "checked" : "") />
+                            @platform.Platform
                             <span>@platform.Count</span>
                         </label>
                     </li>
@@ -34,12 +35,13 @@
             <ul>
                 @foreach (var genre in Model.GenreStats)
                 {
-                    var isChecked = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Contains(genre.Genre);
-                    var hasAnySelected = ViewBag.SelectedGenres != null && ((Genre[])ViewBag.SelectedGenres).Length > 0;
+                    var isChecked = Model.SelectedGenres != null && Model.SelectedGenres.Contains(genre.Genre);
+                    var hasAnySelected = Model.SelectedGenres != null && Model.SelectedGenres.Length > 0;
                     var isDeemphasized = hasAnySelected && !isChecked;
                     <li>
                         <label class="@(isDeemphasized ? "deemphasized" : "")">
-                            <input type="checkbox" name="genres" value="@genre.Genre" @(isChecked ? "checked" : "")> @genre.Genre
+                            <input type="checkbox" name="SelectedGenres" value="@( (int)genre.Genre )" @(isChecked ? "checked" : "") />
+                            @genre.Genre
                             <span>@genre.Count</span>
                         </label>
                     </li>

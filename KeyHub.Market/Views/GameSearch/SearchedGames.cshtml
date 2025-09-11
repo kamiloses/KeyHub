@@ -1,35 +1,31 @@
 @using KeyHub.Market.Enums
-@model IEnumerable<KeyHub.Market.Models.Dto.GameDto>
+@model KeyHub.Market.Models.ViewModels.GameSearchViewModel
 
 @{
     Layout = "_HomeLayout";
     var pageContext = ViewContextType.Search;
-    
-    
 }
 
 <div class="search-page-container">
-
-    @* @await System.ComponentModel.Component.InvokeAsync("Filters", new { selectedPlatforms = ViewBag.SelectedPlatforms, selectedGenres = ViewBag.SelectedGenres }) *@
-
+    @await Component.InvokeAsync("Filters", new { selectedPlatforms = Model.SelectedPlatforms, selectedGenres = Model.SelectedGenres })
     <main class="results-section">
         <div class="results-header">
             <h2>Search Results</h2>
- 
+
             <form method="get" action="/search">
-                @if (ViewBag.SelectedPlatforms != null)
+
+                @if (Model.SelectedPlatforms != null)
                 {
-                    foreach (var platform in (Platform[])ViewBag.SelectedPlatforms)
+                    foreach (var platform in Model.SelectedPlatforms)
                     {
-                        <input type="hidden" name="platforms" value="@platform" />
+                        <input type="hidden" name="platforms" value="@platform"/>
                     }
                 }
-
-                @if (ViewBag.SelectedGenres != null)
+                @if (Model.SelectedGenres != null)
                 {
-                    foreach (var genre in (Genre[])ViewBag.SelectedGenres)
+                    foreach (var genre in Model.SelectedGenres)
                     {
-                        <input type="hidden" name="genres" value="@genre" />
+                        <input type="hidden" name="genres" value="@genre"/>
                     }
                 }
                 @* todo HTML hidden input in GET forms to preserve state *@
@@ -37,27 +33,27 @@
                 @* todo ogarnij view searchedGames *@
                 <div class="custom-select-wrapper">
                     <select name="sortBy" onchange="this.form.submit()">
-                        <option value="ByName" selected="@(ViewBag.CurrentSort == "ByName")">Name A-Z</option>
-                        <option value="ByPriceAsc" selected="@(ViewBag.CurrentSort == "ByPriceAsc")">Price Low to High</option>
-                        <option value="ByPriceDesc" selected="@(ViewBag.CurrentSort == "ByPriceDesc")">Price High to Low</option>
-                        <option value="ByDate" selected="@(ViewBag.CurrentSort == "ByDate")">Newest</option>
+                        @foreach (var sort in Model.SortOptions)
+                        {
+                            <option value="@sort" selected="@(sort == Model.CurrentSort)">
+                                @sort.ToString()
+                            </option>
+                        }
                     </select>
                 </div>
             </form>
         </div>
 
         <div class="game-list">
-            @foreach (var game in Model) 
+            @foreach (var game in Model.Games)
             {
-                <text>
-                    @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
-                </text>
+                @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
             }
         </div>
     </main>
-    
 </div>
 
+@* @await Html.PartialAsync("_Pagination", new PaginationModel { CurrentPage = Model.CurrentPage, TotalPages = Model.TotalPages }) *@
 @* pagination *@
 @await Html.PartialAsync("_Pagination")
 

@@ -37,7 +37,7 @@ public class GameSearchService : IGameSearchService
             .Take(pageSize)
             .ToList();
 
-     List<GameDto> mappedGames  = _mapper.Map<List<GameDto>>(games);
+     List<GameDto> mappedGames  = _mapper.Map<List<GameDto>>(games);//todo ogarnij mappera
         
         return (mappedGames, totalGames);
     }
@@ -59,5 +59,14 @@ public class GameSearchService : IGameSearchService
         games = _sortingService.SortGames(games, sortBy);
 
         return games;
+    }
+}
+
+
+public class GameProfile : Profile
+{
+    public GameProfile()
+    {
+        CreateMap<Game, GameDto>();
     }
 }

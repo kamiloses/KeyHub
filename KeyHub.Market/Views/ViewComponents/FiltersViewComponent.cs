@@ -24,15 +24,17 @@ public class FiltersViewComponent : ViewComponent
 
         var platformStats = await GetPlatformStatsAsync(gamesQuery, selectedGenres);
         var genreStats = await GetGenreStatsAsync(gamesQuery, selectedPlatforms);
-
-
         FiltersViewModel filters = new FiltersViewModel
         {
             PlatformStats = platformStats,
-            GenreStats = genreStats
+            GenreStats = genreStats,
+            SelectedGenres = selectedGenres,
+            SelectedPlatforms = selectedPlatforms
         };
 
-       
+
+
+
         return View(filters);
     }
 
