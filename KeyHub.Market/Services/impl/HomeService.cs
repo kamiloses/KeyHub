@@ -1,5 +1,6 @@
 using AutoMapper;
 using KeyHub.Market.data;
+using KeyHub.Market.Mappers;
 using KeyHub.Market.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,15 +9,13 @@ namespace KeyHub.Market.Services.impl;
 public class HomeService : IHomeService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly IMapper _mapper;
 
-    public HomeService(ApplicationDbContext dbContext, IMapper mapper)
+    public HomeService(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-        _mapper = mapper;
     }
 
- 
+
     public async Task<List<GameDto>>  GetTopDiscountedGamesAsync(int count)
     { 
         var games = await _dbContext.Games
@@ -25,7 +24,7 @@ public class HomeService : IHomeService
             .Take(count)
             .ToListAsync();
 
-        return _mapper.Map<List<GameDto>>(games);
+        return GameMapper.ToDtoList(games);
 
     }
 }

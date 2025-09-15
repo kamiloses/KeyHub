@@ -1,5 +1,3 @@
-using KeyHub.Market.Enums;
-using KeyHub.Market.Models;
 using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,9 +6,8 @@ namespace KeyHub.Market.Controllers;
 public class GameSearchController : Controller
 
 {
-    // TODO 1 filtry min max price bo nie działa , paginacja inna css
-
     private readonly IGameSearchService _gameSearchService;
+    private const int DefaultPageSize = 10;
 
     public GameSearchController(IGameSearchService gameSearchService)
     {
@@ -19,13 +16,13 @@ public class GameSearchController : Controller
     
      
 
-        [HttpGet("search")]
-        public IActionResult SearchedGames([FromQuery] GameSearchViewModel model)
+        [HttpGet("/search")]
+        public async Task<IActionResult> SearchedGames([FromQuery] GameSearchViewModel model)
         {
-            var (games, totalGames) = _gameSearchService.GetSearchedGames(
+            var (games, totalGames) =await _gameSearchService.GetSearchedGames(
                 model.Title, model.CurrentSort, model.SelectedPlatforms,
                 model.SelectedGenres, model.MinPrice, model.MaxPrice,
-                model.CurrentPage, pageSize: 10
+                model.CurrentPage, pageSize: DefaultPageSize
             );
         
             model.Games = games;

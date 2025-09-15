@@ -58,7 +58,7 @@ private async Task<(bool, string? fileName)> UploadFile(IFormFile? ufile)
     if (ufile != null && ufile.Length > 0)
     {
         string fileName = Guid.NewGuid() + Path.GetExtension(ufile.FileName);
-        string uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+        string uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images","games");
         if (!Directory.Exists(uploads))
             Directory.CreateDirectory(uploads);
 

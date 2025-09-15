@@ -1,6 +1,7 @@
 using AutoMapper;
 using KeyHub.Market.data;
 using KeyHub.Market.Enums;
+using KeyHub.Market.Mappers;
 using KeyHub.Market.Models;
 using KeyHub.Market.Models.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +13,16 @@ public class GameSearchService : IGameSearchService
     private readonly ApplicationDbContext _dbContext;
     private readonly IFilteringService _filteringService;
     private readonly ISortingService _sortingService;
-    private readonly IMapper _mapper;
-    public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService,
-        ISortingService sortingService, IMapper mapper)
+    
+
+    public GameSearchService(ApplicationDbContext dbContext, IFilteringService filteringService, ISortingService sortingService)
     {
         _dbContext = dbContext;
         _filteringService = filteringService;
         _sortingService = sortingService;
-        _mapper = mapper;
     }
 
-    public (List<GameDto> Games, int TotalGames) GetSearchedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
+    public async Task<(List<GameDto> Games, int TotalGames)> GetSearchedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
         decimal? minPrice,
         decimal? maxPrice,
         int page,
@@ -30,16 +30,15 @@ public class GameSearchService : IGameSearchService
     {
         IQueryable<Game> gamesQuery = GetFilteredAndSortedGames(title,sortBy, platforms, genres, minPrice, maxPrice);
 
-        int totalGames = gamesQuery.Count();
-
-        List<Game> games = gamesQuery
+        int totalGames = await gamesQuery.CountAsync();
+        List<Game> games = await gamesQuery
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
-            .ToList();
+            .ToListAsync();
 
-     List<GameDto> mappedGames  = _mapper.Map<List<GameDto>>(games);//todo ogarnij mappera
+        List<GameDto> mappedGames = GameMapper.ToDtoList(games);
         
-        return (mappedGames, totalGames);
+        return  (mappedGames, totalGames);
     }
 
     public IQueryable<Game> GetFilteredAndSortedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
@@ -59,14 +58,5 @@ public class GameSearchService : IGameSearchService
         games = _sortingService.SortGames(games, sortBy);
 
         return games;
-    }
-}
-
-
-public class GameProfile : Profile
-{
-    public GameProfile()
-    {
-        CreateMap<Game, GameDto>();
     }
 }

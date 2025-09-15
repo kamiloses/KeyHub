@@ -8,10 +8,10 @@ namespace KeyHub.Market.data
         {
             // context.Games.RemoveRange(context.Games);
             // context.SaveChanges();
-            //
-            //
             
-            if (context.Games.Any())
+            
+            
+            if (!context.Games.Any())
                 return;
 
             var games = new Game[100];
@@ -45,8 +45,8 @@ namespace KeyHub.Market.data
                 };
             }
 
-            context.Games.AddRange(games);
-            context.SaveChanges();
+            // context.Games.AddRange(games);
+            // context.SaveChanges();
         }
     }
 }
