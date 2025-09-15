@@ -32,6 +32,10 @@
                 @* todo HTML hidden input in GET forms to preserve state *@
                 @* //todo name i value ogarnij  oraz to nizej*@
                 @* todo ogarnij view searchedGames *@
+                
+                <input type="hidden" name="MinPrice" value="@Model.MinPrice" />
+                <input type="hidden" name="MaxPrice" value="@Model.MaxPrice" />
+
                 <div class="custom-select-wrapper">
                     <select name="CurrentSort" onchange="this.form.submit()">
                         @foreach (var sort in Model.SortOptions)

@@ -34,6 +34,7 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignI
 
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
+builder.Services.AddScoped<IGameManagerService, GameManagerService>();
 builder.Services.AddScoped<ISortingService, SortingService>();
 builder.Services.AddScoped<IFilteringService,FilteringService>();
 builder.Services.AddScoped<IAuthService,AuthService>();
