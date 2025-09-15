@@ -20,7 +20,6 @@ public class GameManagerController : Controller
     public async Task<EntityEntry<Game>> AddGame(string title,Genre genre,string price,Platform platform,int stock,IFormFile imageFile,int discount=0)
     {
         decimal parsedPrice = decimal.Parse(price.Replace(',', '.'), CultureInfo.InvariantCulture);
-        Console.WriteLine("WYKONUJEEEEEEE " +price);
         
         
         
