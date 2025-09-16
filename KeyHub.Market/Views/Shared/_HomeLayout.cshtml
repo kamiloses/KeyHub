@@ -1,3 +1,4 @@
+@using KeyHub.Market.Enums
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="~/css/footer.css" />
     <link rel="stylesheet" href="~/css/searchedGames.css" />
     <link rel="stylesheet" href="~/css/shared/pagination.css" />
+    <link rel="stylesheet" href="~/css/shared/gameOverview.css" />
     <link rel="stylesheet" href="~/css/auth/login.css" />
     <link rel="stylesheet" href="~/css/auth/register.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -17,8 +19,9 @@
 
 @await Html.PartialAsync("_Header")  
 
-<main>
-    @RenderBody()  
+<main class="@(ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextType.Home) ? "home" : 
+             ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextType.Search) ? "search" : "")">
+    @RenderBody()
 </main>
 
 @await Html.PartialAsync("_Footer")

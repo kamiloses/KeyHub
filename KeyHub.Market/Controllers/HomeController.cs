@@ -1,3 +1,4 @@
+using KeyHub.Market.Enums;
 using KeyHub.Market.Models.Dto;
 using KeyHub.Market.Services;
 using KeyHub.Market.Services.impl;
@@ -17,6 +18,8 @@ public class HomeController : Controller
     [HttpGet("/")]
     public async Task<IActionResult> Home()
     {
+        
+        ViewData["Context"] = ViewContextType.Home;
         List<GameDto> topDiscountedGames = await _homeService.GetTopDiscountedGamesAsync(TopGamesCount);
 
         return View("home", topDiscountedGames);

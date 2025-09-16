@@ -8,15 +8,15 @@ namespace KeyHub.Market.data
         {
             // context.Games.RemoveRange(context.Games);
             // context.SaveChanges();
+            //
             
             
-            
-            if (!context.Games.Any())
+            if (context.Games.Any())
                 return;
 
             var games = new Game[100];
 
-            string[] titles = new[]
+            string[] titles = new string[]
             {
                 "Grand Theft Auto V", "The Witcher 3", "Cyberpunk 2077", "Minecraft",
                 "Halo Infinite", "FIFA 23", "Call of Duty: Modern Warfare", "Assassin's Creed Valhalla",
@@ -45,8 +45,8 @@ namespace KeyHub.Market.data
                 };
             }
 
-            // context.Games.AddRange(games);
-            // context.SaveChanges();
+            context.Games.AddRange(games);
+            context.SaveChanges();
         }
     }
 }

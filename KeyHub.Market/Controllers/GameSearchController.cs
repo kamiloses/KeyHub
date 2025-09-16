@@ -1,3 +1,4 @@
+using KeyHub.Market.Enums;
 using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,8 @@ public class GameSearchController : Controller
         [HttpGet("/search")]
         public async Task<IActionResult> SearchedGames([FromQuery] GameSearchViewModel model)
         {
+            
+            ViewData["Context"] = ViewContextType.Search;
             var (games, totalGames) =await _gameSearchService.GetSearchedGames(
                 model.Title, model.CurrentSort, model.SelectedPlatforms,
                 model.SelectedGenres, model.MinPrice, model.MaxPrice,
