@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,22 +31,45 @@ public class AuthController : Controller
     
     
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var result = await _signInManager.PasswordSignInAsync(
+            model.Email,
+            model.Password,
+            model.RememberMe,
+            lockoutOnFailure: false 
+        );
+
+        if (result.Succeeded)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Email or passowrd is incorrect.");
-                return View(model);
-            }
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+
+            return RedirectToAction("Home", "Home");
         }
+
+        if (result.IsLockedOut)
+        {
+            ModelState.AddModelError(string.Empty, "Your account is locked. Try again later.");
+        }
+        else
+        {
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+        }
+
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
     
     
@@ -61,41 +85,31 @@ public class AuthController : Controller
     }
 
     [HttpPost("/register")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
+            return View(model);
+
+        var user = new IdentityUser
         {
-            var user = new IdentityUser
-            {
-                UserName = model.UserName,
-                Email = model.Email
-            };
+            UserName = model.Email,
+            Email = model.Email
+        };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+        var result = await _userManager.CreateAsync(user, model.Password);
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
+        if (result.Succeeded)
+        {
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return RedirectToAction("Home", "Home");
+        }
 
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
         }
 
         return View(model);
     }
-}
-
-public class LoginViewModel
-{
-    [Required(ErrorMessage = "Email is required!")]
-    [EmailAddress]
-    public string Email { get; set; }
-    [Required(ErrorMessage = "Password is required!")]
-    [DataType(DataType.Password)]
-    public string Password { get; set; }
-    [Display(Name = "Remember me?")]
-    public bool RememberMe { get; set; }
 }
