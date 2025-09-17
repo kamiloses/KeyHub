@@ -23,10 +23,6 @@ public class AuthService : IAuthService
         IdentityUser user = new IdentityUser() { UserName = username, Email = email };
         IdentityResult result =await  _userManager.CreateAsync(user, password);
   
-            
-        // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        // code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-        //
         
         
     }

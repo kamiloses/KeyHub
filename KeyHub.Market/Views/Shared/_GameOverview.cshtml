@@ -6,8 +6,8 @@ var oldPrice = Math.Round(Model.Price, 2);
 }
 
 <div class="game-item">
-    <img src="/images/games/@Model.ImageUrl" alt="Image error" />
-    @* <img src="wwwroot/images/games/1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg" alt="Image error" /> *@
+    @* <img src="/images/games/@Model.ImageUrl" alt="Image error" /> *@
+     <img src="images/games/1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg" alt="Image error" /> 
     <h3>@Model.Title</h3>
 
     <p class="info"><strong>Platform:</strong> @Model.Platform</p>
@@ -15,8 +15,13 @@ var oldPrice = Math.Round(Model.Price, 2);
     <p class="info"><strong>Region:</strong> GLOBAL</p>
 
     <p class="price">
+       
         <span class="final-price">@($"{finalPrice} zł")</span>
-        <span class="old-price">@($"{oldPrice} zł")</span>
-        <span class="discount">-@Model.Discount%</span>
+    @if (Model.Discount != 0)
+        {
+            <span class="old-price">@($"{oldPrice} zł")</span>
+
+            <span class="discount">-@Model.Discount%</span>
+        }
     </p>
 </div>

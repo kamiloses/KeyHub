@@ -17,16 +17,11 @@ public class GameManagerController : Controller
     }
 
     [HttpPost("/AddGame")]
-    public async Task<EntityEntry<Game>> AddGame(string title,Genre genre,string price,Platform platform,int stock,IFormFile imageFile,int discount=0)
+    public async Task<IActionResult> AddGame(string title, Genre genre, decimal price, Platform platform, int stock, IFormFile imageFile, int discount = 0)
     {
-        decimal parsedPrice = decimal.Parse(price.Replace(',', '.'), CultureInfo.InvariantCulture);
-        
-        
-        
-       return await _gameManagerService.AddGame(title, genre, parsedPrice, platform, stock, imageFile, discount);
-        
-    }
-
+             await _gameManagerService.AddGame(title, genre, price, platform, stock, imageFile, discount);
+            return RedirectToAction("Home", "Home"); 
+        }
     
     
     

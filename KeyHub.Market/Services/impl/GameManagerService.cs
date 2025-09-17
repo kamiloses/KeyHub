@@ -8,70 +8,55 @@ namespace KeyHub.Market.Services.impl;
 public class GameManagerService : IGameManagerService
 {
 private readonly ApplicationDbContext _appDbContext;
+private readonly IWebHostEnvironment _env;
 
-public GameManagerService(ApplicationDbContext appDbContext)
+
+public GameManagerService(ApplicationDbContext appDbContext, IWebHostEnvironment env)
 {
     _appDbContext = appDbContext;
+    _env = env;
 }
 
-public async Task<EntityEntry<Game>> AddGame(string title,Genre genre,decimal price,Platform platform,int stock,IFormFile imageFile,int discount=0)
+public async Task<Game> AddGame(string title, Genre genre, decimal price, Platform platform, int stock, IFormFile imageFile, int discount = 0)
 {
+    var imageFileName = await UploadFile(imageFile);
+    if (imageFileName == null)
+        throw new ArgumentException("Image file is required");
 
-   Task<(bool, string? fileName)> ImageUrl= UploadFile(imageFile);
-   {
-
-
-
-       if (ImageUrl.Result.fileName != null)
-       {
-
-
-
-           Game game = new Game()
-           {
-               Title = title,
-               Genre = genre,
-               Price = price,
-               Discount = discount,
-               Platform = platform,
-               ImageUrl = ImageUrl.Result.fileName,
-               Stock = stock
-           };
-           await _appDbContext.AddAsync(game);
-           await _appDbContext.SaveChangesAsync();
-           
-       }
-       
-   }
-  
-    return null;
-
-}
-
-
-
-
-
-
-private async Task<(bool, string? fileName)> UploadFile(IFormFile? ufile)
-{
-    if (ufile != null && ufile.Length > 0)
+    var game = new Game
     {
-        string fileName = Guid.NewGuid() + Path.GetExtension(ufile.FileName);
-        string uploads = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images","games");
-        if (!Directory.Exists(uploads))
-            Directory.CreateDirectory(uploads);
+        Title = title,
+        Genre = genre,
+        Price = price,
+        Discount = discount,
+        Platform = platform,
+        ImageUrl = imageFileName,
+        Stock = stock
+    };
 
-        var filePath = Path.Combine(uploads, fileName);
-        using (var fileStream = new FileStream(filePath, FileMode.Create))
-        {
-            await ufile.CopyToAsync(fileStream);
-        }
-         Console.WriteLine($"Uploaded {fileName}");
-        return (true, fileName);
-    }
-    return (false, null);
+    await _appDbContext.AddAsync(game);
+    await _appDbContext.SaveChangesAsync();
+
+    return game;
 }
 
+
+
+
+private async Task<string?> UploadFile(IFormFile? ufile)
+{
+    if (ufile == null || ufile.Length == 0) return null;
+
+    string fileName = Guid.NewGuid() + Path.GetExtension(ufile.FileName);
+    string uploads = Path.Combine(_env.WebRootPath, "images", "games");
+    Directory.CreateDirectory(uploads);
+
+    var filePath = Path.Combine(uploads, fileName);
+    await using var fileStream = new FileStream(filePath, FileMode.Create);
+    await ufile.CopyToAsync(fileStream);
+
+    Console.WriteLine($"Uploaded {fileName}");
+    return fileName;
+}
     
 }
