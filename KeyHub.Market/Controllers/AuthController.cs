@@ -13,14 +13,15 @@ namespace KeyHub.Market.Controllers;
 public class AuthController : Controller
 {
     private readonly IAuthService _authService;
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly UserManager<User> _userManager;
 
-    public AuthController(IAuthService authService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+
+    public AuthController(IAuthService authService, SignInManager<User> signInManager, UserManager<User> userManager)
     {
         _authService = authService;
-        _userManager = userManager;
         _signInManager = signInManager;
+        _userManager = userManager;
     }
 
     [HttpGet("/login")]
@@ -71,8 +72,7 @@ public class AuthController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
-        Console.BackgroundColor= ConsoleColor.Red;
-        Console.WriteLine("DZIAŁAAAA");
+       
         await _signInManager.SignOutAsync();
         return RedirectToAction("Home", "Home");
     }
@@ -96,7 +96,7 @@ public class AuthController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
-        var user = new IdentityUser
+        var user = new User()
         {
             UserName = model.Email,
             Email = model.Email

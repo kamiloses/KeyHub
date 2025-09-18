@@ -9,7 +9,7 @@ namespace KeyHub.Market.data;
 // dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 // dotnet add package Microsoft.EntityFrameworkCore.Tools
 
-    public class ApplicationDbContext :  IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext :  IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
