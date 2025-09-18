@@ -1,0 +1,31 @@
+@model KeyHub.Market.Models.Game
+
+@{
+    ViewData["Title"] = "Buy Game";
+}
+
+<h2>Buy Game: @Model.Title</h2>
+
+<div class="game-details">
+    <img src="@Model.ImageUrl" alt="@Model.Title" style="max-width:200px" />
+    <p>Genre: @Model.Genre</p>
+    <p>Platform: @Model.Platform</p>
+    <p>Price: @(Model.Price - (Model.Price * Model.Discount / 100)).ToString("C")</p>
+    <p>Stock: @Model.Stock</p>
+</div>
+
+<form asp-action="BuyConfirmed" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success" @(Model.Stock <= 0 ? "disabled" : "")>Buy Now</button>
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <p class="text-danger">@TempData["Error"]</p>
+}
+
+@if (TempData["Success"] != null)
+{
+    <p class="text-success">@TempData["Success"]</p>
+}
