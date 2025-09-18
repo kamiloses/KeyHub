@@ -15,6 +15,7 @@ namespace KeyHub.Market.data;
         
         
         public DbSet<Game>  Games { get; set; }
+        public DbSet<Purchase>  Purchases { get; set; }
         
         
         
