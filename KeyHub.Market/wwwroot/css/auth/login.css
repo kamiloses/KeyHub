@@ -1,5 +1,5 @@
-
-.login-page {
+/* Strona konta (logowanie/rejestracja) */
+.account-page, .register-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,8 +7,9 @@
     background: linear-gradient(135deg, #14142b, #1e1e2f); /* gradient ciemnego granatu */
     font-family: Arial, sans-serif;
 }
-/* Box logowania */
-.login-box {
+
+/* Box logowania/rejestracji */
+.account-box, .register-box {
     background: #2e2e4a;
     padding: 2rem 2.5rem;
     border-radius: 12px;
@@ -18,18 +19,20 @@
 }
 
 /* Tytuł */
-.login-title {
+.account-box h2, .register-box h2 {
     color: #fff;
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
 }
 
 /* Pola formularza */
-.login-form .form-group {
+.account-box .form-group,
+.register-box .form-group {
     margin-bottom: 1rem;
 }
 
-.login-form input {
+.account-box input,
+.register-box input {
     width: 100%;
     padding: 0.7rem 1rem;
     border: none;
@@ -41,13 +44,14 @@
     transition: border 0.2s, box-shadow 0.2s;
 }
 
-.login-form input:focus {
+.account-box input:focus,
+.register-box input:focus {
     border: 1px solid #3a3a5a;
     box-shadow: 0 0 6px rgba(0,120,212,0.4);
 }
 
 /* Przycisk */
-.btn-login {
+.account-box .btn, .register-box .btn {
     width: 100%;
     padding: 0.75rem;
     margin-top: 0.5rem;
@@ -61,23 +65,29 @@
     transition: background 0.2s;
 }
 
-.btn-login:hover {
+.account-box .btn:hover, .register-box .btn:hover {
     background-color: #005ea6;
 }
 
 /* Stopka pod formularzem */
-.login-footer {
+.account-footer, .register-footer {
     margin-top: 1.2rem;
     font-size: 0.9rem;
     color: #bbb;
 }
 
-.login-footer a {
+.account-footer a, .register-footer a {
     color: #4aa3ff;
     text-decoration: none;
     margin-left: 5px;
 }
 
-.login-footer a:hover {
+.account-footer a:hover, .register-footer a:hover {
     text-decoration: underline;
+}
+
+/* Małe poprawki dla checkboxa RememberMe */
+.form-check-label {
+    color: #fff;
+    user-select: none;
 }

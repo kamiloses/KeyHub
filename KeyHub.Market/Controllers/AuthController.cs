@@ -28,14 +28,17 @@ public class AuthController : Controller
     {
         return View();
     }
-    
-    
-    [HttpPost]
+
+
+    [HttpPost("/login")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
     {
         if (!ModelState.IsValid)
+        {
             return View(model);
+        }
+
 
         var result = await _signInManager.PasswordSignInAsync(
             model.Email,
@@ -64,12 +67,14 @@ public class AuthController : Controller
         return View(model);
     }
 
-    [HttpPost]
+    [HttpPost("/logout")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
+        Console.BackgroundColor= ConsoleColor.Red;
+        Console.WriteLine("DZIAŁAAAA");
         await _signInManager.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Home", "Home");
     }
     
     
