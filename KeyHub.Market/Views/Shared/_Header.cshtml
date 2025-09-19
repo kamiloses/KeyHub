@@ -1,5 +1,22 @@
-@using KeyHub.Market.Models
-    
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> _userManager
+
+@functions {
+    public async Task<decimal?> GetUserBalanceAsync()
+    {
+    Console.BackgroundColor = ConsoleColor.Red;
+        
+        if (User.Identity != null && !User.Identity.IsAuthenticated)
+        {
+            Console.WriteLine("Null");
+            return null;
+        }
+
+        var user = await _userManager.GetUserAsync(User);
+    Console.WriteLine("NIE NULL");
+        return user!.Balance;
+    }
+}
 <header class="header-component">
     <nav class="header-nav">
         <div class="header-nav-left">
@@ -39,9 +56,16 @@
             else
             {
                 <a href="/History" class="header-link">Purchase History</a>
+            
+                <span id="user-balance">@await GetUserBalanceAsync() zł</span>
+
+                <form method="post" asp-controller="Purchase" asp-action="AddMoney" class="d-inline">
+                    <input type="number" name="amount" step="0.01" min="0" placeholder="Add money" />
+                    <button type="submit">+</button>
+                </form>
+                
             }
 
-            <span> Doładuj Srodki</span>
                 
                 <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
                     <button type="submit" class="header-link btn btn-link">Logout</button>

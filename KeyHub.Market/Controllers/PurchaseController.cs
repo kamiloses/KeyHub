@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
 
- [Authorize]
     public class PurchaseController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -75,4 +74,23 @@ namespace KeyHub.Market.Controllers;
             TempData["Success"] = $"You purchased {game.Title}!";
             return RedirectToAction("Index", "SearchGame");
         }
+        
+        
+        [HttpPost("/addMoney")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMoney(decimal amount)
+        {
+            Console.BackgroundColor= ConsoleColor.Red;
+            Console.WriteLine("WYKONUJE SIE");
+            if(amount <= 0) return BadRequest("Amount must be greater than 0");
+            var user = await _userManager.GetUserAsync(User);
+            if(user == null) return Unauthorized();
+
+            user.Balance += amount;
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction("Home", "Home");
+
+        }
+        
     }
