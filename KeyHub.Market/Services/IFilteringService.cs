@@ -4,9 +4,9 @@ namespace KeyHub.Market.Services;
 
 public interface IFilteringService
 {
-    public IQueryable<Game> FilterByPlatform(IQueryable<Game> games, Platform[]? platforms);
-    public IQueryable<Game> FilterByGenres(IQueryable<Game> games, Genre[]? selectedGenres);
-    public IQueryable<Game> FilterByPrice(IQueryable<Game> games, decimal? minPrice = null, decimal? maxPrice = null);
+     IQueryable<Game> FilterByPlatform(IQueryable<Game> games, Platform[]? platforms);
+     IQueryable<Game> FilterByGenres(IQueryable<Game> games, Genre[]? selectedGenres);
+     IQueryable<Game> FilterByPrice(IQueryable<Game> games, decimal? minPrice = null, decimal? maxPrice = null);
 
 
 }

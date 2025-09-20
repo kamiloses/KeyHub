@@ -5,6 +5,6 @@ namespace KeyHub.Market.Services;
 
 public interface ISortingService
 {
-    public IQueryable<Game> SortGames(IQueryable<Game> games, GameSort sortBy = GameSort.ByName);
+     IQueryable<Game> SortGames(IQueryable<Game> games, GameSort sortBy = GameSort.ByName);
 
 }

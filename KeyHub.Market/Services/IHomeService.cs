@@ -4,5 +4,5 @@ namespace KeyHub.Market.Services;
 
 public interface IHomeService
 {
-    public Task<List<GameDto>> GetTopDiscountedGamesAsync(int count);
+     Task<List<GameDto>> GetTopDiscountedGamesAsync(int count);
 }

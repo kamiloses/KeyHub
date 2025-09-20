@@ -1,5 +1,4 @@
 using KeyHub.Market.Models;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KeyHub.Market.Services;
 

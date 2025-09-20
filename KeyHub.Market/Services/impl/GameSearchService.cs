@@ -1,4 +1,3 @@
-using AutoMapper;
 using KeyHub.Market.data;
 using KeyHub.Market.Enums;
 using KeyHub.Market.Mappers;
