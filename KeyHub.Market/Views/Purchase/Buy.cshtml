@@ -1,11 +1,28 @@
 @model KeyHub.Market.Models.Game
-
+@* todo niech footer nie wystepuje dopiero po scrollowaniu tylko odrazu jest widoczny *@
 @{
     Layout = "_HomeLayout";
     
     ViewData["Title"] = "Buy Game";
-    var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
+    decimal finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
     var oldPrice = Math.Round(Model.Price, 2);
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> _userManager
+
+@functions {
+    public async Task<decimal?> GetUserBalanceAsync()
+    {
+        
+        if (User.Identity != null && !User.Identity.IsAuthenticated)
+        {
+            return null;
+        }
+
+        var user = await _userManager.GetUserAsync(User);
+        return user!.Balance;
+    }
 }
 
 <div class="buy-game-page">
@@ -33,11 +50,11 @@
             </p>
 
             <p><strong>Stock:</strong> @Model.Stock</p>
-
-            <form asp-action="BuyConfirmed" method="post">
+            @* todo niech nie bedzie mozna kupic jezeli nie jestem zalogowany oraz niech psize ze nie mam pieniedzy by kupic *@
+            <form asp-controller="Purchase" asp-action="BuyConfirmed" method="post">
                 <input type="hidden" name="id" value="@Model.Id" />
                 @Html.AntiForgeryToken()
-                <button type="submit" class="btn-buy" @(Model.Stock <= 0 ? "disabled" : "")>Buy Now</button>
+                <button type="submit" class="btn-buy" @((Model.Stock <= 0)||(await GetUserBalanceAsync()<finalPrice) ? "disabled" : "")>Buy Now</button>
             </form>
 
             @if (TempData["Error"] != null)
@@ -52,114 +69,116 @@
         </div>
     </div>
 
-    <div class="game-description">
-        <h2>About the Game</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a justo eget sapien fermentum dapibus.</p>
-    </div>
+   
 </div>
 
 <style>
-.buy-game-page {
-    max-width: 900px;
-    margin: 40px auto;
-    font-family: Arial, sans-serif;
-    padding: 0 16px;
-}
+    .buy-game-page {
+        max-width: 900px;
+        margin: 40px auto;
+        font-family: Arial, sans-serif;
+        padding: 0 16px;
+        color: #2d2d2d;
+    }
 
-.game-header h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
+    .game-header h1 {
+        font-size: 30px;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+    }
 
-.genre-platform span {
-    margin-right: 10px;
-    color: #555;
-    font-size: 16px;
-}
+    .genre-platform span {
+        margin-right: 10px;
+        color: #6c757d;
+        font-size: 16px;
+    }
 
-.game-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 24px;
-}
+    .game-main {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 24px;
+        background: #f9f9f9;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
 
-.game-image img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+    .game-image img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
 
-.game-info {
-    flex: 1;
-    min-width: 250px;
-}
+    .game-info {
+        flex: 1;
+        min-width: 250px;
+    }
 
-.price {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 16px;
-    font-size: 20px;
-}
+    .price {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 16px;
+        font-size: 22px;
+        font-weight: bold;
+    }
 
-.old-price {
-    text-decoration: line-through;
-    color: #999;
-    font-size: 16px;
-}
+    .final-price {
+        color: #2c7a7b;
+        font-size: 24px;
+    }
 
-.discount {
-    background-color: #fdecea;
-    color: #d32f2f;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 14px;
-}
+    .old-price {
+        text-decoration: line-through;
+        color: #aaa;
+        font-size: 16px;
+    }
 
-.btn-buy {
-    background-color: #28a745;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
+    .discount {
+        background-color: #e3f8e3;
+        color: #2f8f2f;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 14px;
+    }
 
-.btn-buy:hover {
-    background-color: #218838;
-}
+    .btn-buy {
+        background-color: #4cafef;
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
 
-.btn-buy:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+    .btn-buy:hover {
+        background-color: #36a3e0;
+        transform: translateY(-2px);
+    }
 
-.text-danger {
-    color: #d32f2f;
-    margin-top: 12px;
-}
+    .btn-buy:disabled {
+        background-color: #e0e0e0;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
 
-.text-success {
-    color: #28a745;
-    margin-top: 12px;
-}
+    .text-danger {
+        color: #e63946;
+        margin-top: 12px;
+        font-weight: bold;
+    }
 
-.game-description {
-    margin-top: 32px;
-}
+    .text-success {
+        color: #2a9d8f;
+        margin-top: 12px;
+        font-weight: bold;
+    }
 
-.game-description h2 {
-    font-size: 22px;
-    margin-bottom: 8px;
-}
 
-.game-description p {
-    font-size: 16px;
-    color: #444;
-}
 </style>

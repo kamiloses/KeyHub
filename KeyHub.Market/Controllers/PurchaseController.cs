@@ -30,10 +30,13 @@ namespace KeyHub.Market.Controllers;
         }
 
         // POST: /Purchase/Buy/5
-        [HttpPost]
+        [HttpPost("Game/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BuyConfirmed(int id)
         {
+            Console.BackgroundColor= ConsoleColor.Red;
+            Console.WriteLine("WYKONUJE SIE "+id);
+            
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
                 return Challenge();
@@ -71,8 +74,8 @@ namespace KeyHub.Market.Controllers;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = $"You purchased {game.Title}!";
-            return RedirectToAction("Index", "SearchGame");
+            TempData["Success"] = $"You purchased {game.Title}!";//todo jako cookie
+            return RedirectToAction("Home", "Home");
         }
         
         
@@ -80,8 +83,7 @@ namespace KeyHub.Market.Controllers;
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMoney(decimal amount)
         {
-            Console.BackgroundColor= ConsoleColor.Red;
-            Console.WriteLine("WYKONUJE SIE");
+            
             if(amount <= 0) return BadRequest("Amount must be greater than 0");
             var user = await _userManager.GetUserAsync(User);
             if(user == null) return Unauthorized();

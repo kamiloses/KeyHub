@@ -4,16 +4,13 @@
 @functions {
     public async Task<decimal?> GetUserBalanceAsync()
     {
-    Console.BackgroundColor = ConsoleColor.Red;
         
         if (User.Identity != null && !User.Identity.IsAuthenticated)
         {
-            Console.WriteLine("Null");
             return null;
         }
 
         var user = await _userManager.GetUserAsync(User);
-    Console.WriteLine("NIE NULL");
         return user!.Balance;
     }
 }

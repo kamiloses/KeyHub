@@ -1,28 +1,54 @@
 @model KeyHub.Market.Models.Dto.GameDto
 
 @{
-var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
-var oldPrice = Math.Round(Model.Price, 2);
+    var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
+    var oldPrice = Math.Round(Model.Price, 2);
+    var isLowStock = Model.Stock <= 5; //todo ma być 0 potem
 }
-<a href="/game/@Model.Id">
-<div class="game-item">
-    @* <img src="/images/games/@Model.ImageUrl" alt="Image error" /> *@
-    <img src="images/games/1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg" alt="Image error" /> 
-    <h3>@Model.Title</h3>
 
-    <p class="info"><strong>Platform:</strong> @Model.Platform</p>
-    <p class="info"><strong>Genre:</strong> @Model.Genre</p>
-    <p class="info"><strong>Region:</strong> GLOBAL</p>
+<a href="/game/@Model.Id" class="game-link">
+    <div class="game-item @(isLowStock ? "low-stock" : "")">
+        @* <img src="/images/games/@Model.ImageUrl" alt="Image error" /> *@
+        <img src="images/games/1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg" alt="Image error" /> 
+        <h3>@Model.Title</h3>
 
-    <p class="price">
-       
-        <span class="final-price">@($"{finalPrice} zł")</span>
-        @if (Model.Discount != 0)
+        <p class="info"><strong>Platform:</strong> @Model.Platform</p>
+        <p class="info"><strong>Genre:</strong> @Model.Genre</p>
+        <p class="info"><strong>Region:</strong> GLOBAL</p>
+        <p class="price">
+            <span class="final-price">@($"{finalPrice} zł")</span>
+            @if (Model.Discount != 0)
+            {
+                <span class="old-price">@($"{oldPrice} zł")</span>
+                <span class="discount">-@Model.Discount%</span>
+            }
+        </p>
+
+        @if (isLowStock)
         {
-            <span class="old-price">@($"{oldPrice} zł")</span>
-
-            <span class="discount">-@Model.Discount%</span>
+            <div class="stock-warning">Game currently not available</div>
         }
-    </p>
-</div>
+    </div>
 </a>
+
+<style>
+
+
+    .game-item.low-stock {
+        opacity: 0.5; 
+        position: relative;
+    }
+
+    .game-item.low-stock .stock-warning {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,0.7);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
