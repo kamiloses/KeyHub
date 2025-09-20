@@ -1,4 +1,3 @@
-using AutoMapper;
 using KeyHub.Market.data;
 using KeyHub.Market.Mappers;
 using KeyHub.Market.Models.Dto;
@@ -16,8 +15,11 @@ public class HomeService : IHomeService
     }
 
 
-    public async Task<List<GameDto>>  GetTopDiscountedGamesAsync(int count)
-    { 
+    public async Task<List<GameDto>> GetTopDiscountedGamesAsync(int count)
+    {
+        if (count <= 0) return new List<GameDto>();
+
+
         var games = await _dbContext.Games
             .AsNoTracking()
             .OrderByDescending(g => g.Discount)
@@ -25,6 +27,5 @@ public class HomeService : IHomeService
             .ToListAsync();
 
         return GameMapper.ToDtoList(games);
-
     }
 }

@@ -1,7 +1,6 @@
 using KeyHub.Market.Enums;
 using KeyHub.Market.Models.Dto;
 using KeyHub.Market.Services;
-using KeyHub.Market.Services.impl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
@@ -14,8 +13,8 @@ public class HomeController : Controller
     {
         _homeService = homeService; 
     } 
-// todo exception rzycaby w razie wyjatku oraz cache
-    [HttpGet("/")]
+
+    [HttpGet("/home")]
     public async Task<IActionResult> Home()
     {
         

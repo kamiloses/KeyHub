@@ -11,6 +11,7 @@
     <div class="recommended-games">
         @foreach (var game in Model)
         {
+            // todo ogarnij ViewDataDictionary 
             @await Html.PartialAsync("_GameOverview", game,  new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
         }
         
