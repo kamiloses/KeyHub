@@ -1,0 +1,96 @@
+@model KeyHub.Market.Models.ViewModels.HistoryViewModel
+
+@{
+
+Layout = "_HomeLayout";
+    
+ViewData["Title"] = "Purchase History";
+}
+<h2>Purchase History</h2>
+@if (!Model.Any())
+{
+<p>You haven't bought any games yet.</p>
+}
+else
+{
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Game</th>
+        <th>Genre</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th>Date Purchased</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var purchase in Model)
+    {
+    <tr>
+        <td>@purchase.Game.Title</td>
+        <td>@purchase.Game.Genre</td>
+        <td>@purchase.Game.Platform</td>
+        <td>@purchase.PurchasePrice.ToString("C")</td>
+        <td>@purchase.PurchaseDate.ToString("yyyy-MM-dd HH:mm")</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+<style>
+
+    td{
+        color: white;
+    }
+    tr{
+        color: white;
+    }
+    
+    
+    .table-responsive {
+        margin: 20px 0;
+        overflow-x: auto;
+    }
+
+    /* Tabela */
+    .table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Nagłówek */
+    .table thead tr {
+        background-color: white; /* ciemny nagłówek */
+        color: #fff;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    /* Wiersze */
+    .table tbody tr {
+        transition: background-color 0.3s, transform 0.1s;
+        cursor: default;
+    }
+
+    /* Efekt hover na wierszu */
+    .table tbody tr:hover {
+        background-color: #f0f8ff; /* lekki niebieski */
+        transform: scale(1.01);
+    }
+
+    /* Komórki */
+    .table td, .table th {
+        padding: 12px 15px;
+    }
+
+   
+
+    /* Opcjonalnie: wyróżnienie pierwszej kolumny */
+    .table tbody td:first-child {
+        font-weight: 600;
+    }
+
+
+</style>

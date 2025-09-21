@@ -1,37 +1,35 @@
-using KeyHub.Market.data;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.ViewModels;
+using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace KeyHub.Market.Controllers;
 
 public class HistoryController : Controller
 {
-    private readonly ApplicationDbContext _context;
-    private readonly UserManager<User> _userManager;
 
-    public HistoryController(ApplicationDbContext context, UserManager<User> userManager)
+    private readonly IHistoryService _historyService;
+    private readonly UserManager<User> _userManager;
+    private const int DefaultPageSize = 10;
+    public HistoryController(IHistoryService historyService, UserManager<User> userManager)
     {
-        _context = context;
+        _historyService = historyService;
         _userManager = userManager;
     }
 
-    // GET: /History
     [HttpGet("/history")]
-    public async Task<IActionResult> Purchases()
+    // [Authorize] todo 
+    public async Task<IActionResult> History()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-            return Challenge(); // jeśli niezalogowany
-
-        var purchases = await _context.Purchases
-            .Where(p => p.UserId == user.Id)
-            .Include(p => p.Game)
-            .OrderByDescending(p => p.PurchaseDate)
-            .ToListAsync();
-
-        return View(purchases);
+        var purchases = await _historyService.GetUserPurchaseHistoryAsync(user!.Id);
+        int totalCount = purchases.Count; 
+        int totalPages = (int)Math.Ceiling(totalCount / (double)DefaultPageSize);
+        
+       HistoryViewModel historyViewModel= new HistoryViewModel() { Purchases = purchases, TotalPages = totalPages };
+        
+        return View(historyViewModel);
     }
 }

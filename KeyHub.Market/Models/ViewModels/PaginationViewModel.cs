@@ -7,7 +7,7 @@ public class PaginationViewModel
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
      
-    public GameSort CurrentSort { get; set; } = GameSort.ByName;
+    public GameSort? CurrentSort { get; set; }
     
     public decimal? MinPrice { get; set; }
     public decimal? MaxPrice { get; set; }

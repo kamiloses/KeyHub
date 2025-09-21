@@ -14,7 +14,7 @@ public class HomeController : Controller
         _homeService = homeService; 
     } 
 
-    [HttpGet("/home")]
+    [HttpGet("/")]
     public async Task<IActionResult> Home()
     {
         
