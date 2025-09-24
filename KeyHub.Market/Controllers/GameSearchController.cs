@@ -21,7 +21,7 @@ public class GameSearchController : Controller
         public async Task<IActionResult> SearchedGames([FromQuery] GameSearchViewModel model)
         {
             
-            ViewData["Context"] = ViewContextType.Search;
+            ViewData["Context"] = ViewContextTypeModel.Search;
             var (games, totalGames) =await _gameSearchService.GetSearchedGames(
                 model.Title, model.CurrentSort, model.SelectedPlatforms,
                 model.SelectedGenres, model.MinPrice, model.MaxPrice,

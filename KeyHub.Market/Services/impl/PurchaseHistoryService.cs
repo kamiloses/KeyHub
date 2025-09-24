@@ -29,7 +29,7 @@
             
             string cacheKey = $"PurchaseHistory:{userId}:Page:{page}:Size:{pageSize}";
 
-
+ // todo odkomentuj 
             (List<PurchaseHistoryDto>, int)? cachedPurchasesData= await GetCacheUserPurchaseHistoryAsync(cacheKey);
              // if (cachedPurchasesData != null)
              // {
@@ -108,7 +108,7 @@
                 var cachedData = await _cache.GetAsync(cacheKey);
                 if (cachedData != null)
                 {
-                    return JsonSerializer.Deserialize<(List<PurchaseHistoryDto>, int)>(cachedData)!;
+                    return JsonSerializer.Deserialize<(List<PurchaseHistoryDto>, int)>(cachedData);
                 }
             }
             catch (Exception e)

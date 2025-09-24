@@ -1,4 +1,5 @@
 @using KeyHub.Market.Enums
+@using KeyHub.Market.Models.ViewModels
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="~/css/home/home.css" />
     <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/shared/footer.css" />
-    <link rel="stylesheet" href="~/css/searchedGames.css" />
+    <link rel="stylesheet" href="~/css/gameSearch/searchedGames.css" />
+    <link rel="stylesheet" href="~/css/purchaseHistory/purchaseHistory.css" />
     <link rel="stylesheet" href="~/css/shared/pagination.css" />
     <link rel="stylesheet" href="~/css/shared/gameOverview.css" />
     <link rel="stylesheet" href="~/css/auth/login.css" />
@@ -19,8 +21,8 @@
 
 @await Html.PartialAsync("_Header")  
 
-<main class="@(ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextType.Home) ? "home" : 
-             ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextType.Search) ? "search" : "")">
+<main class="@(ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextTypeModel.Home) ? "home" : 
+             ViewData["Context"] != null && ViewData["Context"]!.Equals(ViewContextTypeModel.Search) ? "search" : "")">
     @RenderBody()
 </main>
 
