@@ -1,11 +1,10 @@
-using System.Globalization;
-using KeyHub.Market.Models;
+using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KeyHub.Market.Controllers;
-
+[Authorize(Roles = "Admin")]
 public class GameManagerController : Controller
 {
 
@@ -17,10 +16,10 @@ public class GameManagerController : Controller
     }
 
     [HttpPost("/AddGame")]
-    public async Task<IActionResult> AddGame(string title, Genre genre, decimal price, Platform platform, int stock, IFormFile imageFile, int discount = 0)
+    public async Task<IActionResult> AddGame(GameManagerViewModel game)
     {
-             await _gameManagerService.AddGame(title, genre, price, platform, stock, imageFile, discount);
-            return RedirectToAction("Home", "Home"); 
+             await _gameManagerService.AddGame(game.Title, game.Genre, game.Price, game.Platform, game.Stock, game.ImageFile, game.Discount);
+            return RedirectToAction("SearchedGames", "GameSearch"); 
         }
     
     

@@ -33,9 +33,16 @@ public async Task<Game> AddGame(string title, Genre genre, decimal price, Platfo
         ImageUrl = imageFileName,
         Stock = stock
     };
-
-    await _appDbContext.AddAsync(game);
-    await _appDbContext.SaveChangesAsync();
+    try
+    {
+        await _appDbContext.AddAsync(game);
+        await _appDbContext.SaveChangesAsync();
+    }
+    catch (Exception e)
+    {
+        throw new DatabaseSavingException("There was a problem saving the game", e);
+    }
+    
 
     return game;
 }
