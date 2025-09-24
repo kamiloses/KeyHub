@@ -16,4 +16,6 @@ public class PaginationViewModel
     public Platform[]? SelectedPlatforms { get; set; }
     public Genre[]? SelectedGenres { get; set; }
     
+    public Context context { get; set; }
+    
 }

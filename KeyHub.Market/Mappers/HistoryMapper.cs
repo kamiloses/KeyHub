@@ -6,9 +6,9 @@ namespace KeyHub.Market.Mappers;
 
 public class HistoryMapper
 {
-    public static HistoryDto MapToHistoryDto(Purchase purchase)
+    public static PurchaseHistoryDto MapToHistoryDto(Purchase purchase)
     {
-        return new HistoryDto
+        return new PurchaseHistoryDto
         {
             Id = purchase.Id,
             UserId = purchase.UserId,

@@ -1,6 +1,6 @@
 namespace KeyHub.Market.Models.Dto;
 
-public class HistoryDto
+public class PurchaseHistoryDto
 {
     public int Id { get; set; }
     public string UserId { get; set; }

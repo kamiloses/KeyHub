@@ -5,6 +5,7 @@
 @{
     Layout = "_HomeLayout";
     var pageContext = ViewContextType.Search;
+    Context context = KeyHub.Market.Enums.Context.SearchGames;
 }
 
 <div class="search-page-container">
@@ -58,5 +59,5 @@
     </main>
 </div>
 
- @await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage,TotalPages = Model.TotalPages,CurrentSort = Model.CurrentSort,MinPrice = Model.MinPrice,MaxPrice = Model.MaxPrice,SelectedGenres  = Model.SelectedGenres,SelectedPlatforms = Model.SelectedPlatforms,}) 
+ @await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage,TotalPages = Model.TotalPages,CurrentSort = Model.CurrentSort,MinPrice = Model.MinPrice,MaxPrice = Model.MaxPrice,SelectedGenres  = Model.SelectedGenres,SelectedPlatforms = Model.SelectedPlatforms,context = context}) 
 

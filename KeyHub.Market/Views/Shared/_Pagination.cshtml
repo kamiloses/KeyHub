@@ -1,5 +1,18 @@
-@model KeyHub.Market.Models.ViewModels.PaginationViewModel
-{
+model KeyHub.Market.Models.ViewModels.PaginationViewModel
+@{
+    string actionName;
+    string controllerName;
+
+    if (Model.context.Equals(KeyHub.Market.Enums.Context.PurchaseHistory))
+    {
+        actionName = "History";
+        controllerName = "PurchaseHistory"; 
+    }
+    else
+    {
+        actionName = "SearchedGames";
+        controllerName = "GameSearch";
+    }
 }
 
 <div class="pagination">
@@ -13,16 +26,15 @@
             }
             else
             {
-                <a href="@Url.Action("SearchedGames", new {
-                             page = i,
-                             sortBy = Model.CurrentSort,
-                             platforms = Model.SelectedPlatforms,
-                             genres = Model.SelectedGenres,
-                             minPrice = Model.MinPrice,
-                             maxPrice = Model.MaxPrice
+                <a href="@Url.Action(actionName, controllerName, new {
+                             CurrentPage = i,
+                             CurrentSort = Model.CurrentSort,
+                             SelectedPlatforms = Model.SelectedPlatforms,
+                             SelectedGenres = Model.SelectedGenres,
+                             MinPrice = Model.MinPrice,
+                             MaxPrice = Model.MaxPrice
                          })">@i</a>
             }
         }
     }
 </div>
-@* //todo ogarnij  bo bład jakis*@

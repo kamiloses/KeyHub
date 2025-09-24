@@ -1,13 +1,15 @@
+@using KeyHub.Market.Enums
+@using KeyHub.Market.Models.ViewModels
 @model KeyHub.Market.Models.ViewModels.HistoryViewModel
 
 @{
 
 Layout = "_HomeLayout";
-    
+Context context = KeyHub.Market.Enums.Context.PurchaseHistory;
 ViewData["Title"] = "Purchase History";
 }
 <h2>Purchase History</h2>
-@if (!Model.Any())
+@if (!Model.Purchases.Any())
 {
 <p>You haven't bought any games yet.</p>
 }
@@ -24,7 +26,7 @@ else
     </tr>
     </thead>
     <tbody>
-    @foreach (var purchase in Model)
+    @foreach (var purchase in Model.Purchases)
     {
     <tr>
         <td>@purchase.Game.Title</td>
@@ -37,6 +39,10 @@ else
     </tbody>
 </table>
 }
+
+@await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage,TotalPages = Model.TotalPages,context =context })
+
+
 <style>
 
     td{
