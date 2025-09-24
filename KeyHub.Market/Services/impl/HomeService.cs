@@ -37,7 +37,7 @@ public class HomeService : IHomeService
         catch (Exception e)
         {
             //todo DatabaseFetchingException
-            throw new Exception("Error fetching top discounted games in HomeService", e);
+            throw new Exception("Error fetching top discounted games", e);
         }
        
     }

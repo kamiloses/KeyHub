@@ -30,7 +30,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-
+// builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
