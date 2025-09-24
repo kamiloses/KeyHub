@@ -1,5 +1,4 @@
 using KeyHub.Market.Models;
-using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,18 +23,8 @@ public class PurchaseHistoryController : Controller
     {
 
         var user = await _userManager.GetUserAsync(User);
-
-        var (purchases, totalCount) = await _purchaseHistoryService
-            .GetUserPurchaseHistoryAsync(user!.Id, currentPage, DefaultPageSize);
-
-        int totalPages = (int)Math.Ceiling(totalCount / (double)DefaultPageSize);
-
-        var historyViewModel = new HistoryViewModel()
-        {
-            Purchases = purchases,
-            TotalPages = totalPages,
-            CurrentPage = currentPage
-        };
+        var historyViewModel = await _purchaseHistoryService.GetHistoryViewModelAsync(
+            user!.Id, currentPage, DefaultPageSize);
 
         return View(historyViewModel);
     }

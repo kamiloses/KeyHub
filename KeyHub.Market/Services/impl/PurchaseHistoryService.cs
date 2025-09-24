@@ -1,6 +1,5 @@
     using KeyHub.Market.data;
     using KeyHub.Market.Mappers;
-    using KeyHub.Market.Models;
     using KeyHub.Market.Models.Dto;
     using KeyHub.Market.Models.ViewModels;
     using Microsoft.EntityFrameworkCore;
@@ -16,20 +15,21 @@
             _context = context;
         }
         
-        public async Task<(List<PurchaseHistoryDto> Purchases, int TotalPages)> GetUserPurchaseHistoryAsync(string userId, int pageNumber, int pageSize)
+        public async Task<(List<PurchaseHistoryDto> Purchases, int TotalPages)> GetUserPurchaseHistoryAsync(string userId, int page, int pageSize)
         {
             if (string.IsNullOrEmpty(userId))
                 return (new List<PurchaseHistoryDto>(), 0);
 
+            
             var query = _context.Purchases
-                .Where(p => p.UserId == userId)
-                .Include(p => p.Game)
-                .OrderByDescending(p => p.PurchaseDate);
+                .Where(purchase => purchase.UserId == userId)
+                .Include(purchase => purchase.Game)
+                .OrderByDescending(purchase => purchase.PurchaseDate);
 
             int totalCount = await query.CountAsync();
 
             var purchasesFromDb = await query
-                .Skip((pageNumber - 1) * pageSize)
+                .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
@@ -39,4 +39,19 @@
 
             return (purchases, totalCount);
         }
+        
+        public async Task<HistoryViewModel> GetHistoryViewModelAsync(string userId, int page, int pageSize)
+        {
+            var (purchases, totalCount) = await GetUserPurchaseHistoryAsync(userId, page, pageSize);
+
+            int totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+            return new HistoryViewModel
+            {
+                Purchases = purchases,
+                TotalPages = totalPages,
+                CurrentPage = page
+            };
+        }
+        
     }

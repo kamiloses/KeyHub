@@ -1,5 +1,4 @@
 namespace KeyHub.Market.Models.Dto;
-#pragma warning disable CS8618
 
 public class GameDto
 {
@@ -12,6 +11,6 @@ public class GameDto
     public string ImageUrl { get; set; }
     public Platform Platform { get; set; }
     public int Stock { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
 
 }
