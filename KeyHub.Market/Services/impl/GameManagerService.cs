@@ -1,7 +1,6 @@
 using KeyHub.Market.data;
+using KeyHub.Market.Exceptions;
 using KeyHub.Market.Models;
-using KeyHub.Market.Models.Dto;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace KeyHub.Market.Services.impl;
 
@@ -40,7 +39,7 @@ public async Task<Game> AddGame(string title, Genre genre, decimal price, Platfo
     }
     catch (Exception e)
     {
-        throw new DatabaseSavingException("There was a problem saving the game", e);
+        throw new DatabaseException("Error while adding game", e);
     }
     
 

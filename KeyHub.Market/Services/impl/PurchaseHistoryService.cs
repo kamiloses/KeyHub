@@ -1,5 +1,6 @@
     using System.Text.Json;
     using KeyHub.Market.data;
+    using KeyHub.Market.Exceptions;
     using KeyHub.Market.Mappers;
     using KeyHub.Market.Models.Dto;
     using KeyHub.Market.Models.ViewModels;
@@ -31,10 +32,14 @@
 
  // todo odkomentuj 
             (List<PurchaseHistoryDto>, int)? cachedPurchasesData= await GetCacheUserPurchaseHistoryAsync(cacheKey);
-             // if (cachedPurchasesData != null)
-             // {
-             //     return   cachedPurchasesData.Value;
-             // }
+             if (cachedPurchasesData != null)
+             {
+                 Console.BackgroundColor= ConsoleColor.Red;
+                 Console.WriteLine(cachedPurchasesData);
+                 Console.WriteLine("VALUE "+cachedPurchasesData.Value);
+                 
+                 return   cachedPurchasesData.Value;
+             }
              List<PurchaseHistoryDto> purchases;
              int totalCount;
 
@@ -55,7 +60,7 @@
              }
              catch (Exception e)
              {
-                 throw new Exception("Failed to get purchase history", e);
+                 throw new DatabaseException("Failed to get purchase history", e);
              }
 
             

@@ -11,7 +11,7 @@ public class PurchaseHistoryController : Controller
 {
     private readonly IPurchaseHistoryService _purchaseHistoryService;
     private readonly UserManager<User> _userManager;
-    private const int DefaultPageSize = 5;
+    private const int DefaultPageSize = 10;
 
     public PurchaseHistoryController(IPurchaseHistoryService purchaseHistoryService, UserManager<User> userManager)
     {

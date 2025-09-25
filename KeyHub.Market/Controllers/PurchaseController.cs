@@ -1,24 +1,27 @@
 using KeyHub.Market.data;
+using KeyHub.Market.Middlewares;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace KeyHub.Market.Controllers;
 
     public class PurchaseController : Controller
-    {
+    {   private readonly IHubContext<PurchaseNotificationHub> _hubContext;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
 
-        public PurchaseController(ApplicationDbContext context, UserManager<User> userManager)
+        public PurchaseController(ApplicationDbContext context, UserManager<User> userManager, IHubContext<PurchaseNotificationHub> hubContext)
         {
             _context = context;
             _userManager = userManager;
+            _hubContext = hubContext;
         }
 
-        
-        
+
         [HttpGet("Game/{id}")]
         public async Task<IActionResult> Buy(int id)
         {
@@ -74,6 +77,17 @@ namespace KeyHub.Market.Controllers;
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
+
+
+
+          PurchaseNotificationViewModel purchaseNotification=  new PurchaseNotificationViewModel()
+            {    Username = user.UserName!,
+                Title = game.Title, Price = game.Price, Discount = game.Discount, Platform = game.Platform,
+                ImageUrl = game.ImageUrl
+            };
+            
+            await _hubContext.Clients.All.SendAsync("ReceiveNotifications", purchaseNotification);
+            
             TempData["Success"] = $"You purchased {game.Title}!";//todo jako cookie
             return RedirectToAction("Home", "Home");
         }
@@ -94,5 +108,5 @@ namespace KeyHub.Market.Controllers;
             return RedirectToAction("Home", "Home");
 
         }
-        
+ 
     }

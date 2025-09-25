@@ -1,5 +1,6 @@
 using KeyHub.Market.data;
 using KeyHub.Market.Enums;
+using KeyHub.Market.Exceptions;
 using KeyHub.Market.Mappers;
 using KeyHub.Market.Models;
 using KeyHub.Market.Models.Dto;
@@ -45,8 +46,7 @@ public class GameSearchService : IGameSearchService
         }
         catch (Exception e)
         {
-            //todo DatabaseFetchingException oraz 
-            throw new Exception("Error fetching searched games", e); 
+             throw new DatabaseException("Error while fetching searched games", e); 
         }
     }
 

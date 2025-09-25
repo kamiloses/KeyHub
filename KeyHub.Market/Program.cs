@@ -1,4 +1,5 @@
 using KeyHub.Market.data;
+using KeyHub.Market.Middlewares;
 using KeyHub.Market.Models;
 using KeyHub.Market.Services;
 using KeyHub.Market.Services.impl;
@@ -31,6 +32,7 @@ builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.Requir
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
@@ -42,10 +44,11 @@ builder.Services.AddScoped<IPurchaseHistoryService,PurchaseHistoryService>();
 
 
 var app = builder.Build();
+
 app.UseStaticFiles();
 app.UseRouting();
 app.MapControllers(); 
-
+app.MapHub<PurchaseNotificationHub>("/purchaseNotificationHub");
 
 using (var scope = app.Services.CreateScope())
 {

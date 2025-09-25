@@ -1,4 +1,5 @@
 using KeyHub.Market.data;
+using KeyHub.Market.Exceptions;
 using KeyHub.Market.Mappers;
 using KeyHub.Market.Models.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,6 @@ public class HomeService : IHomeService
     private readonly ApplicationDbContext _dbContext;
     private readonly IDistributedCache _cache;
     private readonly ILogger<HomeService> _logger;
-// todo zarejestruj cache w DI    
 
     public HomeService(ApplicationDbContext dbContext, IDistributedCache cache, ILogger<HomeService> logger)
     {
@@ -36,8 +36,7 @@ public class HomeService : IHomeService
         }
         catch (Exception e)
         {
-            //todo DatabaseFetchingException
-            throw new Exception("Error fetching top discounted games", e);
+            throw new DatabaseException("Error while fetching top discounted games", e);
         }
        
     }
