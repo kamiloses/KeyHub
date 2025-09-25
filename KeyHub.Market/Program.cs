@@ -39,7 +39,6 @@ builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 builder.Services.AddScoped<IGameManagerService, GameManagerService>();
 builder.Services.AddScoped<ISortingService, SortingService>();
 builder.Services.AddScoped<IFilteringService,FilteringService>();
-builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IPurchaseHistoryService,PurchaseHistoryService>();
 
 

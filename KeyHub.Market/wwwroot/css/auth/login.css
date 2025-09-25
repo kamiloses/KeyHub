@@ -1,24 +1,26 @@
-.account-page, .register-page {
+.account-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 60vh;
+    background: linear-gradient(135deg, #14142b, #1e1e2f);
+    font-family: Arial, sans-serif;
 }
 
-.account-box, .register-box {
-    background-color: #1f4971;
+.account-box {
+    background-color: #2e2e4a;
     padding: 2rem 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    width: 380px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    width: 400px;
     text-align: center;
-    color: #fff;
+    color: #ffffff;
 }
 
-.account-box h2, .register-box h2 {
+.account-box h2 {
     margin-bottom: 1.5rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    color: #fff;
 }
 
 .text-danger {
@@ -29,73 +31,61 @@
     text-align: left;
 }
 
-.account-box .form-group,
-.register-box .form-group {
+.account-box .form-group {
     margin-bottom: 1rem;
 }
 
-.account-box input,
-.register-box input {
+.account-box input {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid #3b82f6;
+    padding: 0.7rem 1rem;
+    border: none;
     border-radius: 8px;
     font-size: 0.95rem;
-    color: #ffffff;
-    background-color: #2563a9;
+    color: #fff;
+    background-color: #1e1e2f;
     outline: none;
     transition: border 0.2s, box-shadow 0.2s;
 }
 
-.account-box input:focus,
-.register-box input:focus {
-    border-color: #60a5fa;
-    box-shadow: 0 0 5px rgba(96,165,250,0.5);
-    background-color: #2563a9;
-    color: #ffffff;
+.account-box input:focus {
+    border: 1px solid #3a3a5a;
+    box-shadow: 0 0 6px rgba(0,120,212,0.4);
 }
 
-.account-box .btn, .register-box .btn {
+.account-box .btn {
     width: 100%;
     padding: 0.75rem;
     margin-top: 0.5rem;
     border: none;
     border-radius: 8px;
-    background-color: #3b82f6;
+    background-color: #28a745;
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s;
 }
 
-.account-box .btn:hover, .register-box .btn:hover {
-    background-color: #2563a9;
+.account-box .btn:hover {
+    background-color: #218838;
 }
 
-.account-footer, .register-footer {
+.account-footer, .account-box .text-center.account-register-text {
     margin-top: 1.2rem;
     font-size: 0.875rem;
-    color: #cbd5e1;
+    color: #bbb;
 }
 
-.account-box a, .register-box a {
-    color: navajowhite ;
+.account-box a {
+    color: #4aa3ff;
     text-decoration: none;
 }
 
-.account-box a:hover, .register-box a:hover,
-.account-box a:focus, .register-box a:focus {
-    color:  navajowhite ;
+.account-box a:hover {
     text-decoration: underline;
 }
 
 .form-check-label {
     color: #ffffff;
     user-select: none;
-}
-
-.account-box .text-center.account-register-text,
-.register-box .text-center.account-register-text {
-    margin-top: 0.75rem;
 }

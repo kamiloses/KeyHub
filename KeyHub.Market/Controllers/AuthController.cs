@@ -1,25 +1,19 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
 using KeyHub.Market.Models;
 using KeyHub.Market.Models.ViewModels;
-using KeyHub.Market.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace KeyHub.Market.Controllers;
 
 public class AuthController : Controller
 {
-    private readonly IAuthService _authService;
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
 
 
-    public AuthController(IAuthService authService, SignInManager<User> signInManager, UserManager<User> userManager)
+    public AuthController(SignInManager<User> signInManager, UserManager<User> userManager)
     {
-        _authService = authService;
         _signInManager = signInManager;
         _userManager = userManager;
     }
@@ -32,8 +26,7 @@ public class AuthController : Controller
 
 
     [HttpPost("/login")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
     {
         if (!ModelState.IsValid)
         {
@@ -45,7 +38,7 @@ public class AuthController : Controller
             model.Email,
             model.Password,
             model.RememberMe,
-            lockoutOnFailure: false 
+            lockoutOnFailure: false
         );
 
         if (result.Succeeded)
@@ -68,19 +61,15 @@ public class AuthController : Controller
         return View(model);
     }
 
+
+    [Authorize]
     [HttpPost("/logout")]
     public async Task<IActionResult> Logout()
     {
-       
         await _signInManager.SignOutAsync();
         return RedirectToAction("Home", "Home");
     }
-    
-    
-    
-    
-    
-    
+
 
     [HttpGet("/register")]
     public IActionResult Register()
@@ -110,7 +99,14 @@ public class AuthController : Controller
 
         foreach (var error in result.Errors)
         {
-            ModelState.AddModelError(string.Empty, error.Description);
+            if (error.Description.Contains("Email"))
+            {
+                ModelState.AddModelError("Email", error.Description);
+            }
+            else
+            {
+                ModelState.AddModelError("Password", error.Description);
+            }
         }
 
         return View(model);
