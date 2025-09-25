@@ -4,10 +4,19 @@
     color: #fff;
     padding: 30px 20px;
     font-family: Arial, sans-serif;
-   width: 100%;
+    width: 100%;
     bottom: 0;
 }
 
+body.Search .site-footer {
+    position: relative;
+    margin-top: 50px;
+    background-color: #1e1e2f;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 30px 20px;
+    width: 100%;
+}
 .footer-container {
     display: flex;
     justify-content: space-between;

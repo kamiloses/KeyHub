@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
 
-// [Authorize]
+ [Authorize]
 public class PurchaseHistoryController : Controller
 {
     private readonly IPurchaseHistoryService _purchaseHistoryService;

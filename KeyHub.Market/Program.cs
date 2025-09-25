@@ -47,8 +47,11 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();  
+app.UseAuthorization();
 app.MapControllers(); 
 app.MapHub<PurchaseNotificationHub>("/purchaseNotificationHub");
+
 
 using (var scope = app.Services.CreateScope())
 {

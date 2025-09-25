@@ -1,5 +1,6 @@
-@using KeyHub.Market.Enums
 @using KeyHub.Market.Models.ViewModels
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +13,12 @@
     <link rel="stylesheet" href="~/css/purchaseHistory/purchaseHistory.css" />
     <link rel="stylesheet" href="~/css/shared/pagination.css" />
     <link rel="stylesheet" href="~/css/shared/gameOverview.css" />
+    <link rel="stylesheet" href="~/css/shared/addGame.css" />
     <link rel="stylesheet" href="~/css/auth/login.css" />
     <link rel="stylesheet" href="~/css/auth/register.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="@(ViewData["Context"]?.ToString())">
 @await RenderSectionAsync("Scripts", required: false)
 
 @await Html.PartialAsync("_Header")  
@@ -27,7 +29,7 @@
 </main>
 
 @await Html.PartialAsync("_Footer")
-
+a
 
 </body>
 <style>
