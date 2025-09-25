@@ -1,52 +1,60 @@
-td{
-    color: white;
-}
-tr{
-    color: white;
-}
-
-
-.table-responsive {
-    margin: 20px 0;
-    overflow-x: auto;
-}
-
-/* Tabela */
 .table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1b2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Nagłówek */
 .table thead tr {
-    background-color: white; /* ciemny nagłówek */
-    color: #fff;
+    background: linear-gradient(90deg, #1b3a57, #12324a);
+    color: #ffffff;
     text-align: left;
-    font-weight: 600;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* Wiersze */
+.table th {
+    padding: 14px 20px;
+    border-bottom: 2px solid #0a2239;
+}
+
 .table tbody tr {
-    transition: background-color 0.3s, transform 0.1s;
-    cursor: default;
+    background-color: #142d46;
+    color: #cfd8dc; 
+    transition: all 0.3s ease;
 }
 
-/* Efekt hover na wierszu */
 .table tbody tr:hover {
-    background-color: #f0f8ff; /* lekki niebieski */
+    background-color: #1f4971; 
     transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Komórki */
-.table td, .table th {
-    padding: 12px 15px;
+.table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #0a2239;
 }
 
-
-
-/* Opcjonalnie: wyróżnienie pierwszej kolumny */
 .table tbody td:first-child {
     font-weight: 600;
+    color: #ffffff;
+}
+
+tr, td, th {
+    color: #e0e0e0;
+}
+
+h2 {
+    color: #e1f5fe;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center; 
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4); 
 }
