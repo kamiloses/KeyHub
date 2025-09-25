@@ -8,7 +8,7 @@ namespace KeyHub.Market.Services.impl;
 
 public class AuthService : IAuthService
 {
-
+// todo //todo ogarnij turtle
     private readonly UserManager<User> _userManager;
 
     public AuthService(UserManager<User> userManager)

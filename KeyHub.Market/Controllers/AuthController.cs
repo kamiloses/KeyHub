@@ -62,14 +62,13 @@ public class AuthController : Controller
         }
         else
         {
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError("Password", "Invalid login attempt.");
         }
 
         return View(model);
     }
 
     [HttpPost("/logout")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
     {
        
@@ -90,7 +89,6 @@ public class AuthController : Controller
     }
 
     [HttpPost("/register")]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
         if (!ModelState.IsValid)

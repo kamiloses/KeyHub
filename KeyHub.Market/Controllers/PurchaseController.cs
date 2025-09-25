@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
 namespace KeyHub.Market.Controllers;
-
+   [Authorize]
     public class PurchaseController : Controller
     {   private readonly IHubContext<PurchaseNotificationHub> _hubContext;
         private readonly ApplicationDbContext _context;
@@ -21,7 +21,9 @@ namespace KeyHub.Market.Controllers;
             _hubContext = hubContext;
         }
 
-
+        
+        
+        
         [HttpGet("Game/{id}")]
         public async Task<IActionResult> Buy(int id)
         {
@@ -93,20 +95,44 @@ namespace KeyHub.Market.Controllers;
         }
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         [HttpPost("/addMoney")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMoney(decimal amount)
         {
             
-            if(amount <= 0) return BadRequest("Amount must be greater than 0");
             var user = await _userManager.GetUserAsync(User);
-            if(user == null) return Unauthorized();
 
-            user.Balance += amount;
+            user!.Balance += amount;
             await _userManager.UpdateAsync(user);
 
-            return RedirectToAction("Home", "Home");
+            return Redirect(Request.Headers["Referer"].ToString());
+        
 
         }
+        
+    
  
     }
