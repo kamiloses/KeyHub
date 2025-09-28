@@ -1,7 +1,5 @@
-using KeyHub.Market.data;
 using KeyHub.Market.Middlewares;
 using KeyHub.Market.Models;
-using KeyHub.Market.Models.ViewModels;
 using KeyHub.Market.Services.impl;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,12 +24,11 @@ namespace KeyHub.Market.Controllers;
         [HttpGet("Game/{id}")]
         public async Task<IActionResult> GameDetails(int id)
         {
-            var game = await _context.Games.FindAsync(id);
+           Game? game=  await _purchaseService.GetGameByIdAsync(id);
            
             return View(game);
         }
 
-        // POST: /Purchase/Buy/5
         [HttpPost("Game/{id}")]
         [Authorize]
         public async Task<IActionResult> BuyGame(int id)
@@ -44,12 +41,12 @@ namespace KeyHub.Market.Controllers;
                 await _purchaseService.BuyGameAsync(id, user);
                 TempData["Success"] = "Purchase completed successfully!";
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
                 TempData["Error"] = ex.Message;
             }
             
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("GameDetails", "Purchase", new { id = id });
         }
         
         

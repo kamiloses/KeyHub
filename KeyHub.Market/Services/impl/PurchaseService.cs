@@ -1,4 +1,5 @@
 using KeyHub.Market.data;
+using KeyHub.Market.Exceptions;
 using KeyHub.Market.Models;
 using Microsoft.AspNetCore.Identity;
 
@@ -54,4 +55,24 @@ public class PurchaseService : IPurchaseService
             throw; 
         }
     }
+    
+    public async Task<Game> GetGameByIdAsync(int gameId)
+    {
+        try
+        {
+            var game = await _dbContext.Games.FindAsync(gameId);
+            if (game == null)
+            {
+                throw new DatabaseException($"Game with ID {gameId} not found in the database.");
+            }
+
+            return game;
+        }
+        catch (Exception e) when (!(e is DatabaseException))
+        {
+            throw new DatabaseException("There was a problem fetching the game from the database.", e);
+        }
+    }
+    
+    
 }
