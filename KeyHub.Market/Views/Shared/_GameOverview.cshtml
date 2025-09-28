@@ -3,13 +3,12 @@
 @{
     var finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
     var oldPrice = Math.Round(Model.Price, 2);
-    var isLowStock = Model.Stock <= 5; //todo ma być 0 potem
+    var isLowStock = Model.Stock <= 0; 
 }
 
 <a href="/game/@Model.Id" class="game-link">
     <div class="game-item @(isLowStock ? "low-stock" : "")">
-        <img src="/images/games/@Model.ImageUrl" alt="Image error" />
-        @* <img src="images/games/1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg" alt="Image error" />  *@
+        <img  src="/images/games/@Model.ImageUrl" alt="Image error" />
         <h3>@Model.Title</h3>
 
         <p class="info"><strong>Platform:</strong> @Model.Platform</p>
