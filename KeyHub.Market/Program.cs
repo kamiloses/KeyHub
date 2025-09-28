@@ -40,6 +40,8 @@ builder.Services.AddScoped<IGameManagerService, GameManagerService>();
 builder.Services.AddScoped<ISortingService, SortingService>();
 builder.Services.AddScoped<IFilteringService,FilteringService>();
 builder.Services.AddScoped<IPurchaseHistoryService,PurchaseHistoryService>();
+builder.Services.AddScoped<IPurchaseService,PurchaseService>();
+builder.Services.AddScoped<IWalletService,WalletService>();
 
 
 var app = builder.Build();

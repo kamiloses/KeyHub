@@ -11,7 +11,7 @@ public class AuthController : Controller
     private readonly SignInManager<User> _signInManager;
     private readonly UserManager<User> _userManager;
 
-
+// todo zmien nazwy class/id potem w view zeby nietarualnie nie wygladały
     public AuthController(SignInManager<User> signInManager, UserManager<User> userManager)
     {
         _signInManager = signInManager;
