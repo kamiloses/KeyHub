@@ -6,46 +6,27 @@ namespace KeyHub.Market.data
     {
         public static void Seed(ApplicationDbContext context)
         {
-            // context.Games.RemoveRange(context.Games);
-            // context.SaveChanges();
-            //
-            
-            
-            if (context.Games.Any())
-                return;
+            context.Games.RemoveRange(context.Games);
+            context.SaveChanges();
 
-            var games = new Game[100];
-
-            string[] titles = new string[]
-            {
-                "Grand Theft Auto V", "The Witcher 3", "Cyberpunk 2077", "Minecraft",
-                "Halo Infinite", "FIFA 23", "Call of Duty: Modern Warfare", "Assassin's Creed Valhalla",
-                "Red Dead Redemption 2", "Fortnite", "Overwatch", "Elden Ring", "Stardew Valley",
-                "Rocket League", "DOOM Eternal", "Resident Evil Village", "Hades", "Among Us",
-                "Animal Crossing", "Forza Horizon 5"
-            };
-
-           
-
-            Platform[] platforms = (Platform[])Enum.GetValues(typeof(Platform));
-            var genres = (Genre[])Enum.GetValues(typeof(Genre)); 
-            var random = new Random();
-            for (int i = 0; i < 100; i++)
-            {
-                games[i] = new Game
+            context.Games.AddRange(
+                new Game
                 {
-                    Title = titles[random.Next(titles.Length)] + $" #{i + 1}",
-                    Genre = genres[random.Next(genres.Length)],
-                    Price = Math.Round((decimal)(10 + random.NextDouble() * 50), 2), // 10-60$
-                    Discount = random.Next(5, 70),
-                    ImageUrl = "https://m.media-amazon.com/images/I/81W+fYqjU0L._AC_SX569_.jpg", // jedno zdjęcie dla wszystkich
-                    Platform = platforms[random.Next(platforms.Length)],
-                    Stock = random.Next(10, 101), // 10-100 sztuk
+                    Title = "Farming Simulator 25", Genre = Genre.Simulation, Price = 59.99m, Discount = 0,
+                    ImageUrl = "1e968ee4-6d5e-4ed7-bbf9-d6dbba642500.jpg", Platform = Platform.PSN, Stock = 50,
                     CreatedAt = DateTime.UtcNow
-                };
-            }
+                },
+                new Game
+                {
+                    Title = "Demon's Souls", Genre = Genre.Action, Price = 69.99m, Discount = 0,
+                    ImageUrl = "1ef59ac1-fb49-4f3d-9a80-a71287ee67af.jpg", Platform = Platform.PSN, Stock = 50,
+                    CreatedAt = DateTime.UtcNow
+                },
+                new Game { Title = "Bloodborne", Genre = Genre.Action, Price = 69.99m, Discount = 0, ImageUrl = "01d5c2ad-b9ae-465e-91de-653e47929102.jpg", Platform = Platform.PSN, Stock = 50, CreatedAt = DateTime.UtcNow },
+                new Game { Title = "Grand Theft Auto V", Genre = Genre.Action, Price = 59.99m, Discount = 0, ImageUrl = "2c4f730e-37b3-49dd-8eed-93b5991060fc.jpg", Platform = Platform.PSN, Stock = 50, CreatedAt = DateTime.UtcNow },
+                new Game { Title = "Minecraft", Genre = Genre.Action, Price = 49.99m, Discount = 0, ImageUrl = "03c5e356-5e9c-463a-9f53-a8ee9411ee4d.jpg", Platform = Platform.PSN, Stock = 50, CreatedAt = DateTime.UtcNow }
+                );
 
-            context.Games.AddRange(games);
             context.SaveChanges();
         }
     }

@@ -1,60 +1,46 @@
-@model KeyHub.Market.Models.Game
-@* todo niech footer nie wystepuje dopiero po scrollowaniu tylko odrazu jest widoczny *@
+@model KeyHub.Market.Models.ViewModels.GamePurchaseViewModel
+
 @{
-    Layout = "_HomeLayout";
     
-    ViewData["Title"] = "Buy Game";
-    decimal finalPrice = Math.Round(Model.Price * (1 - (Model.Discount) / 100m), 2);
-    var oldPrice = Math.Round(Model.Price, 2);
-}
-
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<User> _userManager
-
-@functions {
-    public async Task<decimal?> GetUserBalanceAsync()
-    {
-        
-        if (User.Identity != null && !User.Identity.IsAuthenticated)
-        {
-            return null;
-        }
-
-        var user = await _userManager.GetUserAsync(User);
-        return user!.Balance;
-    }
+    Layout = "_HomeLayout";
 }
 
 <div class="buy-game-page">
-
     <div class="game-header">
-        <h1>@Model.Title</h1>
+        <h1>@Model.Game.Title</h1>
         <p class="genre-platform">
-            <span>@Model.Genre</span> | <span>@Model.Platform</span>
+            <span>@Model.Game.Genre</span> | <span>@Model.Game.Platform</span>
         </p>
     </div>
 
     <div class="game-main">
         <div class="game-image">
-            <img src="@Model.ImageUrl" alt="@Model.Title" />
+            <img src="@Model.Game.ImageUrl" alt="@Model.Game.Title" />
         </div>
 
         <div class="game-info">
             <p class="price">
-                <span class="final-price">@($"{finalPrice} zł")</span>
-                @if (Model.Discount != 0)
+                <span class="final-price">@($"{Model.FinalPrice} zł")</span>
+                @if (Model.Game.Discount != 0)
                 {
-                    <span class="old-price">@($"{oldPrice} zł")</span>
-                    <span class="discount">-@Model.Discount%</span>
+                    <span class="old-price">@($"{Model.Game.Price} zł")</span>
+                    <span class="discount">-@Model.Game.Discount%</span>
                 }
             </p>
 
-            <p><strong>Stock:</strong> @Model.Stock</p>
-            @* todo niech nie bedzie mozna kupic jezeli nie jestem zalogowany oraz niech psize ze nie mam pieniedzy by kupic *@
-            <form asp-controller="Purchase" asp-action="BuyConfirmed" method="post">
-                <input type="hidden" name="id" value="@Model.Id" />
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn-buy" @((Model.Stock <= 0)||(await GetUserBalanceAsync()<finalPrice) ? "disabled" : "")>Buy Now</button>
+            <p><strong>Stock:</strong> @Model.Game.Stock</p>
+
+            <form asp-controller="Purchase" asp-action="BuyGame" method="post">
+                <input type="hidden" name="id" value="@Model.Game.Id" />
+                <button type="submit" class="btn-buy" @(Model.CanBuy ? "" : "disabled")>
+                    Buy Now
+                </button>
+                @if (!string.IsNullOrEmpty(Model.BuyErrorMessage))
+                {
+                    <p class="text-danger mt-2">@Model.BuyErrorMessage</p>
+                }
+                
+                
             </form>
 
             @if (TempData["Error"] != null)
@@ -68,117 +54,4 @@
             }
         </div>
     </div>
-
-   
 </div>
-
-<style>
-    .buy-game-page {
-        max-width: 900px;
-        margin: 40px auto;
-        font-family: Arial, sans-serif;
-        padding: 0 16px;
-        color: #2d2d2d;
-    }
-
-    .game-header h1 {
-        font-size: 30px;
-        margin-bottom: 8px;
-        color: #1a1a1a;
-    }
-
-    .genre-platform span {
-        margin-right: 10px;
-        color: #6c757d;
-        font-size: 16px;
-    }
-
-    .game-main {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        margin-top: 24px;
-        background: #f9f9f9;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-    .game-image img {
-        width: 100%;
-        max-width: 400px;
-        border-radius: 12px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    }
-
-    .game-info {
-        flex: 1;
-        min-width: 250px;
-    }
-
-    .price {
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        margin-bottom: 16px;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .final-price {
-        color: #2c7a7b;
-        font-size: 24px;
-    }
-
-    .old-price {
-        text-decoration: line-through;
-        color: #aaa;
-        font-size: 16px;
-    }
-
-    .discount {
-        background-color: #e3f8e3;
-        color: #2f8f2f;
-        padding: 4px 8px;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .btn-buy {
-        background-color: #4cafef;
-        color: #fff;
-        padding: 12px 28px;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.1s;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .btn-buy:hover {
-        background-color: #36a3e0;
-        transform: translateY(-2px);
-    }
-
-    .btn-buy:disabled {
-        background-color: #e0e0e0;
-        cursor: not-allowed;
-        box-shadow: none;
-    }
-
-    .text-danger {
-        color: #e63946;
-        margin-top: 12px;
-        font-weight: bold;
-    }
-
-    .text-success {
-        color: #2a9d8f;
-        margin-top: 12px;
-        font-weight: bold;
-    }
-
-
-</style>

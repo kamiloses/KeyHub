@@ -1,5 +1,7 @@
 using KeyHub.Market.Middlewares;
 using KeyHub.Market.Models;
+using KeyHub.Market.Models.ViewModels;
+using KeyHub.Market.Services;
 using KeyHub.Market.Services.impl;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,11 +11,11 @@ using Microsoft.AspNetCore.SignalR;
 namespace KeyHub.Market.Controllers;
     public class PurchaseController : Controller
     {   private readonly IHubContext<PurchaseNotificationHub> _hubContext;
-        private readonly PurchaseService _purchaseService;
+        private readonly IPurchaseService _purchaseService;
         private readonly UserManager<User> _userManager;
 
 
-        public PurchaseController(IHubContext<PurchaseNotificationHub> hubContext, PurchaseService purchaseService, UserManager<User> userManager)
+        public PurchaseController(IHubContext<PurchaseNotificationHub> hubContext, IPurchaseService purchaseService, UserManager<User> userManager)
         {
             _hubContext = hubContext;
             _purchaseService = purchaseService;
@@ -21,13 +23,38 @@ namespace KeyHub.Market.Controllers;
         }
 
 
-        [HttpGet("Game/{id}")]
-        public async Task<IActionResult> GameDetails(int id)
+        [HttpPost("/addMoney")]
+        public async Task<IActionResult> AddMoney(decimal amount)
         {
-           Game? game=  await _purchaseService.GetGameByIdAsync(id);
-           
-            return View(game);
+            
+            var user = await _userManager.GetUserAsync(User);
+
+            user!.Balance += amount;
+            await _userManager.UpdateAsync(user);
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        
+
         }
+
+        
+
+
+        [HttpGet("Game/{id}")]
+            public async Task<IActionResult> GameDetails(int id)
+            {
+                var game = await _purchaseService.GetGameByIdAsync(id);
+                var user = User.Identity?.IsAuthenticated == true ? await _userManager.GetUserAsync(User) : null;
+
+                var gamePurchaseViewModel = new GamePurchaseViewModel()
+                {
+                    Game = game,
+                    UserBalance = user?.Balance ?? 0
+                };
+
+                return View(gamePurchaseViewModel);
+            }
+           
 
         [HttpPost("Game/{id}")]
         [Authorize]
@@ -59,40 +86,6 @@ namespace KeyHub.Market.Controllers;
         //       };
         //       
         //       await _hubContext.Clients.All.SendAsync("ReceiveNotifications", purchaseNotification);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        [HttpPost("/addMoney")]
-        public async Task<IActionResult> AddMoney(decimal amount)
-        {
-            
-            var user = await _userManager.GetUserAsync(User);
-
-            user!.Balance += amount;
-            await _userManager.UpdateAsync(user);
-
-            return Redirect(Request.Headers["Referer"].ToString());
-        
-
-        }
         
     
  

@@ -1,21 +1,19 @@
 using KeyHub.Market.data;
 using KeyHub.Market.Exceptions;
 using KeyHub.Market.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace KeyHub.Market.Services.impl;
 
 public class PurchaseService : IPurchaseService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly Logger<PurchaseService> _logger;
+    private readonly ILogger<PurchaseService> _logger;
 
-    public PurchaseService(ApplicationDbContext dbContext, Logger<PurchaseService> logger)
+    public PurchaseService(ApplicationDbContext dbContext, ILogger<PurchaseService> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
     }
-
     public async Task BuyGameAsync(int gameId, User user)
     {
         try
@@ -68,7 +66,7 @@ public class PurchaseService : IPurchaseService
 
             return game;
         }
-        catch (Exception e) when (!(e is DatabaseException))
+        catch (Exception e) when (e is not DatabaseException)
         {
             throw new DatabaseException("There was a problem fetching the game from the database.", e);
         }
