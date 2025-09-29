@@ -44,13 +44,36 @@
 }
 
 .header-nav-center input.header-search[type="text"] {
-    padding: 0.35rem 0.8rem;
-    font-size: 0.85rem;
-    border-radius: 15px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 25px;
     border: none;
     outline: none;
-    width: 400px;
+    width: 350px;
     height: 45px;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.header-nav-center input.header-search[type="text"]:focus {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.header-nav-center button {
+    padding: 0.45rem 1rem;
+    margin-left: 0.5rem;
+    border-radius: 25px;
+    border: none;
+    background-color: #3a3a5a;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.header-nav-center button:hover {
+    background-color: #55557a;
+    transform: scale(1.05);
 }
 
 .header-nav-right {
@@ -113,6 +136,45 @@
 
 .header-genre-dropdown:hover .header-genre-list {
     display: block;
+}
+
+.header-nav-right form.d-inline input[type="number"] {
+    width: 120px;
+    padding: 0.35rem 0.6rem;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    text-align: right;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.header-nav-right form.d-inline input[type="number"]:focus {
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+}
+
+.header-nav-right form.d-inline button {
+    padding: 0.35rem 0.7rem;
+    border-radius: 15px;
+    border: none;
+    background-color: #3a3a5a;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.header-nav-right form.d-inline button:hover {
+    background-color: #55557a;
+    transform: scale(1.1);
+}
+
+#user-balance {
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 10px;
+    background-color: #2e2e4a;
+    color: #fff;
 }
 
 .header-cart-icon i {
