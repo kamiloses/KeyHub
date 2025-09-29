@@ -23,6 +23,11 @@
       <_ContentIncludedByDefault Remove="wwwroot\auth\register.css" />
       <_ContentIncludedByDefault Remove="Views\GameManager\AddGame.cshtml" />
       <_ContentIncludedByDefault Remove="Views\GameManager\_AddGame.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\history\history.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\js\" />
     </ItemGroup>
 
 </Project>

@@ -116,8 +116,8 @@ public class PurchaseHistoryService : IPurchaseHistoryService
             var cachedData = await _cache.GetAsync(cacheKey);
             if (cachedData != null)
             {
-                var cachedObject = JsonSerializer.Deserialize<CachedPurchaseHistoryDto>(cachedData);
-                return cachedObject;
+                return JsonSerializer.Deserialize<CachedPurchaseHistoryDto>(cachedData);
+                
             }
         }
         catch (Exception e)

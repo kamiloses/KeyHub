@@ -9,11 +9,13 @@ public class PurchaseService : IPurchaseService
     private readonly ApplicationDbContext _dbContext;
     private readonly ILogger<PurchaseService> _logger;
 
+
     public PurchaseService(ApplicationDbContext dbContext, ILogger<PurchaseService> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
     }
+
     public async Task BuyGameAsync(int gameId, User user)
     {
         try
@@ -53,6 +55,11 @@ public class PurchaseService : IPurchaseService
             throw; 
         }
     }
+    
+    
+    
+    
+    
     
     public async Task<Game> GetGameByIdAsync(int gameId)
     {

@@ -1,17 +1,16 @@
-
-<div id="gameModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Add New Game</h2>
+<div class="game-modal" id="gameModal">
+    <div class="modal-box">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2 class="modal-title">Add New Game</h2>
         <form method="post" asp-controller="GameManager" asp-action="AddGame" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" placeholder="Game title" required>
+            <div class="form-field">
+                <label for="gameTitle">Title</label>
+                <input type="text" id="gameTitle" name="title" placeholder="Game title" required>
             </div>
 
-            <div class="form-group">
-                <label for="genre">Genre</label>
-                <select id="genre" name="genre" required>
+            <div class="form-field">
+                <label for="gameGenre">Genre</label>
+                <select id="gameGenre" name="genre" required>
                     @foreach (Genre genre in Enum.GetValues(typeof(Genre)))
                     {
                         <option value="@genre">@genre</option>
@@ -19,19 +18,19 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="price">Price (PLN)</label>
-                <input type="number" id="price" name="price" step="0.01" min="0.20" placeholder="0.00" required>
+            <div class="form-field">
+                <label for="gamePrice">Price (PLN)</label>
+                <input type="number" id="gamePrice" name="price" step="0.01" min="0.20" placeholder="0.00" required>
             </div>
 
-            <div class="form-group">
-                <label for="discount">Discount (%)</label>
-                <input type="number" id="discount" name="discount" min="0" max="100" placeholder="0">
+            <div class="form-field">
+                <label for="gameDiscount">Discount (%)</label>
+                <input type="number" id="gameDiscount" name="discount" min="0" max="100" placeholder="0">
             </div>
 
-            <div class="form-group">
-                <label for="platform">Platform</label>
-                <select id="platform" name="platform" required>
+            <div class="form-field">
+                <label for="gamePlatform">Platform</label>
+                <select id="gamePlatform" name="platform" required>
                     @foreach (Platform platform in Enum.GetValues(typeof(Platform)))
                     {
                         <option value="@platform">@platform</option>
@@ -39,20 +38,17 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="stock">Stock</label>
-                <input type="number" id="stock" name="stock" min="1" placeholder="1" required>
+            <div class="form-field">
+                <label for="gameStock">Stock</label>
+                <input type="number" id="gameStock" name="stock" min="1" placeholder="1" required>
             </div>
 
-            <div class="form-group">
-                <label for="imageFile">Game Image</label>
-                <input type="file" id="imageFile" name="imageFile" accept="image/*" required>
+            <div class="form-field">
+                <label for="gameImage">Game Image</label>
+                <input type="file" id="gameImage" name="imageFile" accept="image/*" required>
             </div>
 
-            <button type="submit" class="add-game-btn">Add Game</button>
+            <button type="submit" class="btn-submit-game">Add Game</button>
         </form>
     </div>
 </div>
-
-<style>
-</style>

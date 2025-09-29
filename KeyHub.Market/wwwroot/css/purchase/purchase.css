@@ -1,4 +1,4 @@
-.buy-game-page {
+.purchase-page {
     max-width: 900px;
     margin: 40px auto;
     font-family: Arial, sans-serif;
@@ -6,7 +6,7 @@
     color: #2d2d2d;
 }
 
-.game-header h1 {
+.purchase-header h1 {
     font-size: 30px;
     margin-bottom: 8px;
     color: #1a1a1a;
@@ -18,7 +18,7 @@
     font-size: 16px;
 }
 
-.game-main {
+.purchase-main {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -29,19 +29,19 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.game-image img {
+.purchase-image img {
     width: 100%;
     max-width: 400px;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
-.game-info {
+.purchase-info {
     flex: 1;
     min-width: 250px;
 }
 
-.price {
+.price-section {
     display: flex;
     align-items: baseline;
     gap: 12px;
@@ -50,18 +50,18 @@
     font-weight: bold;
 }
 
-.final-price {
+.price-final {
     color: #2c7a7b;
     font-size: 24px;
 }
 
-.old-price {
+.price-old {
     text-decoration: line-through;
     color: #aaa;
     font-size: 16px;
 }
 
-.discount {
+.price-discount {
     background-color: #e3f8e3;
     color: #2f8f2f;
     padding: 4px 8px;
@@ -70,7 +70,7 @@
     font-size: 14px;
 }
 
-.btn-buy {
+.purchase-button {
     background-color: #4cafef;
     color: #fff;
     padding: 12px 28px;
@@ -82,27 +82,25 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.btn-buy:hover {
+.purchase-button:hover {
     background-color: #36a3e0;
     transform: translateY(-2px);
 }
 
-.btn-buy:disabled {
+.purchase-button:disabled {
     background-color: #e0e0e0;
     cursor: not-allowed;
     box-shadow: none;
 }
 
-.text-danger {
+.error-msg {
     color: #e63946;
     margin-top: 12px;
     font-weight: bold;
 }
 
-.text-success {
+.success-msg {
     color: #2a9d8f;
     margin-top: 12px;
     font-weight: bold;
 }
-
-

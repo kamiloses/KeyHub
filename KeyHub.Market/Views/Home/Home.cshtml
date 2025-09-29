@@ -5,14 +5,12 @@
     var pageContext = ViewContextTypeModel.Home;
 }
 
-
-<div class="home-recommended">
-    <h2 class="recommended-title">Recommended for You</h2>
-    <div class="recommended-games">
+<div class="featured-section">
+    <h2 class="featured-title">Recommended for You</h2>
+    <div class="featured-games">
         @foreach (var game in Model)
         {
-            @await Html.PartialAsync("_GameOverview", game,  new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
+            @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
         }
-        
     </div>
 </div>

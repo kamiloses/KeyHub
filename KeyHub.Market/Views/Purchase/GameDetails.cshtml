@@ -1,30 +1,29 @@
 @model KeyHub.Market.Models.ViewModels.GamePurchaseViewModel
 
 @{
-    
     Layout = "_HomeLayout";
 }
 
-<div class="buy-game-page">
-    <div class="game-header">
+<div class="purchase-page">
+    <div class="purchase-header">
         <h1>@Model.Game.Title</h1>
         <p class="genre-platform">
             <span>@Model.Game.Genre</span> | <span>@Model.Game.Platform</span>
         </p>
     </div>
 
-    <div class="game-main">
-        <div class="game-image">
-            <img src="@Model.Game.ImageUrl" alt="@Model.Game.Title" />
+    <div class="purchase-main">
+        <div class="purchase-image">
+            <img src="/images/games/@Model.Game.ImageUrl" alt="@Model.Game.Title" />
         </div>
 
-        <div class="game-info">
-            <p class="price">
-                <span class="final-price">@($"{Model.FinalPrice} zł")</span>
+        <div class="purchase-info">
+            <p class="price-section">
+                <span class="price-final">@($"{Model.FinalPrice} zł")</span>
                 @if (Model.Game.Discount != 0)
                 {
-                    <span class="old-price">@($"{Model.Game.Price} zł")</span>
-                    <span class="discount">-@Model.Game.Discount%</span>
+                    <span class="price-old">@($"{Model.Game.Price} zł")</span>
+                    <span class="price-discount">-@Model.Game.Discount%</span>
                 }
             </p>
 
@@ -32,25 +31,23 @@
 
             <form asp-controller="Purchase" asp-action="BuyGame" method="post">
                 <input type="hidden" name="id" value="@Model.Game.Id" />
-                <button type="submit" class="btn-buy" @(Model.CanBuy ? "" : "disabled")>
+                <button type="submit" class="purchase-button" @(Model.CanBuy ? "" : "disabled")>
                     Buy Now
                 </button>
                 @if (!string.IsNullOrEmpty(Model.BuyErrorMessage))
                 {
-                    <p class="text-danger mt-2">@Model.BuyErrorMessage</p>
+                    <p class="error-msg mt-2">@Model.BuyErrorMessage</p>
                 }
-                
-                
             </form>
 
             @if (TempData["Error"] != null)
             {
-                <p class="text-danger">@TempData["Error"]</p>
+                <p class="error-msg">@TempData["Error"]</p>
             }
 
             @if (TempData["Success"] != null)
             {
-                <p class="text-success">@TempData["Success"]</p>
+                <p class="success-msg">@TempData["Success"]</p>
             }
         </div>
     </div>

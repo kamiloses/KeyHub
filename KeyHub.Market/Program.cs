@@ -1,5 +1,4 @@
 using KeyHub.Market.data;
-using KeyHub.Market.Middlewares;
 using KeyHub.Market.Models;
 using KeyHub.Market.Services;
 using KeyHub.Market.Services.impl;
@@ -41,7 +40,6 @@ builder.Services.AddScoped<ISortingService, SortingService>();
 builder.Services.AddScoped<IFilteringService,FilteringService>();
 builder.Services.AddScoped<IPurchaseHistoryService,PurchaseHistoryService>();
 builder.Services.AddScoped<IPurchaseService,PurchaseService>();
-builder.Services.AddScoped<IWalletService,WalletService>();
 
 
 var app = builder.Build();
@@ -51,7 +49,6 @@ app.UseRouting();
 app.UseAuthentication();  
 app.UseAuthorization();
 app.MapControllers(); 
-app.MapHub<PurchaseNotificationHub>("/purchaseNotificationHub");
 
 
 using (var scope = app.Services.CreateScope())

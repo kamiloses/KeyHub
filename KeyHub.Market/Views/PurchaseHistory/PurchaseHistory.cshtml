@@ -3,46 +3,40 @@
 @model KeyHub.Market.Models.ViewModels.HistoryViewModel
 
 @{
+    Layout = "_HomeLayout";
+    Context context = KeyHub.Market.Enums.Context.PurchaseHistory;
+}
 
-Layout = "_HomeLayout";
-Context context = KeyHub.Market.Enums.Context.PurchaseHistory;}
-
-<h2>Purchase History</h2>
+<h2 class="history-title">Purchase History</h2>
 @if (!Model.Purchases.Any())
 {
-<p>You haven't bought any games yet.</p>
+    <p class="no-purchases-msg">You haven't bought any games yet.</p>
 }
 else
 {
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Game</th>
-        <th>Genre</th>
-        <th>Platform</th>
-        <th>Price</th>
-        <th>Date Purchased</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var purchase in Model.Purchases)
-    {
-    <tr>
-        <td>@purchase.Game.Title</td>
-        <td>@purchase.Game.Genre</td>
-        <td>@purchase.Game.Platform</td>
-        <td>@purchase.PurchasePrice.ToString("C")</td>
-        <td>@purchase.PurchaseDate.ToString("yyyy-MM-dd HH:mm")</td>
-    </tr>
-    }
-    </tbody>
-</table>
+    <table class="history-table">
+        <thead>
+        <tr>
+            <th>Game</th>
+            <th>Genre</th>
+            <th>Platform</th>
+            <th>Price</th>
+            <th>Date Purchased</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var purchase in Model.Purchases)
+        {
+            <tr>
+                <td>@purchase.Game.Title</td>
+                <td>@purchase.Game.Genre</td>
+                <td>@purchase.Game.Platform</td>
+                <td>@purchase.PurchasePrice.ToString("C")</td>
+                <td>@purchase.PurchaseDate.ToString("yyyy-MM-dd HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 }
 
-@await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage,TotalPages = Model.TotalPages,context =context })
-
-
-<style>
-    
-
-</style>
+@await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage, TotalPages = Model.TotalPages, context = context })

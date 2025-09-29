@@ -1,4 +1,4 @@
-.modal {
+.game-modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -9,7 +9,7 @@
     background-color: rgba(0,0,0,0.5);
 }
 
-.modal-content {
+.modal-box {
     background-color: #fff;
     margin: 50px auto;
     padding: 30px 40px;
@@ -23,27 +23,27 @@
     animation: slideDown 0.3s ease-out;
 }
 
-.modal-content h2 {
+.modal-title {
     margin-bottom: 20px;
     font-size: 24px;
     text-align: center;
     color: dodgerblue;
 }
 
-.modal-content .form-group {
+.form-field {
     margin-bottom: 15px;
 }
 
-.modal-content label {
+.form-field label {
     display: block;
     margin-bottom: 5px;
     font-weight: 600;
 }
 
-.modal-content input[type="text"],
-.modal-content input[type="number"],
-.modal-content input[type="file"],
-.modal-content select {
+.form-field input[type="text"],
+.form-field input[type="number"],
+.form-field input[type="file"],
+.form-field select {
     width: 100%;
     padding: 10px 12px;
     border-radius: 6px;
@@ -55,14 +55,14 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.modal-content input:focus,
-.modal-content select:focus {
+.form-field input:focus,
+.form-field select:focus {
     border-color: #e53935;
     box-shadow: 0 0 5px rgba(229,57,53,0.6);
     outline: none;
 }
 
-.modal-content .close {
+.modal-close {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -73,11 +73,11 @@
     transition: color 0.2s;
 }
 
-.modal-content .close:hover {
+.modal-close:hover {
     color: #e53935;
 }
 
-.add-game-btn {
+.btn-submit-game {
     width: 100%;
     padding: 12px;
     background-color: #e53935;
@@ -90,6 +90,6 @@
     transition: background-color 0.3s;
 }
 
-.add-game-btn:hover {
+.btn-submit-game:hover {
     background-color: #b71c1c;
 }

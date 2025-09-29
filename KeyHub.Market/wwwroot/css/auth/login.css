@@ -1,4 +1,4 @@
-.account-page {
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     font-family: Arial, sans-serif;
 }
 
-.account-box {
+.login-card {
     background-color: #2e2e4a;
     padding: 2rem 2.5rem;
     border-radius: 12px;
@@ -17,13 +17,13 @@
     color: #ffffff;
 }
 
-.account-box h2 {
+.login-title {
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
     color: #fff;
 }
 
-.text-danger {
+.error-text {
     color: #f87171;
     font-size: 0.875rem;
     margin-bottom: 0.5rem;
@@ -31,11 +31,11 @@
     text-align: left;
 }
 
-.account-box .form-group {
+.input-group {
     margin-bottom: 1rem;
 }
 
-.account-box input {
+.input-field {
     width: 100%;
     padding: 0.7rem 1rem;
     border: none;
@@ -47,12 +47,12 @@
     transition: border 0.2s, box-shadow 0.2s;
 }
 
-.account-box input:focus {
+.input-field:focus {
     border: 1px solid #3a3a5a;
     box-shadow: 0 0 6px rgba(0,120,212,0.4);
 }
 
-.account-box .btn {
+.login-button {
     width: 100%;
     padding: 0.75rem;
     margin-top: 0.5rem;
@@ -66,26 +66,47 @@
     transition: background 0.2s;
 }
 
-.account-box .btn:hover {
+.login-button:hover {
     background-color: #218838;
 }
 
-.account-footer, .account-box .text-center.account-register-text {
+.register-text {
     margin-top: 1.2rem;
     font-size: 0.875rem;
     color: #bbb;
 }
 
-.account-box a {
+.login-card a {
     color: #4aa3ff;
     text-decoration: none;
 }
 
-.account-box a:hover {
+.login-card a:hover {
     text-decoration: underline;
 }
 
-.form-check-label {
+.checkbox-label {
     color: #ffffff;
     user-select: none;
+}
+
+.flex-row {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-input {
+    margin-right: 0.5rem;
 }

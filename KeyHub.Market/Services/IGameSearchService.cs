@@ -11,7 +11,6 @@ public interface IGameSearchService
         decimal? maxPrice,
         int page,
         int pageSize);
-    //todo ogarnij turtle
     
      IQueryable<Game> GetFilteredAndSortedGames(string? title,GameSort sortBy, Platform[]? platforms, Genre[]? genres,
         decimal? minPrice = null, decimal? maxPrice = null);
