@@ -22,7 +22,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
-// todo zarejestruj cache
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -30,8 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-// builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSignalR();
+builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
