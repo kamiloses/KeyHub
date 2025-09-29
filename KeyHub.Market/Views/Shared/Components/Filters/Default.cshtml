@@ -50,14 +50,14 @@
         </div>
 
         <button type="submit">Apply</button>
+        @if (User.IsInRole("Admin")){
+        
         <button type="button" class="add-game-btn" onclick="openModal()">+ Add New Game</button>
+        }
     </form>
 </aside>
 
-@if (User.IsInRole("Admin"))
-{
     @await Html.PartialAsync("_AddGame")
-}
 
 
 <style>

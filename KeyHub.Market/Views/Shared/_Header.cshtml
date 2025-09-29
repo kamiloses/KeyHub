@@ -11,7 +11,7 @@
         }
 
         var user = await _userManager.GetUserAsync(User);
-        return user!.Balance;
+        return user?.Balance;
     }
 }
 <header class="header-component">

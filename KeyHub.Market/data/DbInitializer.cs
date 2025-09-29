@@ -56,8 +56,8 @@ roleManager.CreateAsync(new IdentityRole("User")).Wait();
 // --- Create Admin user ---
 var adminUser = new User
 {
-    UserName = "admin@example.com",
-    Email = "admin@example.com",
+    UserName = "admin",
+    Email = "admin@gmail.com",
     EmailConfirmed = true,
     Balance = 1000
 };
@@ -66,8 +66,8 @@ userManager.AddToRoleAsync(adminUser, "Admin").Wait();
 
 var normalUser = new User
 {
-    UserName = "user@example.com",
-    Email = "user@example.com",
+    UserName = "user",
+    Email = "user@gmail.com",
     EmailConfirmed = true,
     Balance = 500
 };

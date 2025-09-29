@@ -25,7 +25,7 @@ public class AuthController : Controller
 
 
     [HttpPost("/login")]
-    public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+    public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (!ModelState.IsValid)
         {
@@ -34,7 +34,7 @@ public class AuthController : Controller
 
 
         var result = await _signInManager.PasswordSignInAsync(
-            model.Email,
+            model.UserName,
             model.Password,
             model.RememberMe,
             lockoutOnFailure: false
@@ -42,8 +42,6 @@ public class AuthController : Controller
 
         if (result.Succeeded)
         {
-            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                return Redirect(returnUrl);
 
             return RedirectToAction("Home", "Home");
         }
@@ -84,7 +82,7 @@ public class AuthController : Controller
 
         var user = new User()
         {
-            UserName = model.Email,
+            UserName = model.UserName,
             Email = model.Email
         };
 
