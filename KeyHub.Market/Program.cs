@@ -51,10 +51,19 @@ app.UseAuthorization();
 app.MapControllers(); 
 
 
+
+
+
+
+// seed
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    DbInitializer.Seed(dbContext);
-}
+    var services = scope.ServiceProvider;
 
+    var dbContext = services.GetRequiredService<ApplicationDbContext>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    DbInitializer.Seed(dbContext, userManager, roleManager);
+}
 app.Run();

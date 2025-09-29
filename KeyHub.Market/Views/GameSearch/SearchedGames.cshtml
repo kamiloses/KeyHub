@@ -9,10 +9,10 @@
     ViewData["Context"] = ViewContextTypeModel.Search;
 }
 
-<div class="search-container">
+<div class="search-page-container">
     @await Component.InvokeAsync("Filters", new {Model.MinPrice,Model.MaxPrice, selectedPlatforms = Model.SelectedPlatforms, selectedGenres = Model.SelectedGenres })
-    <main class="search-results">
-        <div class="results-topbar">
+    <main class="results-section">
+        <div class="results-header">
             <h2>Search Results</h2>
 
             <form method="get" action="/search">
@@ -31,11 +31,14 @@
                         <input type="hidden" name="SelectedGenres" value="@genre.ToString()" />
                     }
                 }
-
+                @* todo HTML hidden input in GET forms to preserve state *@
+                @* //todo name i value ogarnij  oraz to nizej*@
+                @* todo ogarnij view searchedGames *@
+                
                 <input type="hidden" name="MinPrice" value="@Model.MinPrice" />
                 <input type="hidden" name="MaxPrice" value="@Model.MaxPrice" />
 
-                <div class="sort-wrapper">
+                <div class="custom-select-wrapper">
                     <select name="CurrentSort" onchange="this.form.submit()">
                         @foreach (var sort in Model.SortOptions)
                         {
@@ -48,7 +51,7 @@
             </form>
         </div>
 
-        <div class="games-container">
+        <div class="game-list">
             @foreach (var game in Model.Games)
             {
                 @await Html.PartialAsync("_GameOverview", game, new ViewDataDictionary(ViewData) { ["Context"] = pageContext })
@@ -57,4 +60,5 @@
     </main>
 </div>
 
-@await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage, TotalPages = Model.TotalPages, CurrentSort = Model.CurrentSort, MinPrice = Model.MinPrice, MaxPrice = Model.MaxPrice, SelectedGenres  = Model.SelectedGenres, SelectedPlatforms = Model.SelectedPlatforms, context = context}) 
+ @await Html.PartialAsync("_Pagination", new PaginationViewModel() { CurrentPage = Model.CurrentPage,TotalPages = Model.TotalPages,CurrentSort = Model.CurrentSort,MinPrice = Model.MinPrice,MaxPrice = Model.MaxPrice,SelectedGenres  = Model.SelectedGenres,SelectedPlatforms = Model.SelectedPlatforms,context = context}) 
+

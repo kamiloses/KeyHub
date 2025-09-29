@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KeyHub.Market.Controllers;
-// [Authorize(Roles = "Admin")] todo odkomentuj
+[Authorize(Roles = "Admin")] 
 public class GameManagerController : Controller
 {
 

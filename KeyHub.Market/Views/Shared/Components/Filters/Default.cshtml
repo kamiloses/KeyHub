@@ -54,8 +54,10 @@
     </form>
 </aside>
 
-@await Html.PartialAsync("_AddGame")
-
+@if (User.IsInRole("Admin"))
+{
+    @await Html.PartialAsync("_AddGame")
+}
 
 
 <style>
@@ -154,7 +156,6 @@
         background-color: #45a049;
     }
 
-    /* STYL NOWEGO PRZYCISKU */
     .add-game-btn {
         display: block;
         text-align: center;
@@ -195,7 +196,6 @@
         document.getElementById("gameModal").style.display = "none";
     }
 
-    // Zamknięcie po kliknięciu w tło
     window.onclick = function(event) {
         const modal = document.getElementById("gameModal");
         if (event.target === modal) {

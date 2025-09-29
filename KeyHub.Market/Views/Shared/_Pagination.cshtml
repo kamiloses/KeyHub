@@ -15,14 +15,14 @@
     }
 }
 
-<div class="pagination">
+<div class="page-nav">
     @if (Model.TotalPages > 1)
     {
         for (int i = 1; i <= Model.TotalPages; i++)
         {
             if (i == Model.CurrentPage)
             {
-                <span class="current-page">@i</span>
+                <span class="page-active">@i</span>
             }
             else
             {

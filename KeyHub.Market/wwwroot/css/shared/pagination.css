@@ -1,4 +1,4 @@
-.pagination {
+.page-nav {
     margin-top: 60px;
     display: flex;
     gap: 6px;
@@ -6,8 +6,8 @@
     font-family: Arial, sans-serif;
 }
 
-.pagination a,
-.pagination span {
+.page-nav a,
+.page-nav span {
     padding: 8px 14px;
     border-radius: 50px;
     border: 1px solid #ccc;
@@ -18,13 +18,13 @@
     text-align: center;
 }
 
-.pagination a:hover {
+.page-nav a:hover {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
 }
 
-.pagination .current-page {
+.page-active {
     background-color: #007bff;
     color: white;
     border-color: #007bff;

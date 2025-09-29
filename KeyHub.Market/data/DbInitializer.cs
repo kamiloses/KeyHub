@@ -1,10 +1,11 @@
 using KeyHub.Market.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace KeyHub.Market.data
 {
     public static class DbInitializer
     {
-        public static void Seed(ApplicationDbContext context)
+        public static void Seed(ApplicationDbContext context,UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             context.Games.RemoveRange(context.Games);
             context.SaveChanges();
@@ -37,14 +38,42 @@ context.Games.AddRange(
 
 context.SaveChanges();
 
-context.SaveChanges();
 
+//Creating new accounts
+foreach (var user in userManager.Users.ToList())
+{
+    userManager.DeleteAsync(user).Wait();
+}
 
-context.SaveChanges();
+foreach (var role in roleManager.Roles.ToList())
+{
+    roleManager.DeleteAsync(role).Wait();
+}
 
-context.SaveChanges();
+roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
+roleManager.CreateAsync(new IdentityRole("User")).Wait();
 
-            context.SaveChanges();
+// --- Create Admin user ---
+var adminUser = new User
+{
+    UserName = "admin@example.com",
+    Email = "admin@example.com",
+    EmailConfirmed = true,
+    Balance = 1000
+};
+userManager.CreateAsync(adminUser, "Admin123!").Wait();
+userManager.AddToRoleAsync(adminUser, "Admin").Wait();
+
+var normalUser = new User
+{
+    UserName = "user@example.com",
+    Email = "user@example.com",
+    EmailConfirmed = true,
+    Balance = 500
+};
+userManager.CreateAsync(normalUser, "User123!").Wait();
+userManager.AddToRoleAsync(normalUser, "User").Wait();
+
         }
     }
 }
