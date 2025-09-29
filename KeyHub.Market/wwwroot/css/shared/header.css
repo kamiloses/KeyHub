@@ -1,4 +1,3 @@
-/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,7 +7,7 @@
 .header-component {
     background-color: #1e1e2f;
     color: #fff;
-    padding: 0.5rem 1.5rem; /* zmniejszone odstępy */
+    padding: 0.5rem 1.5rem;
     font-family: Arial, sans-serif;
     height: 100px;
 }
@@ -31,7 +30,7 @@
 }
 
 .header-nav-left .header-logo {
-    height: 70px; /* trochę mniejsza, żeby nie zajmowała za dużo miejsca */
+    height: 70px;
     object-fit: contain;
 }
 
@@ -44,7 +43,6 @@
     margin-left: 10rem;
 }
 
-/* Wyszukiwarka */
 .header-nav-center input.header-search[type="text"] {
     padding: 0.35rem 0.8rem;
     font-size: 0.85rem;
@@ -55,19 +53,18 @@
     height: 45px;
 }
 
-/* Linki i dropdown */
 .header-nav-right {
     margin-left: 10rem;
     display: flex;
     align-items: center;
-    gap: 0.7rem; /* zmniejszony gap między elementami */
+    gap: 0.7rem;
 }
 
 .header-nav-right a.header-link {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
-    padding: 0.3rem 0.6rem; /* mniejsze paddingi */
+    padding: 0.3rem 0.6rem;
     border-radius: 5px;
     transition: background 0.2s;
 }
@@ -76,12 +73,11 @@
     background-color: #3a3a5a;
 }
 
-/* Dropdown */
 .header-genre-dropdown {
     position: relative;
     cursor: pointer;
     font-weight: 500;
-    padding: 0.3rem 0.6rem; /* mniejsze paddingi */
+    padding: 0.3rem 0.6rem;
     border-radius: 5px;
     transition: background 0.2s;
 }
@@ -92,17 +88,20 @@
 
 .header-genre-dropdown .header-genre-list {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
     background: #2e2e4a;
     border-radius: 5px;
     list-style: none;
-    padding: 0.3rem 0; /* mniejsze paddingi */
+    padding: 0.3rem 0;
     min-width: 150px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     z-index: 10;
 }
 
 .header-genre-dropdown .header-genre-list li {
-    padding: 0.35rem 0.8rem; /* mniejsze paddingi */
+    padding: 0.35rem 0.8rem;
     color: #fff;
     cursor: pointer;
     transition: background 0.2s;
@@ -116,7 +115,6 @@
     display: block;
 }
 
-/* Koszyk */
 .header-cart-icon i {
-    font-size: 1rem; /* mniejsza ikona koszyka */
+    font-size: 1rem;
 }

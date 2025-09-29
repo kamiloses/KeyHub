@@ -2,68 +2,58 @@
 @inject UserManager<User> _userManager
 
 @functions {
-    public async Task<decimal?> GetUserBalanceAsync()
+    private async Task<decimal> GetUserBalanceAsync()
     {
-        
-        if (User.Identity != null && !User.Identity.IsAuthenticated)
+        if (User?.Identity == null || !User.Identity.IsAuthenticated)
         {
-            return null;
+            return 0m;
         }
-
         var user = await _userManager.GetUserAsync(User);
-        return user?.Balance;
+        return user?.Balance ?? 0m;
     }
 }
+
 <header class="header-component">
     <nav class="header-nav">
         <div class="header-nav-left">
             <a href="/" class="header-logo-link">
-                <img src="~/images/keyHub-logo.png" alt="KeyHub Logo" class="header-logo">
+                <img src="@Url.Content("~/images/keyHub-logo.png")" alt="KeyHub Logo" class="header-logo" />
                 <h1 class="header-title">KeyHub</h1>
             </a>
         </div>
 
         <div class="header-nav-center">
             <form method="get" action="/search">
-                <input 
-                    type="text" 
-                    name="title" 
-                    placeholder="Search for a game..." 
-                    class="header-search" 
-                    value="@ViewBag.SearchTitle" />
-                <button type="submit">Search</button>
+                <input type="text" name="title" placeholder="Search for a game..." class="header-search" value="@(ViewBag.SearchTitle ?? "")" />
             </form>
         </div>
 
         <div class="header-nav-right">
             <div class="header-genre-dropdown">
                 <span>Genre ▼</span>
-                @* todo dynamiczna z bazy danych *@
                 <ul class="header-genre-list">
-                    @foreach(var genre in Enum.GetValues(typeof(Genre))){
+                    @foreach (var genre in Enum.GetValues(typeof(Genre)))
+                    {
                         <li><a href="/search?genres=@genre">@genre</a></li>
                     }
                 </ul>
             </div>
 
-            @if (!User.Identity!.IsAuthenticated) {
+            @if (!User.Identity?.IsAuthenticated ?? true)
+            {
                 <a href="/login" class="header-link">Login</a>
                 <a href="/register" class="header-link">Register</a>
             }
             else
             {
                 <a href="/History" class="header-link">Purchase History</a>
-            
                 <span id="user-balance">@await GetUserBalanceAsync() zł</span>
 
                 <form method="post" asp-controller="Purchase" asp-action="AddMoney" class="d-inline">
                     <input type="number" name="amount" step="0.01" min="0" placeholder="Add money" />
                     <button type="submit">+</button>
                 </form>
-                
-            }
 
-                
                 <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
                     <button type="submit" class="header-link btn btn-link">Logout</button>
                 </form>
