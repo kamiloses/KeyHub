@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: gba_sql_server
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Kamiloses3d"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$SA_PASSWORD\" -Q \"SELECT 1\" >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: keyhub:local
+    container_name: gba_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5265"
+      # Connection string do SQL Server w kontenerze
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=GameDb;User Id=sa;Password=Kamiloses3d;TrustServerCertificate=True;"
+    ports:
+      - "5265:5265"
+    volumes:
+      - ./:/src
+      - ./DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+    restart: unless-stopped
+
+volumes:
+  mssql_data:
