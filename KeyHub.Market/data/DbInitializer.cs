@@ -53,7 +53,6 @@ foreach (var role in roleManager.Roles.ToList())
 roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
 roleManager.CreateAsync(new IdentityRole("User")).Wait();
 
-// --- Create Admin user ---
 var adminUser = new User
 {
     UserName = "admin",
