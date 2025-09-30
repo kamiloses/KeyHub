@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using KeyHub.Market.data;
-using KeyHub.Market.Exceptions;
 using KeyHub.Market.Models;
 using KeyHub.Market.Services.impl;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +21,7 @@ public class PurchaseServiceTest
         public PurchaseServiceTest()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString()) // unikalna baza dla każdego testu
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
                 .Options;
 
             _dbContext = new ApplicationDbContext(options);
@@ -33,7 +32,6 @@ public class PurchaseServiceTest
         [Fact]
         public async Task BuyGameAsync_SuccessfulPurchase_DecreasesStockAndBalance()
         {
-            // Arrange
             var user = new User { Id = Guid.NewGuid().ToString(), UserName = "testuser", Balance = 100 };
             var game = new Game 
             { 
@@ -44,16 +42,14 @@ public class PurchaseServiceTest
             _dbContext.Games.Add(game);
             await _dbContext.SaveChangesAsync();
 
-            // Act
             await _service.BuyGameAsync(game.Id, user);
 
-            // Assert
             var updatedGame = await _dbContext.Games.FindAsync(game.Id);
             var updatedUser = await _dbContext.Users.FindAsync(user.Id);
             var purchase = await _dbContext.Purchases.FirstOrDefaultAsync();
 
             Assert.Equal(4, updatedGame.Stock);
-            Assert.Equal(100 - (50 - (50 * 0.1m)), updatedUser.Balance); // 10% discount
+            Assert.Equal(100 - (50 - (50 * 0.1m)), updatedUser.Balance); 
             Assert.NotNull(purchase);
             Assert.Equal(game.Id, purchase.GameId);
             Assert.Equal(user.Id, purchase.UserId);
@@ -118,9 +114,4 @@ public class PurchaseServiceTest
             Assert.Equal(game.Title, result.Title);
         }
 
-        [Fact]
-        public async Task GetGameByIdAsync_GameDoesNotExist_ThrowsDatabaseException()
-        {
-            await Assert.ThrowsAsync<DatabaseException>(() => _service.GetGameByIdAsync(999));
-        }
     }

@@ -25,14 +25,11 @@ public class FilteringServiceTest
         [Fact]
         public void FilterByPlatform_WithPlatforms_ReturnsOnlyMatching()
         {
-            // Arrange
             var games = GetSampleGames();
             var platforms = new[] { Platform.PSN };
 
-            // Act
             var result = _service.FilterByPlatform(games, platforms).ToList();
 
-            // Assert
             Assert.All(result, g => Assert.Contains(g.Platform, platforms));
             Assert.Equal(3, result.Count); // Bloodborne, Dark Souls 3, Horizon
         }
@@ -76,7 +73,7 @@ public class FilteringServiceTest
         {
             var games = GetSampleGames();
 
-            // Price after discount: Elden Ring 54, Bloodborne 50, Dark Souls 3 52.25, Horizon 80
+            // Price after discount: Elden Ring 54, Bloodborne 50, Dark Souls3 52.25, Horizon 80
             var result = _service.FilterByPrice(games, minPrice: 50, maxPrice: 55).ToList();
 
             Assert.Contains(result, g => g.Title == "Elden Ring");

@@ -19,7 +19,7 @@ public class SortingServiceTest
     public SortingServiceTest()
     {
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // <- unikalna nazwa
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
             .Options;
         _dbContext = new ApplicationDbContext(options);
 
