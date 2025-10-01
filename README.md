@@ -10,3 +10,10 @@
 <img width="1823" height="954" alt="image" src="https://github.com/user-attachments/assets/ac5d1488-22c2-4121-b551-de7d4324f2b6" />
 <img width="1823" height="954" alt="image" src="https://github.com/user-attachments/assets/b04d3a3c-51d1-4860-8b15-d73cc15bb9a4" />
 <img width="1823" height="954" alt="image" src="https://github.com/user-attachments/assets/9ed62ff8-d654-40e6-bef3-9007411d6f00" />
+
+
+How to run 
+1 Clone the repository
+2 cd KeyHub.Market
+3 compose up build
+4działą
