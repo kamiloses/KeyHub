@@ -1,3 +1,18 @@
+
+# Step 1: Clone the repository
+
+
+# Step 2: Change directory
+```bash
+cd KeyHub.Market
+```
+# Step 3: Build and start with Docker Compose
+```bash
+docker-compose up --build
+```
+# Step 4: Run the app at http://localhost:8081/
+
+
 <img width="1838" height="1012" alt="image" src="https://github.com/user-attachments/assets/8834d7c5-f530-419a-b1dc-71b2cc98efff" /><img width="1838" height="1012" alt="image" src="https://github.com/user-attachments/assets/667d35e1-d398-4b84-b225-95fef3f1547d" />
 <img width="1838" height="1012" alt="image" src="https://github.com/user-attachments/assets/99355ca9-1abb-4cc1-ac9f-59cfbd094e97" />
 <img width="1838" height="1012" alt="image" src="https://github.com/user-attachments/assets/07b3ded4-abb3-4774-adee-4907993d0ec0" />
@@ -12,8 +27,11 @@
 <img width="1823" height="954" alt="image" src="https://github.com/user-attachments/assets/9ed62ff8-d654-40e6-bef3-9007411d6f00" />
 
 
-How to run 
-1 Clone the repository
-2 cd KeyHub.Market
-3 compose up build
-4działą
+
+Technologies used in the project:
+- ASP.NET Core MVC (Razor Views)
+- Entity Framework Core & SQL Server
+- ASP.NET Identity
+- In-Memory Cache
+- xUnit & Moq
+
