@@ -1,42 +1,68 @@
 
+A web application built with ASP.NET Core, functioning as an online store for
+computer games. Users can create accounts, log in, add funds to their account,
+and purchase games with applied discounts and current stock levels. The system
+allows searching and filtering games by price, genre, platform, and sorting by
+various criteria. Purchase history is paginated and stored in In-Memory Cache.
+Administrators have access to a management panel where they can add new
+games along with images.
 
 
 
 
 
 
+<h1 align="center">🚀 How to Run the Application</h1>
 
+Follow these steps to run the application locally.
 
+---
 
-## Technologies Used
+## 1️⃣ Clone the Repository
 
-The project is built with the following technologies:
+Clone the repository to your local machine:
 
-- **ASP.NET Core MVC (Razor Views)**
-- **Entity Framework Core & SQL Server**
-- **ASP.NET Identity**
-- **In-Memory Cache**
-- **xUnit & Moq**
+```
+git clone https://github.com/kamiloses/KeyHub.git
+```
 
+---
 
+## 2️⃣ Change Directory
 
+Navigate to the project folder:
 
-# Step 1: Clone the repository
-
-
-# Step 2: Change directory
-```bash
+```
 cd KeyHub.Market
 ```
-# Step 3: write command
-```bash
- dotnet ef migrations add InitialCreate
+
+---
+
+## 3️⃣ Apply Entity Framework Migrations
+
+Create the database and apply migrations:
+
 ```
-# Step 4: Build and start with Docker Compose
-```bash
+dotnet ef migrations add InitialCreate
+```
+
+---
+
+## 4️⃣ Build and Start with Docker Compose
+
+Build and run the application using Docker:
+
+```
 docker-compose up --build
 ```
-# Step 5: Run the app at http://localhost:8081/
+
+---
+
+## 5️⃣ Access the Application
+
+Open your browser and go to:
+
+[http://localhost:8081/](http://localhost:8081/)
 
 
 
@@ -45,10 +71,11 @@ docker-compose up --build
 
 
 
+                   
 
 
-
-
+<br><br><br><br><br><br><br><br><br>
+       <h1 align="center">💡 How does the application work?</h1>
 
 ## 1. Home Page
 Initially, you will be redirected to the Home Page, where you can see games available at the biggest discounts.
@@ -58,10 +85,28 @@ Initially, you will be redirected to the Home Page, where you can see games avai
 ---
 
 ## 2. Account Management
-You can either create an account or log in, depending on your situation. Validation has been implemented on both the client and server sides.
+
+You can either create an account or log in, depending on your situation. Validation has been implemented on both the client and server sides.  
+
+By default, two users have already been created for you, so you can log in immediately without registering a new account:
+
+- **Admin user**
+  - Username: `admin`
+  - Email: `admin@gmail.com`
+  - Password: `Admin123!`
+  - Role: Admin
+  - Balance: 1000
+
+- **Normal user**
+  - Username: `user`
+  - Email: `user@gmail.com`
+  - Password: `User123!`
+  - Role: User
+  - Balance: 500
+
+This allows you to test both admin and regular user functionalities right away.
 
 ![Account Management](https://github.com/user-attachments/assets/99355ca9-1abb-4cc1-ac9f-59cfbd094e97)
-
 ---
 
 ## 3. Starting Balance
@@ -105,3 +150,18 @@ As an admin, you have access to a special button that allows you to publish a ne
 
 ![Admin Publish Game](https://github.com/user-attachments/assets/9ed62ff8-d654-40e6-bef3-9007411d6f00)
 
+
+<br><br><br><br>
+
+
+
+
+## Technologies Used
+
+The project is built with the following technologies:
+
+- **ASP.NET Core MVC (Razor Views)**
+- **Entity Framework Core & SQL Server**
+- **ASP.NET Identity**
+- **In-Memory Cache**
+- **xUnit & Moq**
