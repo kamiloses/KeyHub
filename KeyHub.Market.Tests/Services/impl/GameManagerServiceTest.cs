@@ -36,14 +36,12 @@ namespace KeyHub.Market.Tests.Services.impl;
         [Fact]
         public async Task AddGame_ValidInput_AddsGame()
         {
-            // Arrange
             var mockFile = new Mock<IFormFile>();
             var content = new MemoryStream(System.Text.Encoding.UTF8.GetBytes("fake image content"));
             mockFile.Setup(f => f.OpenReadStream()).Returns(content);
             mockFile.Setup(f => f.FileName).Returns("image.png");
             mockFile.Setup(f => f.Length).Returns(content.Length);
 
-            // Act
             var game = await _service.AddGame(
                 title: "Elden Ring",
                 genre: Genre.RPG,
@@ -54,7 +52,6 @@ namespace KeyHub.Market.Tests.Services.impl;
                 discount: 10
             );
 
-            // Assert
             Assert.NotNull(game);
             Assert.Equal("Elden Ring", game.Title);
             Assert.Equal(Genre.RPG, game.Genre);
@@ -71,7 +68,6 @@ namespace KeyHub.Market.Tests.Services.impl;
         [Fact]
         public async Task AddGame_NullImage_ThrowsArgumentException()
         {
-            // Act & Assert
             await Assert.ThrowsAsync<ArgumentException>(() => _service.AddGame(
                 title: "Dark Souls 3",
                 genre: Genre.Action,
