@@ -1,15 +1,22 @@
 
-A web application built with ASP.NET Core, functioning as an online store for
-computer games. Users can create accounts, log in, add funds to their account,
-and purchase games with applied discounts and current stock levels. The system
-allows searching and filtering games by price, genre, platform, and sorting by
-various criteria. Purchase history is paginated and stored in In-Memory Cache.
-Administrators have access to a management panel where they can add new
-games along with images.
+<h1 align="center"> ASP.NET Core Online Game Store</h1>
+
+A web application built with **ASP.NET Core**, functioning as an online store for computer games. 
+
+## Features
+
+- **User Accounts**: Users can create accounts and log in.  
+- **Account Management**: Add funds to your account and purchase games.  
+- **Discounts & Stock**: Purchases include applied discounts and reflect current stock levels.  
+- **Search & Filtering**: Search and filter games by price, genre, platform, and sort by various criteria.  
+- **Purchase History**: Paginated and stored in In-Memory Cache.  
+
+## Admin Panel
+
+- **Game Management**: Administrators can add new games along with images.
 
 
-
-
+<br><br><br><br>
 
 
 <h1 align="center">🚀 How to Run the Application</h1>
